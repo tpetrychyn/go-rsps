@@ -1,0 +1,201 @@
+[ACCOUNT]
+character-username = test
+
+[CHARACTER]
+character-height = 0
+character-posx = 3223
+character-posy = 3221
+character-rights = 3
+hasStarter = false
+bankPin1 = 0
+bankPin2 = 0
+bankPin3 = 0
+bankPin4 = 0
+hasBankpin = false
+pinRegisteredDeleteDay = 0
+requestPinDelete = false
+lastLoginDate = 20190414
+setPin = false
+hasPaid = false
+lostCannon = false
+cannonX = 0
+cannonY = 0
+myBalls = 0
+poison = false
+spiritTree = false
+npcCanAttack = true
+rope = false
+rope2 = false
+recievedMask = false
+recievedReward = false
+isBotting = false
+brightness = 2
+closeTutorialInterface = true
+canWalkTutorial = true
+village = false
+lastThieve = 1557706266999
+homeTele = 0
+strongHold = false
+character-energy = 100
+crystal-bow-shots = 0
+splitChat = false
+canSpeak = true
+barrowsNpcs = 0	0
+barrowsNpcs = 1	0
+barrowsNpcs = 2	0
+barrowsNpcs = 3	0
+barrowsNpcs = 4	0
+barrowsNpcs = 5	0
+questStages = 0
+SlayerMaster = 0
+music = true	false	false	false	false	true	true	false	false	false	true	false	true	true	false	false	false	true	false	false	false	true	false	false	false	false	false	true	true	false	false	false	false	false	false	false	false	false	false	false	true	false	false	false	false	false	false	false	false	false	
+randomActions = 21
+blackMarks = 0
+tutorial-progress = 36
+skull-timer = -1
+recoilHits = 0
+lastX = 3223
+lastY = 3221
+lastH = 0
+removedTask0 = -1
+removedTask1 = -1
+removedTask2 = -1
+removedTask3 = -1
+creationAddress = 
+has-npc = false
+summonId = 0
+thankedForDonation = 0
+membership = false
+questPoints = 19
+bananas = 0
+magic-book = 0
+special-amount = 10.0
+musicOn = true
+needsNewTask = false
+luthas = false
+selected-coffin = 0
+runeMist = 0
+cookAss = 0
+pirateTreasure = 0
+ptjob = 0
+doricQuest = 0
+dragonSlayerQuestStage = 0
+impsC = 0
+knightS = 0
+sheepShear = 1
+romeo-juliet = 0
+gertCat = 0
+cw-games = 0
+witchspot = 0
+restGhost = 0
+vampSlayer = 0
+RatDied2 = false
+teleblock-length = 0
+pc-points = 0
+lastYell = 0
+slayerTask = 0
+taskAmount = 0
+magePoints = 0
+autoRet = 0
+barrowsKillCount = 0
+slayerPoints = 0
+flagged = false
+wave = 0
+gwkc = 0
+isRunning = true
+fightMode = 2
+void = 0	0	0	0	0
+
+[EQUIPMENT]
+character-equip = 0	6858	1	
+character-equip = 1	-1	1	
+character-equip = 2	-1	1	
+character-equip = 3	841	1	
+character-equip = 4	-1	1	
+character-equip = 5	-1	1	
+character-equip = 6	-1	0	
+character-equip = 7	-1	1	
+character-equip = 8	-1	0	
+character-equip = 9	-1	1	
+character-equip = 10	-1	1	
+character-equip = 11	-1	0	
+character-equip = 12	-1	1	
+character-equip = 13	882	4818	
+
+[LOOK]
+character-look = 0	0
+character-look = 1	1
+character-look = 2	18
+character-look = 3	26
+character-look = 4	33
+character-look = 5	36
+character-look = 6	42
+character-look = 7	10
+character-look = 8	0
+character-look = 9	0
+character-look = 10	0
+character-look = 11	0
+character-look = 12	0
+
+[SKILLS]
+character-skill = 0	24	7700
+character-skill = 1	2	100
+character-skill = 2	13	2000
+character-skill = 3	16	2850
+character-skill = 4	21	5140
+character-skill = 5	1	385
+character-skill = 6	1	0
+character-skill = 7	1	0
+character-skill = 8	4	375
+character-skill = 9	3	254
+character-skill = 10	1	0
+character-skill = 11	1	0
+character-skill = 12	1	0
+character-skill = 13	1	0
+character-skill = 14	1	0
+character-skill = 15	1	15
+character-skill = 16	1	0
+character-skill = 17	1	80
+character-skill = 18	1	0
+character-skill = 19	1	0
+character-skill = 20	1	0
+character-skill = 21	1	0
+character-skill = 22	1	0
+character-skill = 23	1	0
+character-skill = 24	1	0
+
+[ITEMS]
+character-item = 0	1352	1
+character-item = 1	591	1
+character-item = 2	304	1
+character-item = 3	1512	1
+character-item = 4	1926	1
+character-item = 5	1932	1
+character-item = 6	2310	1
+character-item = 7	1266	1
+character-item = 8	1206	1
+character-item = 9	1278	1
+character-item = 10	1172	1
+character-item = 11	996	156
+character-item = 12	1512	1
+character-item = 13	557	25
+character-item = 14	559	20
+character-item = 15	556	4
+character-item = 16	558	4
+character-item = 17	560	4
+character-item = 18	1512	1
+character-item = 19	883	10
+character-item = 20	1752	1
+character-item = 22	250	1
+character-item = 23	2	1
+character-item = 24	618	1
+character-item = 25	618	1
+
+[BANK]
+
+[FRIENDS]
+
+[IGNORES]
+
+[EOF]
+

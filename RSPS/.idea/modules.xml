@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/RSPS.iml" filepath="$PROJECT_DIR$/.idea/RSPS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2006Redone Server/Server.iml" filepath="$PROJECT_DIR$/2006Redone Server/Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2006Redone Server/redone.iml" filepath="$PROJECT_DIR$/2006Redone Server/redone.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "edge_portal",
+    "id": 4150,
+    "x": 3094,
+    "y": 3498,
+    "height": 0,
+    "face": -1,
+    "type": 10
+  },
+  {
+    "name": "heroesGuildAttack",
+    "id": 4151,
+    "x": 2894,
+    "y": 3505,
+    "height": 0,
+    "face": -1,
+    "type": 10
+  },
+  {
+    "name": "heroesGuildStrength",
+    "id": 4152,
+    "x": 2896,
+    "y": 3505,
+    "height": 0,
+    "face": -1,
+    "type": 10
+  }
+]

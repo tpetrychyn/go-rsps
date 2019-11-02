@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="redone.util.ControlPanelForm">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <tabbedpane id="3182" binding="tabbedPane1" default-binding="true">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="f2a95" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <tabbedpane title="Objects"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="6865d" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Enter Object Id"/>
+                </properties>
+              </component>
+              <component id="24a8b" class="javax.swing.JTextField" binding="objectId">
+                <constraints/>
+                <properties>
+                  <columns value="5"/>
+                </properties>
+              </component>
+              <component id="f4c6d" class="javax.swing.JButton" binding="spawnButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Spawn"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="7532b" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <tabbedpane title="NPCs"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="34244" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Enter NPC Id"/>
+                </properties>
+              </component>
+              <component id="9a7a2" class="javax.swing.JTextField" binding="npcId">
+                <constraints/>
+                <properties>
+                  <columns value="5"/>
+                </properties>
+              </component>
+              <component id="f48bd" class="javax.swing.JButton" binding="spawnNpc">
+                <constraints/>
+                <properties>
+                  <text value="Spawn"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="f7199" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <tabbedpane title="IDK"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="4890b" class="javax.swing.JList" binding="coordsList">
+                <constraints/>
+                <properties>
+                  <model>
+                    <item value="test"/>
+                  </model>
+                  <toolTipText value=""/>
+                </properties>
+              </component>
+              <component id="97c0" class="javax.swing.JButton" binding="addToCoordsList">
+                <constraints/>
+                <properties>
+                  <text value="Button"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </tabbedpane>
+      <toolbar id="b0a21" binding="playerInfo">
+        <constraints border-constraint="South"/>
+        <properties>
+          <margin top="0" left="0" bottom="0" right="0"/>
+        </properties>
+        <border type="none">
+          <font/>
+        </border>
+        <children>
+          <component id="2b770" class="javax.swing.JLabel" binding="playerCoords">
+            <constraints/>
+            <properties>
+              <text value="Waiting for player"/>
+            </properties>
+          </component>
+          <hspacer id="ec538">
+            <constraints/>
+          </hspacer>
+          <component id="11d3f" class="javax.swing.JButton" binding="searchButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <text value="Search"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+    </children>
+  </grid>
+</form>
