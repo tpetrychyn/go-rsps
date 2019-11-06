@@ -6,7 +6,6 @@ import (
 
 func main() {
 
-
 	connectionHandler := net.NewConnectionHandler()
 	connectionHandler.Listen()
 

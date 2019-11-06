@@ -1,8 +1,365 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39ad227f-78ef-46ad-a2f3-21c00d47f346" name="Default Changelist" comment="" />
+    <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/packets/PlayerPacket.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2006Redone Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/2006Redone Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Animable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Animable_Sub3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Animable_Sub4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Animable_Sub5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Animation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Background.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Censor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class13.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class18.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class21.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class29.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class30_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class32.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class33.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class36.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class39.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class40.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class43.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class47.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class56.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class56_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class56_Sub1_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class56_Sub1_Sub2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Class6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ClientSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/CollisionMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Decompressor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DrawingArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DummyClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/EntityDef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Flo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Ground.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/IDK.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ISAACRandomGen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/InputStream_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Item.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ItemDef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/MRUNodes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Midi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/MouseDetection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/NPC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/NodeCache.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/NodeList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/NodeSub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/NodeSubList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Object1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Object2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Object3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Object4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Object5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ObjectDef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ObjectManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/OnDemandData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/OnDemandFetcher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/OnDemandFetcherParent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RSApplet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RSFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RSImageProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RSInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RSSocket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Runnable_Impl1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Signlink$Position.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Signlink.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SizeConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Skills.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SoundPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Sounds.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SpotAnim.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Sprite.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Stream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/StreamLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/TextClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/TextDrawingArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/TextInput.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Texture.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/VarBit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Varp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/WorldController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Animable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Animable_Sub3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Animable_Sub4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Animable_Sub5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Animation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Background.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Censor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class13.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class18.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class21.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class29.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class30_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class32.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class33.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class36.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class39.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class40.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class43.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class47.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class56.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class56_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class56_Sub1_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class56_Sub1_Sub2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Class6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/ClientSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/CollisionMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Decompressor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/DrawingArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/DummyClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/EntityDef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Flo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Ground.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/IDK.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/ISAACRandomGen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/InputStream_Sub1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Item.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/ItemDef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/MRUNodes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Midi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/MouseDetection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/NPC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/NodeCache.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/NodeList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/NodeSub.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/NodeSubList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Object1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Object2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Object3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Object4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Object5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/ObjectDef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/ObjectManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/OnDemandData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/OnDemandFetcher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/OnDemandFetcherParent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/RSApplet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/RSFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/RSImageProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/RSInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/RSSocket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Runnable_Impl1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Signlink$Position.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Signlink.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/SizeConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Skills.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/SoundPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Sounds.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/SpotAnim.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Sprite.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Stream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/StreamLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/TextClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/TextDrawingArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/TextInput.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Texture.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/VarBit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/Varp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2006Redone Client/WorldController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/a.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/aa.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ab.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ac.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ad.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ae.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/af.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ag.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ah.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ai.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/aj.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ak.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/al.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/am.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/an.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/aq.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/as.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/at.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/au.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/av.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/aw.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ax.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/az.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/b.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/ba.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bb.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bd.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/be.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bf.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bg.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bh.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bj.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bk.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bq.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/br.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bv.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bw.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/bx.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/by.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/c.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/d.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/e.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/f.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/g.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/h.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/i.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/j.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/k.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/l.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/m.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/n.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/o.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/p.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/q.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/r.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/s.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/t.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/u.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/v.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/w.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/x.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/y.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/z.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/binary/zd.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/client.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/client.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/init-arch.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/init-bin.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/jms.JMS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/keystore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/obf.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animable_Sub3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animable_Sub4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animable_Sub5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Background.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Censor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class11.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class13.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class18.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class21.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class29.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class30_Sub1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class33.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class36.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class39.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class40.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class43.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class47.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class56.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class56_Sub1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class56_Sub1_Sub1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class56_Sub1_Sub2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class6.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CollisionMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Decompressor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DrawingArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DummyClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EntityDef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Flo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ground.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IDK.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ISAACRandomGen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InputStream_Sub1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ItemDef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MRUNodes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Midi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MouseDetection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NPC.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NodeCache.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NodeList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NodeSub.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NodeSubList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ObjectDef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ObjectManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnDemandData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnDemandFetcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnDemandFetcherParent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RSApplet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RSFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RSImageProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RSInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RSSocket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Runnable_Impl1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Signlink.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SizeConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Skills.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SoundPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sounds.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpotAnim.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sprite.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Stream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StreamLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextDrawingArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Texture.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VarBit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Varp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/PlayerUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/Stream_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/Stream_test.go" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,105 +367,113 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run.bat">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="10157" column="54" lean-forward="true" selection-start-line="10157" selection-start-column="54" selection-end-line="10157" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stream.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/RSSocket.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="952">
+              <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/io/InputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="12529">
+              <caret line="765" column="16" selection-start-line="765" selection-start-column="16" selection-end-line="765" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Stream.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5049">
-              <caret line="327" column="16" selection-start-line="327" selection-start-column="16" selection-end-line="327" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ISAACRandomGen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="10155" column="17" lean-forward="true" selection-start-line="10155" selection-start-column="17" selection-end-line="10155" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RSApplet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8466">
-              <caret line="515" selection-start-line="515" selection-end-line="515" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SizeConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+              <caret line="327" column="11" selection-start-line="327" selection-start-column="11" selection-end-line="327" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isaac</find>
-      <find>getNextKey()</find>
-      <find>== 65</find>
-      <find>== 126)</find>
-      <find>getplayer</find>
-      <find>T2 -</find>
-      <find>== 249)</find>
-      <find>== 85)</find>
-      <find>getNextKey</find>
-      <find>pktType:</find>
-      <find>getnext</find>
-      <find>81</find>
+      <find>1.5</find>
       <find>== 81</find>
-      <find>getnextkey</find>
-      <find>== 81)</find>
-      <find>600</find>
-      <find>== 1)</find>
-      <find>pktType:</find>
+      <find>readall</find>
+      <find>reset()</find>
+      <find>== 126</find>
+      <find>netty</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Stream.java" />
-        <option value="$PROJECT_DIR$/src/RSApplet.java" />
-        <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/packets/PlayerPacket.java" />
+        <option value="$PROJECT_DIR$/src/main/java/packets/PlayerPacket.proto" />
+        <option value="$PROJECT_DIR$/src/main/java/RSSocket.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Game.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="204" />
-    <option name="y" value="6" />
-    <option name="width" value="1666" />
-    <option name="height" value="1030" />
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="2006Redone Client" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="248" />
+    <option name="y" value="43" />
+    <option name="width" value="1316" />
+    <option name="height" value="942" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -116,19 +481,42 @@
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -161,24 +549,36 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="39ad227f-78ef-46ad-a2f3-21c00d47f346" name="Default Changelist" comment="" />
-      <created>1572463067186</created>
+      <changelist id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="" />
+      <created>1572732628388</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1572463067186</updated>
-      <workItem from="1572463069371" duration="9176000" />
-      <workItem from="1572563119811" duration="807000" />
-      <workItem from="1572652936008" duration="2143000" />
+      <updated>1572732628388</updated>
+      <workItem from="1572732631067" duration="289000" />
+      <workItem from="1572732950973" duration="14000" />
+      <workItem from="1572732979917" duration="4492000" />
+      <workItem from="1572907508231" duration="66000" />
+      <workItem from="1573047759262" duration="908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12126000" />
+    <option name="totallyTimeSpent" value="5769000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="204" y="6" width="1666" height="1030" extended-state="0" />
+    <frame x="248" y="43" width="1316" height="942" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2559153" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26592356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -186,25 +586,25 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32998884" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39910814" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32880098" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39925835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32880098" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32998884" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49920383" weight="0.32880098" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5007962" side_tool="true" weight="0.32880098" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32880098" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.32961783" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
@@ -213,54 +613,92 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/compile.bat">
+    <entry file="file://$PROJECT_DIR$/.project">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/packets/packets/PlayerPacketOuterClass.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacket.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacketOuterClass.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacketProto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="292" column="19" selection-start-line="292" selection-start-column="19" selection-end-line="292" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.10.0/protobuf-java-3.10.0.jar!/com/google/protobuf/AbstractMessageLite.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/net/Socket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="902" column="23" selection-start-line="902" selection-start-column="23" selection-end-line="902" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/io/ByteArrayOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="62" column="11" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
+          <folding>
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacket.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RSSocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/io/InputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12529">
+          <caret line="765" column="16" selection-start-line="765" selection-start-column="16" selection-end-line="765" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5049">
+          <caret line="327" column="11" selection-start-line="327" selection-start-column="11" selection-end-line="327" selection-end-column="24" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2006Redone Client.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.bat">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5049">
-          <caret line="327" column="16" selection-start-line="327" selection-start-column="16" selection-end-line="327" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ISAACRandomGen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RSApplet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8466">
-          <caret line="515" selection-start-line="515" selection-end-line="515" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SizeConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="10155" column="17" lean-forward="true" selection-start-line="10155" selection-start-column="17" selection-end-line="10155" selection-end-column="17" />
+        <state relative-caret-position="152">
+          <caret line="10157" column="54" lean-forward="true" selection-start-line="10157" selection-start-column="54" selection-end-line="10157" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

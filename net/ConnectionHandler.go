@@ -128,7 +128,7 @@ func (c *ConnectionHandler) handleConnection(conn *Connection) {
 		} else {
 			playerUpdatePacket := packet.NewPlayerUpdatePacket().
 				SetUpdateRequired(true).
-				SetType(packet.Idle).
+				SetType(packet.Moved).
 				Build()
 			conn.Wb(playerUpdatePacket)
 		}

@@ -1,15 +1,23 @@
 package packet
 
-import "math"
+//import "math"
 
 type Stream struct {
 	bitBuffer map[uint]byte
 	bitPosition uint
 }
 
+var bitmask = [32]uint{}
+
 func NewStream() *Stream {
 	bitBuffer := make(map[uint]byte)
 	bitBuffer[0] = 0
+
+	for i:=0;i<32;i++ {
+		bitmask[i] = (1 << uint(i)) - 1
+	}
+
+
 	return &Stream{
 		bitBuffer:   bitBuffer,
 		bitPosition: 0,
@@ -45,16 +53,18 @@ func (s *Stream) WriteBits(numBits uint, value uint) {
 	}
 	bytePos := uint(len(s.bitBuffer) - 1)
 	if numBits+s.bitPosition > 8 {
-		diff := uint(math.Abs(float64(int(numBits - s.bitPosition))))
+		//diff := uint(math.Abs(float64(int(numBits - s.bitPosition))))
 
 		shift := numBits-(8-s.bitPosition)
-		s.bitBuffer[bytePos] = byte(uint(s.bitBuffer[bytePos])<<(8-s.bitPosition) | value>>shift)
+		s.bitBuffer[bytePos] = byte(uint(s.bitBuffer[bytePos]) | (value>>shift)&bitmask[8-int(shift)])
 		bytePos++
 		shift = 8-shift
 		s.bitBuffer[bytePos] = byte(value << shift)
-		s.bitPosition = 8 - diff
+		s.bitPosition = 8 - shift
 	} else {
-		s.bitBuffer[bytePos] = byte(uint(s.bitBuffer[bytePos])<<numBits | value >> s.bitPosition)
+		s.bitBuffer[bytePos] = byte(uint(s.bitBuffer[bytePos]) | (value<<(8-s.bitPosition-numBits)))
 		s.bitPosition += numBits
 	}
 }
+
+
