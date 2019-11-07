@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"context"
-	"encoding/binary"
 	"fmt"
 	"log"
 	"net"
@@ -55,55 +54,33 @@ func NewConnectionHandler() *ConnectionHandler {
 const PORT = "43594"
 
 func (c *ConnectionHandler) Listen() {
-	ln, err := net.Listen("tcp", ":"+PORT)
+	tcpaddr, _ := net.ResolveTCPAddr("tcp", ":43594")
+	ln, err := net.ListenTCP("tcp", tcpaddr)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	log.Printf("Listening on %s", PORT)
 
 	for {
-		conn, err := ln.Accept()
+		conn, err := ln.AcceptTCP()
 		if err != nil {
-			// handle error
+			// TODO: Handle error
 		}
 		newConn := &Connection{
-			Conn:    conn,
+			TCPConn: conn,
 			Context: context.Background(),
 		}
 		newConn.SetValue(LoginState, 0)
 		go c.handleConnection(newConn)
+		go c.PlayerTick(newConn)
 	}
 }
 
-func (c *ConnectionHandler) handleConnection(conn *Connection) {
-	fmt.Printf("Serving %s\n", conn.RemoteAddr().String())
-
+func (c *ConnectionHandler) PlayerTick(conn *Connection) {
 	for {
-		time.Sleep(1 * time.Second)
 		if conn.GetValue(LoginState) != 2 {
 			c.LoginHandler.HandlePacket(conn)
 			continue
-		}
-
-		buf := bufio.NewReader(conn)
-
-		first, _ := buf.ReadByte()
-		opCode := int(first & 0xff) // - int(conn.Decryptor.Rand()&0xff)
-
-		var size int
-		//log.Printf("opcode: %d", opCode)
-		if opCode >= 0 && opCode < len(PACKET_SIZE) {
-			size = PACKET_SIZE[opCode]
-			log.Printf("opcode: %+v, size: %+v", opCode, size)
-
-			//data := make([]byte, size)
-			//
-			//_, err := buf.Read(data)
-			//if err != nil {
-			//	log.Fatal(err.Error())
-			//}
-			//
-			//log.Printf("data: %+v", data)
 		}
 
 		if conn.GetValue("INITIALIZED") != 1 {
@@ -114,23 +91,58 @@ func (c *ConnectionHandler) handleConnection(conn *Connection) {
 			conn.W([]int{-48, -1, -1})
 			conn.W([]int{73, 1, 18, 1, -110, 81, 0, 59, -26, -43, -80, 7, -1, 16, -52, 0, -1, -1, 0, 0, 0, 0, 1, 18, 0, 1, 26, 1, 36, 1, 0, 1, 33, 1, 42, 1, 10, 0, 0, 0, 0, 0, 3, 40, 3, 55, 3, 51, 3, 52, 3, 53, 3, 54, 3, 56, 0, 0, 1, -88, -5, 9, 73, 127, 3, 0, 0})
 
-			var x uint16
-			x = (1 << 8) + 18
-			y := (1 << 8) + -110 + 256
-			w = new(bytes.Buffer)
-			_ = binary.Write(w, binary.BigEndian, &MapRegionPacket{
-				Id: 73,
-				X:  274,
-				Y:  402,
-			})
-			log.Printf("map region: %d %d", x, y)
+			playerUpdatePacket := packet.NewPlayerUpdatePacket().
+				SetUpdateRequired(true).
+				SetType(packet.Idle).
+				Build()
+			conn.Wb(playerUpdatePacket)
+
 			conn.SetValue("INITIALIZED", 1)
 		} else {
 			playerUpdatePacket := packet.NewPlayerUpdatePacket().
 				SetUpdateRequired(true).
-				SetType(packet.Moved).
+				SetType(packet.Idle).
 				Build()
 			conn.Wb(playerUpdatePacket)
+		}
+
+		time.Sleep(500 * time.Millisecond)
+	}
+}
+
+func (c *ConnectionHandler) handleConnection(conn *Connection) {
+	fmt.Printf("Serving %s\n", conn.RemoteAddr().String())
+
+	for {
+		if conn.GetValue(LoginState) != 2 {
+			continue
+		}
+		buf := bufio.NewReader(conn)
+
+		id, err := buf.ReadByte()
+		if err != nil {
+			log.Printf("error reading packetId %s", err.Error())
+		}
+
+		opCode := int(id & 0xff) // - int(conn.Decryptor.Rand()&0xff)
+
+		var size int
+		if opCode >= 0 && opCode < len(PACKET_SIZE) {
+			size = PACKET_SIZE[opCode]
+		}
+
+		if size > 0 {
+			payload := make([]byte, size)
+			_, err = buf.Read(payload)
+			if err != nil {
+				log.Printf("error reading payload %s", err.Error())
+			}
+			packet := []byte{id, byte(size)}
+			packet = append(packet, payload...)
+			conn.packetQueue.Write(packet)
+			log.Printf("Read Packet id: %d, size: %d, payload: %+v", id, size, payload)
+		} else {
+			log.Printf("Read Packet id: %d, size: %d", id, size)
 		}
 	}
 }
@@ -180,7 +192,7 @@ func (c *Connection) WriteFrame(id int, b []int) {
 }
 
 func (c *Connection) Wb(b []byte) {
-	log.Printf("Writing Packet: %+v", b)
+	//log.Printf("Writing Packet: %+v", b)
 	c.Write(b)
 }
 

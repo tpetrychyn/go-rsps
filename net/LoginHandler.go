@@ -37,7 +37,7 @@ func (l *LoginHandler) HandlePacket(c *Connection) {
 		var packet LoginPacket
 		err := binary.Read(c, binary.BigEndian, &packet)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("login stage 1 error: " + err.Error())
 			return
 		}
 		log.Printf("%+v", packet)

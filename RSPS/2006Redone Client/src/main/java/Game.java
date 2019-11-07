@@ -160,8 +160,8 @@ public class Game extends RSApplet {
 		return true;
 	}
 	
-	final synchronized void method58(int i_30_, int volume,
-		    boolean bool, int music) {
+	final synchronized void playMusic(int i_30_, int volume,
+									  int music) {
 		if (musicIsntNull()) {
 			nextSong = music;
 			onDemandFetcher.method558(2, nextSong);
@@ -2015,7 +2015,7 @@ public class Game extends RSApplet {
 		currentSong = -1;
 		nextSong = -1;
 		previousSong = 0;
-		method58(10, musicVolume, false, 0);
+		playMusic(10, musicVolume, 0);
 	}
 
 	public void method45() {
@@ -6610,7 +6610,7 @@ public class Game extends RSApplet {
 			Class36.method528(onDemandFetcher.getAnimCount());
 			Model.method459(onDemandFetcher.getVersionCount(0), onDemandFetcher);
 			if (!lowMem) {
-				method58(10, musicVolume, false, 0);
+				playMusic(10, musicVolume, 0);
 				while (onDemandFetcher.getNodeCount() > 0) {
 					processOnDemandQueue();
 					try {
@@ -10060,30 +10060,6 @@ public class Game extends RSApplet {
 	}
 
 	public void updatePlayers(int i, Stream stream) {
-//		@SuppressWarnings("AccessStaticViaInstance")
-//		PlayerPacketProto.PlayerPacket p = PlayerPacketProto
-//				.PlayerPacket
-//				.newBuilder()
-//				.setIsUpdating(true)
-//				.setType(PlayerPacketProto.UpdateType.IDLE)
-//				.setNewDirection(10)
-//				.build();
-//
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//		try {
-//			p.writeTo(bos);
-//			System.out.println(bos.toByteArray());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-
-		try {
-			PlayerPacketProto.PlayerPacket p = PlayerPacketProto.PlayerPacket.parseFrom(stream.buffer);
-			System.out.println(p.getIsUpdating());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		anInt839 = 0;
 		anInt893 = 0;
 		System.out.printf("pktType: %d, size %d, stream %s\n", pktType, pktSize, Arrays.toString(stream.buffer));
@@ -10330,16 +10306,16 @@ public class Game extends RSApplet {
 				return true;
 			}
 			if (pktType == 74) {
-				int i2 = inStream.method434();
-				if (i2 == 65535) {
-					i2 = -1;
+				int songId = inStream.method434();
+				if (songId == 65535) {
+					songId = -1;
 				}
-				if (i2 != -1 || previousSong != 0) {
-					if (i2 != -1 && currentSong != i2 && musicVolume != 0 && previousSong == 0)
-						method58(10, musicVolume, false, i2);
+				if (songId != -1 || previousSong != 0) {
+					if (songId != -1 && currentSong != songId && musicVolume != 0 && previousSong == 0)
+						playMusic(10, musicVolume, songId);
 				} else
 					method55(false);
-				currentSong = i2;
+				currentSong = songId;
 				pktType = -1;
 				return true;
 			}

@@ -1,6 +1,7 @@
 package net
 
 import (
+	"bytes"
 	"context"
 	"github.com/gtank/isaac"
 	"net"
@@ -9,10 +10,11 @@ import (
 const LoginState = "LOGIN_STATE"
 
 type Connection struct {
-	net.Conn
+	*net.TCPConn
 	context.Context
-	Encryptor isaac.ISAAC
-	Decryptor isaac.ISAAC
+	packetQueue bytes.Buffer
+	Encryptor   isaac.ISAAC
+	Decryptor   isaac.ISAAC
 }
 
 func (c *Connection) SetValue(key interface{}, val interface{}) {
@@ -22,4 +24,3 @@ func (c *Connection) SetValue(key interface{}, val interface{}) {
 func (c *Connection) GetValue(key interface{}) interface{} {
 	return c.Context.Value(key)
 }
-

@@ -8,14 +8,10 @@ type PlayerUpdateType int
 
 const (
 	Idle PlayerUpdateType = iota
-	Moved
+	Moving
 	Running
-	Height
+	Teleport
 )
-
-// [81 0 2 0 0] standing still
-// [81 0 7 -90 1 -1 -64 1 0 0] move north
-// [81 0 7 -70 1 -1 -64 1 0 0] move south
 
 type PlayerUpdatePacket struct {
 	buf *bytes.Buffer
@@ -34,7 +30,6 @@ func NewPlayerUpdatePacket() *PlayerUpdatePacket {
 
 func (p *PlayerUpdatePacket) SetUpdateRequired(updateRequired bool) *PlayerUpdatePacket {
 	p.updateRequired = updateRequired
-
 	return p
 }
 
@@ -53,7 +48,8 @@ func (p *PlayerUpdatePacket) SetOtherPlayers(otherPlayers []interface{}) *Player
 	return p
 }
 
-var xlateDirectionToClient = []uint{ 1, 2, 4, 7, 6, 5, 3, 0 }
+var xlateDirectionToClient = []uint{1, 2, 4, 7, 6, 5, 3, 0}
+
 func (p *PlayerUpdatePacket) Build() []byte {
 	stream := NewStream()
 
@@ -63,16 +59,20 @@ func (p *PlayerUpdatePacket) Build() []byte {
 		case Idle:
 			stream.WriteBits(2, 0)
 			break
-		case Moved:
+		case Moving:
 			stream.WriteBits(2, 1)
 			stream.WriteBits(3, xlateDirectionToClient[0])
 			stream.WriteBits(1, 1)
+		case Running:
+			stream.WriteBits(2, 2)
+			stream.WriteBits(3, xlateDirectionToClient[0])
+			stream.WriteBits(3, xlateDirectionToClient[0])
+			stream.WriteBits(1, 1)
+			// TODO: Teleport
 		}
 	} else {
 		stream.WriteBits(1, 0)
 	}
-
-	//p.buf.Write(stream.Flush())
 
 	p.otherPlayers = make([]interface{}, 1)
 	stream.WriteBits(8, uint(len(p.otherPlayers)-1))
@@ -81,43 +81,21 @@ func (p *PlayerUpdatePacket) Build() []byte {
 
 	if p.updateRequired {
 		updateMask := byte(0)
-		// forceChat
-		//updateMask |= 4
-		//p.buf.Write([]byte{updateMask})
-		//p.buf.Write([]byte("null"))
-		//p.buf.Write([]byte{10})
 
-		updateMask |= 4 | 0x10
+		updateMask |= 0x10 // appearance update
+		// updateMask |= 4 // forced chat
+
 		p.buf.WriteByte(updateMask)
 
-		p.buf.Write([]byte("hello"))
-		p.buf.Write([]byte{10})
+		//p.buf.Write([]byte("Hello"))
+		//p.buf.WriteByte(10)
 
-		p.buf.WriteByte(211) //this players update bit offset in the packet... wtf
-
-		p.buf.WriteByte(0)    //player appearance 0
-		p.buf.WriteByte(3)    // prayer icon
-		p.buf.WriteByte(0xFF) //pk icon
-		for i := 0; i < 12; i++ {
-			p.buf.WriteByte(0)
+		pa := &PlayerAppearance{
+			Legs: 4730,
 		}
-		for i := 0; i < 5; i++ {
-			p.buf.WriteByte(0)
-		}
-
-		p.buf.Write([]byte{0x328 >> 8, 0x328 & 0xFF})
-		p.buf.Write([]byte{0x337 >> 8, 0x337 & 0xFF})
-		p.buf.Write([]byte{0x333 >> 8, 0x333 & 0xFF})
-		p.buf.Write([]byte{0x334 >> 8, 0x334 & 0xFF})
-		p.buf.Write([]byte{0x335 >> 8, 0x335 & 0xFF})
-		p.buf.Write([]byte{0x336 >> 8, 0x336 & 0xFF})
-		p.buf.Write([]byte{0x338 >> 8, 0x338 & 0xFF})
-
-		//0 0 0 0 79 120 111 6
-		p.buf.Write([]byte{0, 0, 0, 0, 79, 120, 111, 6}) //player name as int
-		p.buf.WriteByte(3)
-		p.buf.Write([]byte{0, 0})
+		p.buf.Write(pa.ToBytes())
 	}
+
 	// calculate size of packet and set second word
 	b := p.buf.Bytes()
 	size := len(b) - 3
@@ -125,6 +103,3 @@ func (p *PlayerUpdatePacket) Build() []byte {
 
 	return b
 }
-
-//81 0 53 128 31 252 16 -48 0 -1 -1 0 0 0 0 0 0 1 26 0 1 0 0 0 1 10 0 0 0 0 0 3 40 3 55 3 51 3 52 3 53 3 54 3 56 0 0 0 0 79 120 111 6 3 0 0
-//81 0 49 128 31 252 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 40 3 55 3 51 3 52 3 53 3 54 3 56 0 0 0 0 0 0 0 0 100 10 10 0

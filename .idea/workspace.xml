@@ -2,360 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_10_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/packets/PlayerPacket.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/PlayerAppearance.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/2006Redone Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/2006Redone Client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Animable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Animable_Sub3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Animable_Sub4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Animable_Sub5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Animation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Background.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Censor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class18.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class21.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class29.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class30_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class32.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class33.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class36.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class39.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class40.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class43.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class47.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class56.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class56_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class56_Sub1_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class56_Sub1_Sub2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Class6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/ClientSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/CollisionMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Decompressor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/DrawingArea.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/DummyClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Entity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/EntityDef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Flo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Ground.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/IDK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/ISAACRandomGen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/InputStream_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/ItemDef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/MRUNodes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Midi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/MouseDetection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/NPC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/NodeCache.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/NodeList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/NodeSub.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/NodeSubList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Object1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Object2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Object3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Object4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Object5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/ObjectDef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/ObjectManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/OnDemandData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/OnDemandFetcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/OnDemandFetcherParent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/RSApplet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/RSFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/RSImageProducer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/RSInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/RSSocket.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Runnable_Impl1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Signlink$Position.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Signlink.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/SizeConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Skills.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/SoundPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Sounds.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/SpotAnim.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Sprite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Stream.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/StreamLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/TextClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/TextDrawingArea.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/TextInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Texture.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/VarBit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/Varp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/bin/WorldController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Animable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Animable_Sub3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Animable_Sub4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Animable_Sub5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Animation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Background.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Censor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class18.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class21.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class29.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class30_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class32.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class33.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class36.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class39.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class40.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class43.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class47.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class56.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class56_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class56_Sub1_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class56_Sub1_Sub2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Class6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/ClientSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/CollisionMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Decompressor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/DrawingArea.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/DummyClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Entity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/EntityDef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Flo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Ground.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/IDK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/ISAACRandomGen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/InputStream_Sub1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/ItemDef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/MRUNodes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Midi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/MouseDetection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/NPC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/NodeCache.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/NodeList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/NodeSub.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/NodeSubList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Object1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Object2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Object3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Object4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Object5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/ObjectDef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/ObjectManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/OnDemandData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/OnDemandFetcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/OnDemandFetcherParent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/RSApplet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/RSFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/RSImageProducer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/RSInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/RSSocket.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Runnable_Impl1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Signlink$Position.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Signlink.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/SizeConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Skills.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/SoundPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Sounds.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/SpotAnim.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Sprite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Stream.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/StreamLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/TextClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/TextDrawingArea.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/TextInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Texture.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/VarBit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/Varp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/out/production/2006Redone Client/WorldController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/a.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/aa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ab.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ac.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ad.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ae.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/af.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ag.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ah.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ai.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/aj.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ak.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/al.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/am.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/an.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/aq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/as.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/at.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/au.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/av.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/aw.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ax.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ay.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/az.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/b.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/ba.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bb.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bd.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/be.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bf.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bg.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bh.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bj.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bn.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/br.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bv.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bw.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/bx.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/by.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/c.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/d.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/e.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/f.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/g.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/h.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/i.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/j.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/k.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/l.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/m.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/n.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/o.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/p.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/q.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/r.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/s.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/t.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/u.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/v.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/w.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/x.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/y.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/z.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/binary/zd.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/client.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/client.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/init-arch.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/init-bin.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/jms.JMS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/keystore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/release/obf.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Animable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Animable_Sub3.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Animable_Sub4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Animable_Sub5.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Animation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Background.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Censor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class11.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class29.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class30_Sub1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class32.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class33.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class36.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class39.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class40.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class43.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class47.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class56.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class56_Sub1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class56_Sub1_Sub1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class56_Sub1_Sub2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Class6.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/ClientSettings.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/CollisionMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Decompressor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/DrawingArea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/DummyClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Entity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/EntityDef.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Flo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Ground.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/IDK.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/ISAACRandomGen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/InputStream_Sub1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/ItemDef.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/MRUNodes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Midi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/MouseDetection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/NPC.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Node.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/NodeCache.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/NodeList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/NodeSub.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/NodeSubList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Object1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Object2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Object3.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Object4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Object5.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/ObjectDef.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/ObjectManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/OnDemandData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/OnDemandFetcher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/OnDemandFetcherParent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/RSApplet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/RSFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/RSImageProducer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/RSInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/RSSocket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Runnable_Impl1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Signlink.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/SizeConstants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Skills.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/SoundPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Sounds.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/SpotAnim.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Sprite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Stream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/StreamLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/TextClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/TextDrawingArea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/TextInput.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Texture.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/VarBit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/Varp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/WorldController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/Connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/Connection.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/ConnectionHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/ConnectionHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/LoginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/PlayerPacket.pb.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/PlayerUpdatePacket.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/Stream.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/Stream_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/Stream_test.go" afterDir="false" />
@@ -389,11 +44,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Taylor\go\src\rsps" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -418,7 +73,7 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="Stream_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Stream_test.go (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="rsps" />
       <working_directory value="$PROJECT_DIR$/net/packet" />
       <framework value="gotest" />
@@ -428,7 +83,7 @@
       <filePath value="$PROJECT_DIR$/net/packet/Stream_test.go" />
       <method v="2" />
     </configuration>
-    <configuration name="TestStream_WriteBitsLargerThanByte in rsps/net/packet (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestStream_WriteByte in rsps/net/packet" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="rsps" />
       <working_directory value="$PROJECT_DIR$/net/packet" />
       <framework value="gotest" />
@@ -436,10 +91,10 @@
       <package value="rsps/net/packet" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestStream_WriteBitsLargerThanByte$" />
+      <pattern value="^TestStream_WriteByte$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestStream_WriteBitsSmallerThanOneByte in rsps/net/packet" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestStream_WriteByteAndWord in rsps/net/packet" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="rsps" />
       <working_directory value="$PROJECT_DIR$/net/packet" />
       <framework value="gotest" />
@@ -447,10 +102,10 @@
       <package value="rsps/net/packet" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestStream_WriteBitsSmallerThanOneByte$" />
+      <pattern value="^TestStream_WriteByteAndWord$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestWriteBits in rsps/net/packet (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestStream_WriteWord in rsps/net/packet" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="rsps" />
       <working_directory value="$PROJECT_DIR$/net/packet" />
       <framework value="gotest" />
@@ -458,16 +113,16 @@
       <package value="rsps/net/packet" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestWriteBits$" />
+      <pattern value="^TestStream_WriteWord$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build main.go" />
-        <item itemvalue="Go Test.TestStream_WriteBitsLargerThanByte in rsps/net/packet (1)" />
-        <item itemvalue="Go Test.Stream_test.go" />
-        <item itemvalue="Go Test.TestStream_WriteBitsSmallerThanOneByte in rsps/net/packet" />
-        <item itemvalue="Go Test.TestWriteBits in rsps/net/packet (1)" />
+        <item itemvalue="Go Test.TestStream_WriteByteAndWord in rsps/net/packet" />
+        <item itemvalue="Go Test.TestStream_WriteByte in rsps/net/packet" />
+        <item itemvalue="Go Test.TestStream_WriteWord in rsps/net/packet" />
+        <item itemvalue="Go Test.Stream_test.go (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -495,18 +150,9 @@
           <line>504</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/net/packet/Stream.go</url>
-          <line>54</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
-      <configuration name="GoApplicationRunConfiguration">
-        <watch expression="uint(p.bitBuffer[bytePos])&lt;&lt;numBits" language="go" />
-        <watch expression="value &gt;&gt; p.bitPosition" language="go" />
-      </configuration>
       <configuration name="GoTestRunConfiguration">
         <watch expression="value&gt;&gt;2" language="go" />
         <watch expression="bitmask" language="go" />
