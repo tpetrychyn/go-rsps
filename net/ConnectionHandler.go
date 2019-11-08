@@ -8,7 +8,7 @@ import (
 	"net"
 	"rsps/entity"
 	"rsps/net/packet"
-	"rsps/net/packet/handler"
+	"rsps/net/packet/incoming"
 	"time"
 )
 
@@ -110,7 +110,7 @@ func (c *ConnectionHandler) writer(conn *Connection) {
 			for len(conn.PacketQueue) > 0 {
 				p := conn.PacketQueue[0]
 				conn.PacketQueue = conn.PacketQueue[1:]
-				handler := handler.IncomingPackets[p.Opcode]
+				handler := incoming.Packets[p.Opcode]
 				if handler != nil {
 					handler.HandlePacket(conn.Player, p)
 				}
@@ -133,24 +133,16 @@ func (c *ConnectionHandler) listener(conn *Connection) {
 
 		buf := bufio.NewReader(conn.TCPConn)
 
-		op, err := buf.ReadByte()
+		opCode, err := buf.ReadByte()
 		if err != nil {
 			log.Printf("error reading packetId %s", err.Error())
 			conn.SetValue(ConnectionStatus, Disconnected)
 			return
 		}
 
-		//opCode := int(op & 0xff) - int(conn.Decryptor.Rand()&0xff)
-		opCode := op
+		//opCode := byte(int(opCode & 0xff) - int(conn.Decryptor.Rand()&0xff))
 
-		var ignored bool
-		for _, v := range IGNORED_PACKETS {
-			if opCode == v {
-				ignored = true
-				break
-			}
-		}
-		if ignored { continue }
+		if isIgnored(opCode) { continue }
 
 		var size uint8
 		if int(opCode) < len(PACKET_SIZE) {
@@ -166,7 +158,7 @@ func (c *ConnectionHandler) listener(conn *Connection) {
 		}
 
 		p := &packet.Packet{
-			Opcode:  op,
+			Opcode:  opCode,
 			Size:    size,
 		}
 		if size > 0 {
@@ -183,6 +175,15 @@ func (c *ConnectionHandler) listener(conn *Connection) {
 	}
 }
 
-var IGNORED_PACKETS = []byte{0, 3}
+func isIgnored(opCode byte) bool {
+	ignoredPackets := []byte{0, 3}
+	for _, v := range ignoredPackets {
+		if opCode == v {
+			return true
+		}
+	}
+	return false
+}
+
 
 

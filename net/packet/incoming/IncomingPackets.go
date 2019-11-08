@@ -1,4 +1,4 @@
-package handler
+package incoming
 
 import "rsps/net/packet"
 
@@ -6,6 +6,6 @@ const (
 	GAME_MOVEMENT_OPCODE = 164
 )
 
-var IncomingPackets = map[byte]packet.PacketListener{
+var Packets = map[byte]packet.PacketListener{
 	GAME_MOVEMENT_OPCODE: new(MovementPacketHandler),
 }
