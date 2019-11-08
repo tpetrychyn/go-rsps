@@ -15,14 +15,14 @@ func (l *LoginHandler) HandlePacket(c *Connection) {
 	if c.GetValue(LoginState) == 0 {
 		log.Printf("Login Stage %d", c.GetValue(LoginState))
 		var packet LoginZero
-		err := binary.Read(c, binary.BigEndian, &packet)
+		err := binary.Read(c.TCPConn, binary.BigEndian, &packet)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		log.Printf("packet: %+v", packet)
 
-		err = binary.Write(c, binary.BigEndian, &LoginZeroResponse{
+		err = binary.Write(c.TCPConn, binary.BigEndian, &LoginZeroResponse{
 			ServerSessionKey: 12345678,
 		})
 		if err != nil {
@@ -35,7 +35,7 @@ func (l *LoginHandler) HandlePacket(c *Connection) {
 	if c.GetValue(LoginState) == 1 {
 		log.Println("Login Stage 1")
 		var packet LoginPacket
-		err := binary.Read(c, binary.BigEndian, &packet)
+		err := binary.Read(c.TCPConn, binary.BigEndian, &packet)
 		if err != nil {
 			fmt.Println("login stage 1 error: " + err.Error())
 			return
@@ -77,18 +77,18 @@ func (l *LoginHandler) HandlePacket(c *Connection) {
 		sessionKey[2] = uint32(rsaPacket.ServerSessionKey >> 32)
 		sessionKey[3] = uint32(rsaPacket.ServerSessionKey)
 		inC.Generate(sessionKey)
-		c.Decryptor = inC
+		c.Decryptor = &inC
 
 		for i := 0;i<4;i++ {
 			sessionKey[i] += 50
 		}
 		outC := isaac.ISAAC{}
 		outC.Generate(sessionKey)
-		c.Encryptor = outC
+		c.Encryptor = &outC
 
 		log.Printf("%+v", rsaPacket)
 
-		err = binary.Write(c, binary.BigEndian, &LoginResponse{
+		err = binary.Write(c.TCPConn, binary.BigEndian, &LoginResponse{
 			ReturnCode:   2,
 			PlayerRights: 3,
 			Unknown:      0,

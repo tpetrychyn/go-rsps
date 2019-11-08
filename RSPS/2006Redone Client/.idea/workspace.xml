@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="2006Redone Client:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../net/packet/PlayerAppearance.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/2006Redone_Client_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../entity/Character.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/Direction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/Position.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/Packet.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/handler/IncomingPackets.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/handler/MovementPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/writer/InterfaceTextPacketWriter.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_10_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2006Redone Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/2006Redone Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/packets/PlayerPacket.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/packets/PlayerPacketProto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$PlayerPacket$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$PlayerPacket$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$PlayerPacket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$PlayerPacketOrBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$UpdateType$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto$UpdateType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPacketProto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/Connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/Connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/ConnectionHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/ConnectionHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/LoginHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/PlayerUpdatePacket.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/Stream.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,7 +52,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
+            <state relative-caret-position="34901">
               <caret line="2074" column="25" selection-start-line="2074" selection-start-column="25" selection-end-line="2074" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -40,17 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/RSApplet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="528" column="15" lean-forward="true" selection-start-line="528" selection-start-column="15" selection-end-line="528" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacketProto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+            <state relative-caret-position="205">
+              <caret line="520" column="28" selection-start-line="520" selection-start-column="28" selection-end-line="520" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -111,12 +128,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/packets/PlayerPacket.java" />
         <option value="$PROJECT_DIR$/src/main/java/packets/PlayerPacket.proto" />
         <option value="$PROJECT_DIR$/src/main/java/RSSocket.java" />
         <option value="$PROJECT_DIR$/src/main/java/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/RSApplet.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -138,9 +155,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="205" />
-    <option name="y" value="39" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="172" />
+    <option name="y" value="36" />
     <option name="width" value="1316" />
     <option name="height" value="942" />
   </component>
@@ -150,14 +167,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name=".settings" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
@@ -179,12 +199,32 @@
             </path>
             <path>
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,6 +234,10 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -207,7 +251,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="2006Redone Client" />
@@ -215,9 +265,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="2006Redone Client.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/2006Redone_Client_jar/2006Redone Client.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="JAR Application.2006Redone Client.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -237,11 +293,12 @@
       <workItem from="1572907508231" duration="66000" />
       <workItem from="1573047759262" duration="908000" />
       <workItem from="1573086129973" duration="6228000" />
+      <workItem from="1573166901245" duration="2230000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11997000" />
+    <option name="totallyTimeSpent" value="14227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -253,10 +310,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="205" y="39" width="1316" height="942" extended-state="1" />
-    <editor active="true" />
+    <frame x="172" y="36" width="1316" height="942" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26990446" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27388534" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -265,7 +321,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32880098" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32880098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -273,7 +329,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49920383" weight="0.32880098" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49920383" visible="true" weight="0.32880098" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5007962" side_tool="true" weight="0.32880098" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32880098" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -296,13 +352,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/packets/packets/PlayerPacketOuterClass.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacket.java" />
@@ -342,6 +391,18 @@
     <entry file="file://$PROJECT_DIR$/2006Redone Client.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34901">
+          <caret line="2074" column="25" selection-start-line="2074" selection-start-column="25" selection-end-line="2074" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4154#4155#0" expanded="true" />
+            <element signature="e#4185#4186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/RSSocket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
@@ -363,38 +424,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacketProto.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        <state relative-caret-position="17">
+          <caret line="1" column="16" lean-forward="true" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/packets/PlayerPacketProto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="2074" column="25" selection-start-line="2074" selection-start-column="25" selection-end-line="2074" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4154#4155#0" expanded="true" />
-            <element signature="e#4185#4186#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RS2006.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/RSApplet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="528" column="15" lean-forward="true" selection-start-line="528" selection-start-column="15" selection-end-line="528" selection-end-column="15" />
+        <state relative-caret-position="205">
+          <caret line="520" column="28" selection-start-line="520" selection-start-column="28" selection-end-line="520" selection-end-column="28" />
         </state>
       </provider>
     </entry>
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>2006Redone Client:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

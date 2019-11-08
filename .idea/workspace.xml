@@ -2,18 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/net/packet/PlayerAppearance.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/artifacts/2006Redone_Client_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/Character.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Direction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Position.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/Packet.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/handler/IncomingPackets.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/handler/MovementPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/writer/InterfaceTextPacketWriter.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_10_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/2006Redone Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/2006Redone Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/packets/PlayerPacket.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/packets/PlayerPacketProto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$PlayerPacket$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$PlayerPacket$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$PlayerPacket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$PlayerPacketOrBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$UpdateType$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto$UpdateType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/PlayerPacketProto.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/net/Connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/Connection.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/ConnectionHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/ConnectionHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/LoginHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/PlayerPacket.pb.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/PlayerUpdatePacket.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/Stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/Stream_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/Stream_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,11 +60,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\net" />
+      <recent name="C:\Users\Taylor\go\src\rsps\model" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Taylor\go\src\rsps" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
     </key>
   </component>
   <component name="RunDashboard">

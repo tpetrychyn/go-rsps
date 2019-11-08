@@ -2,16 +2,17 @@ package net
 
 import (
 	"bufio"
-	"bytes"
 	"context"
 	"fmt"
 	"log"
 	"net"
+	"rsps/entity"
 	"rsps/net/packet"
+	"rsps/net/packet/handler"
 	"time"
 )
 
-var PACKET_SIZE = []int{0, 0, 0, 1, -1, 0, 0, 0, 0, 0, // 0
+var PACKET_SIZE = []int8{0, 0, 0, 1, -1, 0, 0, 0, 0, 0, // 0
 	0, 0, 0, 0, 8, 0, 6, 2, 2, 0, // 10
 	0, 2, 0, 6, 0, 12, 0, 0, 0, 0, // 20
 	0, 0, 0, 0, 0, 8, 4, 0, 0, 2, // 30
@@ -40,14 +41,12 @@ var PACKET_SIZE = []int{0, 0, 0, 1, -1, 0, 0, 0, 0, 0, // 0
 }
 
 type ConnectionHandler struct {
-	//Connections map[string]*Connection
 	LoginHandler *LoginHandler
 }
 
 func NewConnectionHandler() *ConnectionHandler {
 	return &ConnectionHandler{
 		LoginHandler: &LoginHandler{},
-		//Connections: make(map[string]*Connection),
 	}
 }
 
@@ -69,24 +68,26 @@ func (c *ConnectionHandler) Listen() {
 		newConn := &Connection{
 			TCPConn: conn,
 			Context: context.Background(),
+			Player: entity.NewPlayer(),
 		}
 		newConn.SetValue(LoginState, 0)
-		go c.handleConnection(newConn)
-		go c.PlayerTick(newConn)
+		go c.listener(newConn)
+		go c.writer(newConn)
 	}
 }
 
-func (c *ConnectionHandler) PlayerTick(conn *Connection) {
+func (c *ConnectionHandler) writer(conn *Connection) {
 	for {
+		if conn.GetValue(ConnectionStatus) == Disconnected {
+			return
+		}
+
 		if conn.GetValue(LoginState) != 2 {
 			c.LoginHandler.HandlePacket(conn)
 			continue
 		}
 
 		if conn.GetValue("INITIALIZED") != 1 {
-			w := NewInterfaceText("100%", 21)
-
-			conn.Write(w.Bytes())
 
 			conn.W([]int{-48, -1, -1})
 			conn.W([]int{73, 1, 18, 1, -110, 81, 0, 59, -26, -43, -80, 7, -1, 16, -52, 0, -1, -1, 0, 0, 0, 0, 1, 18, 0, 1, 26, 1, 36, 1, 0, 1, 33, 1, 42, 1, 10, 0, 0, 0, 0, 0, 3, 40, 3, 55, 3, 51, 3, 52, 3, 53, 3, 54, 3, 56, 0, 0, 1, -88, -5, 9, 73, 127, 3, 0, 0})
@@ -104,108 +105,84 @@ func (c *ConnectionHandler) PlayerTick(conn *Connection) {
 				SetType(packet.Idle).
 				Build()
 			conn.Wb(playerUpdatePacket)
+
+
+			for len(conn.PacketQueue) > 0 {
+				p := conn.PacketQueue[0]
+				conn.PacketQueue = conn.PacketQueue[1:]
+				handler := handler.IncomingPackets[p.Opcode]
+				if handler != nil {
+					handler.HandlePacket(conn.Player, p)
+				}
+			}
+
+			conn.Player.Tick()
 		}
 
 		time.Sleep(500 * time.Millisecond)
 	}
 }
 
-func (c *ConnectionHandler) handleConnection(conn *Connection) {
-	fmt.Printf("Serving %s\n", conn.RemoteAddr().String())
+func (c *ConnectionHandler) listener(conn *Connection) {
+	fmt.Printf("Serving %s\n", conn.TCPConn.RemoteAddr().String())
 
 	for {
 		if conn.GetValue(LoginState) != 2 {
 			continue
 		}
-		buf := bufio.NewReader(conn)
 
-		id, err := buf.ReadByte()
+		buf := bufio.NewReader(conn.TCPConn)
+
+		op, err := buf.ReadByte()
 		if err != nil {
 			log.Printf("error reading packetId %s", err.Error())
+			conn.SetValue(ConnectionStatus, Disconnected)
+			return
 		}
 
-		opCode := int(id & 0xff) // - int(conn.Decryptor.Rand()&0xff)
+		//opCode := int(op & 0xff) - int(conn.Decryptor.Rand()&0xff)
+		opCode := op
 
-		var size int
-		if opCode >= 0 && opCode < len(PACKET_SIZE) {
-			size = PACKET_SIZE[opCode]
+		var ignored bool
+		for _, v := range IGNORED_PACKETS {
+			if opCode == v {
+				ignored = true
+				break
+			}
+		}
+		if ignored { continue }
+
+		var size uint8
+		if int(opCode) < len(PACKET_SIZE) {
+			if PACKET_SIZE[opCode] == -1 {
+				size, err = buf.ReadByte()
+				if err != nil {
+					log.Printf("error reading packetId %s", err.Error())
+					continue
+				}
+			} else {
+				size = uint8(PACKET_SIZE[opCode])
+			}
 		}
 
+		p := &packet.Packet{
+			Opcode:  op,
+			Size:    size,
+		}
 		if size > 0 {
 			payload := make([]byte, size)
 			_, err = buf.Read(payload)
 			if err != nil {
 				log.Printf("error reading payload %s", err.Error())
+				continue
 			}
-			packet := []byte{id, byte(size)}
-			packet = append(packet, payload...)
-			conn.packetQueue.Write(packet)
-			log.Printf("Read Packet id: %d, size: %d, payload: %+v", id, size, payload)
-		} else {
-			log.Printf("Read Packet id: %d, size: %d", id, size)
+			p.Payload = payload
 		}
+		log.Printf("Read Packet id: %d, size: %d, payload: %+v", p.Opcode, p.Size, p.Payload)
+		conn.PacketQueue = append(conn.PacketQueue, p)
 	}
 }
 
-func NewInterfaceText(text string, interfaceId uint16) *bytes.Buffer {
-	buf := new(bytes.Buffer)
-	buf.Write([]byte{126})
-	buf.Write([]byte{0, byte(len(text) + 3)})
-	buf.Write([]byte(text))
-	buf.Write([]byte{10})
-	buf.Write([]byte{byte(interfaceId << 8), byte(interfaceId)})
-	log.Printf("Writing interface: %+v", buf.Bytes())
-	return buf
-}
+var IGNORED_PACKETS = []byte{0, 3}
 
-type MapRegionPacket struct {
-	Id byte
-	X  uint16
-	Y  uint16
-}
 
-type LocationPacket struct {
-	Id   byte
-	Mask byte
-	Y    uint8
-	X    uint8
-}
-
-type Packet struct {
-	Opcode byte
-	Size   byte
-}
-
-func (c *Connection) WriteFrame(id int, b []int) {
-	buf := make([]byte, len(b))
-	for k, v := range b {
-		if v < 0 {
-			buf[k] = byte(256 + v)
-		} else {
-			buf[k] = byte(v)
-		}
-	}
-
-	log.Printf("Writing Packet id: %d, %+v, %s", id, buf, string(buf))
-	buf = append([]byte{byte(id)}, buf...)
-	c.Write(buf)
-}
-
-func (c *Connection) Wb(b []byte) {
-	//log.Printf("Writing Packet: %+v", b)
-	c.Write(b)
-}
-
-func (c *Connection) W(b []int) {
-	buf := make([]byte, len(b))
-	for k, v := range b {
-		if v < 0 {
-			buf[k] = byte(256 + v)
-		} else {
-			buf[k] = byte(v)
-		}
-	}
-
-	log.Printf("Writing Packet: %+v", buf)
-	c.Write(buf)
-}

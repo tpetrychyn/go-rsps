@@ -2,6 +2,7 @@ package packet
 
 import (
 	"bytes"
+	"rsps/model"
 )
 
 type PlayerUpdateType int
@@ -48,8 +49,6 @@ func (p *PlayerUpdatePacket) SetOtherPlayers(otherPlayers []interface{}) *Player
 	return p
 }
 
-var xlateDirectionToClient = []uint{1, 2, 4, 7, 6, 5, 3, 0}
-
 func (p *PlayerUpdatePacket) Build() []byte {
 	stream := NewStream()
 
@@ -61,12 +60,12 @@ func (p *PlayerUpdatePacket) Build() []byte {
 			break
 		case Moving:
 			stream.WriteBits(2, 1)
-			stream.WriteBits(3, xlateDirectionToClient[0])
+			stream.WriteBits(3, model.Direction.North)
 			stream.WriteBits(1, 1)
 		case Running:
 			stream.WriteBits(2, 2)
-			stream.WriteBits(3, xlateDirectionToClient[0])
-			stream.WriteBits(3, xlateDirectionToClient[0])
+			stream.WriteBits(3, model.Direction.North)
+			stream.WriteBits(3, model.Direction.North)
 			stream.WriteBits(1, 1)
 			// TODO: Teleport
 		}
@@ -99,6 +98,7 @@ func (p *PlayerUpdatePacket) Build() []byte {
 	// calculate size of packet and set second word
 	b := p.buf.Bytes()
 	size := len(b) - 3
+	b[1] = byte(size >> 8)
 	b[2] = byte(size)
 
 	return b
