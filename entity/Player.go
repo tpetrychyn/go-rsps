@@ -2,15 +2,11 @@ package entity
 
 import (
 	"rsps/model"
-	"rsps/net/packet/outgoing"
 )
 
-type Player struct {
-	*model.Player
-	*Character
 
-	LoginState int
-	//Outgoing []*packet.Packet
+type Player struct {
+	*Character
 }
 
 func NewPlayer() *Player {
@@ -19,9 +15,12 @@ func NewPlayer() *Player {
 		Y: 3221,
 		Z: 0,
 	})
-	return &Player{
-		Character:  c,
+	p := &Player{
+		Character: c,
 	}
+	//go p.Tick()
+
+	return p
 }
 
 func (p *Player) PostUpdate() {
@@ -29,6 +28,12 @@ func (p *Player) PostUpdate() {
 }
 
 func (p *Player) Tick() {
-	outgoing.SendMapRegion(&p.Player.Position)
+	//for {
 	p.Character.Tick() // tick parent class
+	//
+	//	time.Sleep(600 * time.Millisecond)
+	//
+	//	p.PostUpdate()
+	//}
+
 }

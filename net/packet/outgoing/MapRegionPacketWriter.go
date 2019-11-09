@@ -1,18 +1,20 @@
 package outgoing
 
 import (
+	"bufio"
 	"rsps/model"
-	"rsps/net/packet"
 )
 
-func SendMapRegion(p *model.Position) *packet.Packet {
-	s := model.NewStream()
-	s.WriteWord(uint(p.GetRegionX() + 6) + 128)
-	s.WriteWord(uint(p.GetRegionY() + 6))
-
-	return &packet.Packet{
-		Opcode:  73,
-		Size:    4,
-		Payload: s.Flush(),
-	}
+type MapRegionPacket struct {
+	Position *model.Position
 }
+
+func (m *MapRegionPacket) Write(writer *bufio.Writer) {
+	s := model.NewStream()
+	s.WriteWordA(uint(m.Position.GetRegionX() + 6))
+	s.WriteWord(uint(m.Position.GetRegionY() + 6))
+
+	writer.WriteByte(73)
+	writer.Write(s.Flush())
+}
+

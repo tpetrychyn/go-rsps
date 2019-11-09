@@ -7,37 +7,37 @@ import (
 	"github.com/gtank/isaac"
 	"log"
 	"math/big"
+	"rsps/net/packet/outgoing/login"
 )
 
-type LoginHandler struct{}
+type UpstreamLoginHandler struct{}
 
-func (l *LoginHandler) HandlePacket(c *Connection) {
-	if c.GetValue(LoginState) == 0 {
-		log.Printf("Login Stage %d", c.GetValue(LoginState))
+func (l *UpstreamLoginHandler) HandlePacket(c *TCPClient) {
+	if c.loginState == 0 {
+		log.Printf("Login Stage %d", c.loginState)
 		var packet LoginZero
-		err := binary.Read(c.TCPConn, binary.BigEndian, &packet)
+		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		log.Printf("packet: %+v", packet)
 
-		err = binary.Write(c.TCPConn, binary.BigEndian, &LoginZeroResponse{
+		c.Enqueue(&login.LoginHandshakeResponse{
+			LoginStatus:      login.MayProceed,
 			ServerSessionKey: 12345678,
 		})
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		c.SetValue(LoginState, 1)
+
+		c.Enqueue(&flush{})
+		c.loginState = LoginStage
 	}
 
-	if c.GetValue(LoginState) == 1 {
+	if c.loginState == LoginStage {
 		log.Println("Login Stage 1")
 		var packet LoginPacket
-		err := binary.Read(c.TCPConn, binary.BigEndian, &packet)
+		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
-			fmt.Println("login stage 1 error: " + err.Error())
+			log.Printf("login stage 1 error: " + err.Error())
 			return
 		}
 		log.Printf("%+v", packet)
@@ -88,34 +88,15 @@ func (l *LoginHandler) HandlePacket(c *Connection) {
 
 		log.Printf("%+v", rsaPacket)
 
-		err = binary.Write(c.TCPConn, binary.BigEndian, &LoginResponse{
+		c.Enqueue(&login.LoginResponse{
 			ReturnCode:   2,
 			PlayerRights: 3,
-			Unknown:      0,
+			Flagged:      0,
 		})
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		c.SetValue(LoginState, 2)
+		c.Enqueue(&flush{})
+
+		c.loginState = Initialize
 	}
-}
-
-type LoginZeroResponse struct {
-	Unknown          [8]byte
-	Unknown2         byte
-	ServerSessionKey int64
-}
-
-type LoginZero struct {
-	Protocol byte
-	NameHash byte
-}
-
-type LoginResponse struct {
-	ReturnCode   byte
-	PlayerRights byte
-	Unknown      byte
 }
 
 type LoginPacket struct {
@@ -134,4 +115,9 @@ type RsaPacket struct {
 	ClientSessionKey int64
 	ServerSessionKey int64
 	Uid              int32
+}
+
+type LoginZero struct {
+	Protocol byte
+	NameHash byte
 }

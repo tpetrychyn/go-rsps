@@ -1,8 +1,6 @@
 package incoming
 
-import (
-	"rsps/net/packet"
-)
+import "rsps/net/packet"
 
 const (
 	GAME_MOVEMENT_OPCODE = 164

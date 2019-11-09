@@ -1,15 +1,14 @@
 package entity
 
 import (
-	"log"
 	"rsps/model"
 )
 
 type Character struct {
+	MovementQueue    *MovementQueue
 	Position         *model.Position
 	PrimaryDirection model.Direction
 	LastDirection    model.Direction
-	MovementQueue    *MovementQueue
 }
 
 func NewCharacter(p *model.Position) *Character {
@@ -25,7 +24,6 @@ func NewCharacter(p *model.Position) *Character {
 
 func (c *Character) Tick() {
 	c.MovementQueue.Tick()
-	log.Printf("c character %+v", c)
 }
 
 func (c *Character) PostUpdate() {

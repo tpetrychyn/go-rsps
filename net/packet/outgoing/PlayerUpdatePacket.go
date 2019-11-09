@@ -1,7 +1,9 @@
-package packet
+package outgoing
 
 import (
+	"bufio"
 	"bytes"
+	"rsps/entity"
 	"rsps/model"
 )
 
@@ -15,18 +17,16 @@ const (
 )
 
 type PlayerUpdatePacket struct {
-	buf *bytes.Buffer
-
+	typ            PlayerUpdateType
 	updateRequired bool
 	clearFlag      bool
-	player         *model.Player
+	player         *entity.Player
 	otherPlayers   []interface{}
 }
 
-func NewPlayerUpdatePacket(player *model.Player) *PlayerUpdatePacket {
+func NewPlayerUpdatePacket (player *entity.Player) *PlayerUpdatePacket {
 	return &PlayerUpdatePacket{
-		player: player,
-		buf:    bytes.NewBuffer([]byte{81, 0, 0}),
+		player:         player,
 	}
 }
 
@@ -35,21 +35,33 @@ func (p *PlayerUpdatePacket) SetUpdateRequired(updateRequired bool) *PlayerUpdat
 	return p
 }
 
-func (p *PlayerUpdatePacket) SetClearFlag(clearFlag bool) *PlayerUpdatePacket {
-	p.clearFlag = clearFlag
-	return p
-}
-
 func (p *PlayerUpdatePacket) SetOtherPlayers(otherPlayers []interface{}) *PlayerUpdatePacket {
 	p.otherPlayers = otherPlayers
 	return p
 }
 
+func (p *PlayerUpdatePacket) SetTyp(typ PlayerUpdateType) *PlayerUpdatePacket {
+	p.typ = typ
+	return p
+}
+
+func (p *PlayerUpdatePacket) Write(writer *bufio.Writer) {
+	payload := p.Build()
+	size := len(payload)
+	writer.WriteByte(81)
+	writer.WriteByte(byte(size >> 8))
+	writer.WriteByte(byte(size))
+	writer.Write(payload)
+}
+
 func (p *PlayerUpdatePacket) Build() []byte {
+	buffer := new(bytes.Buffer)
 	stream := model.NewStream()
 
-	var updateType PlayerUpdateType
-	if p.player.LastDirection != model.None {
+	var updateType = p.typ
+	if p.typ == Teleport {
+		updateType = Teleport
+	} else if p.player.LastDirection != model.None {
 		updateType = Running
 	} else if p.player.PrimaryDirection != model.None {
 		updateType = Moving
@@ -72,7 +84,13 @@ func (p *PlayerUpdatePacket) Build() []byte {
 			stream.WriteBits(3, uint(p.player.PrimaryDirection))
 			stream.WriteBits(3, uint(p.player.LastDirection))
 			stream.WriteBits(1, 1)
-			// TODO: Teleport
+		case Teleport:
+			stream.WriteBits(2, 3)
+			stream.WriteBits(2, 0)
+			stream.WriteBits(1, 1)
+			stream.WriteBits(1, 1)
+			stream.WriteBits(7, uint(p.player.Position.GetLocalY()))
+			stream.WriteBits(7, uint(p.player.Position.GetLocalX()))
 		}
 	} else {
 		stream.WriteBits(1, 0)
@@ -81,7 +99,7 @@ func (p *PlayerUpdatePacket) Build() []byte {
 	p.otherPlayers = make([]interface{}, 1)
 	stream.WriteBits(8, uint(len(p.otherPlayers)-1))
 	stream.WriteBits(11, 2047)
-	p.buf.Write(stream.Flush())
+	buffer.Write(stream.Flush())
 
 	if p.updateRequired {
 		updateMask := byte(0)
@@ -89,22 +107,22 @@ func (p *PlayerUpdatePacket) Build() []byte {
 		updateMask |= 0x10 // appearance update
 		// updateMask |= 4 // forced chat
 
-		p.buf.WriteByte(updateMask)
+		buffer.WriteByte(updateMask)
 
 		//p.buf.Write([]byte("Hello"))
 		//p.buf.WriteByte(10)
 
 		pa := &PlayerAppearance{
-			Legs: 4730,
+			//Legs: 4730,
 		}
-		p.buf.Write(pa.ToBytes())
+		buffer.Write(pa.ToBytes())
 	}
 
 	// calculate size of packet and set second word
-	b := p.buf.Bytes()
-	size := len(b) - 3
-	b[1] = byte(size >> 8)
-	b[2] = byte(size)
+	//b := p.buf.Bytes()
+	//size := len(b) - 3
+	//b[1] = byte(size >> 8)
+	//b[2] = byte(size)
 
-	return b
+	return buffer.Bytes()
 }

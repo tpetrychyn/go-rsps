@@ -47,15 +47,30 @@ func (s *Stream) WriteWord(value uint) {
 	s.buffer = append(s.buffer, 0)
 	s.buffer[s.currentOffset] = byte(value)
 	s.currentOffset++
-
 }
 
-func (s *Stream) WriteByte(value uint) {
+func (s *Stream) WriteWordA(value uint) {
 	if s.currentOffset > 0 {
 		s.buffer = append(s.buffer, 0)
 	}
 
-	s.buffer[s.currentOffset] = byte(value)
+	s.buffer[s.currentOffset] = byte(value >> 8)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value + 128)
+	s.currentOffset++
+}
+
+func (s *Stream) WriteByte(value byte) {
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, 0)
+	}
+
+	s.buffer[s.currentOffset] = value
+	s.currentOffset++
+}
+
+func (s *Stream) SkipByte() {
 	s.currentOffset++
 }
 
