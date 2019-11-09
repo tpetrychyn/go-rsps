@@ -1,4 +1,4 @@
-package packet
+package model
 
 type Stream struct {
 	buffer        []byte

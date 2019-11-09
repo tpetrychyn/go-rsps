@@ -47,6 +47,6 @@ func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *pack
 	}
 
 	for _, v := range positions {
-		log.Printf("position %+v", v)
+		player.MovementQueue.AddPosition(v)
 	}
 }

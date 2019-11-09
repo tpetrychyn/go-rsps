@@ -18,24 +18,20 @@ type PlayerUpdatePacket struct {
 	buf *bytes.Buffer
 
 	updateRequired bool
-	typ            PlayerUpdateType
 	clearFlag      bool
+	player         *model.Player
 	otherPlayers   []interface{}
 }
 
-func NewPlayerUpdatePacket() *PlayerUpdatePacket {
+func NewPlayerUpdatePacket(player *model.Player) *PlayerUpdatePacket {
 	return &PlayerUpdatePacket{
-		buf: bytes.NewBuffer([]byte{81, 0, 0}),
+		player: player,
+		buf:    bytes.NewBuffer([]byte{81, 0, 0}),
 	}
 }
 
 func (p *PlayerUpdatePacket) SetUpdateRequired(updateRequired bool) *PlayerUpdatePacket {
 	p.updateRequired = updateRequired
-	return p
-}
-
-func (p *PlayerUpdatePacket) SetType(typ PlayerUpdateType) *PlayerUpdatePacket {
-	p.typ = typ
 	return p
 }
 
@@ -50,22 +46,31 @@ func (p *PlayerUpdatePacket) SetOtherPlayers(otherPlayers []interface{}) *Player
 }
 
 func (p *PlayerUpdatePacket) Build() []byte {
-	stream := NewStream()
+	stream := model.NewStream()
+
+	var updateType PlayerUpdateType
+	if p.player.LastDirection != model.None {
+		updateType = Running
+	} else if p.player.PrimaryDirection != model.None {
+		updateType = Moving
+	} else {
+		updateType = Idle
+	}
 
 	if p.updateRequired {
 		stream.WriteBits(1, 1)
-		switch p.typ {
+		switch updateType {
 		case Idle:
 			stream.WriteBits(2, 0)
 			break
 		case Moving:
 			stream.WriteBits(2, 1)
-			stream.WriteBits(3, model.Direction.North)
+			stream.WriteBits(3, uint(p.player.PrimaryDirection))
 			stream.WriteBits(1, 1)
 		case Running:
 			stream.WriteBits(2, 2)
-			stream.WriteBits(3, model.Direction.North)
-			stream.WriteBits(3, model.Direction.North)
+			stream.WriteBits(3, uint(p.player.PrimaryDirection))
+			stream.WriteBits(3, uint(p.player.LastDirection))
 			stream.WriteBits(1, 1)
 			// TODO: Teleport
 		}

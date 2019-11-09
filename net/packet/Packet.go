@@ -1,6 +1,6 @@
 package packet
 
-import "rsps/entity"
+import "rsps/model"
 
 type Packet struct {
 	Opcode  byte
@@ -9,5 +9,5 @@ type Packet struct {
 }
 
 type PacketListener interface {
-	HandlePacket(*entity.Player, *Packet)
+	HandlePacket(*model.Player, *Packet)
 }

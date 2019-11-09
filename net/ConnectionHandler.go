@@ -2,11 +2,8 @@ package net
 
 import (
 	"bufio"
-	"context"
 	"fmt"
 	"log"
-	"net"
-	"rsps/entity"
 	"rsps/net/packet"
 	"rsps/net/packet/incoming"
 	"time"
@@ -50,33 +47,7 @@ func NewConnectionHandler() *ConnectionHandler {
 	}
 }
 
-const PORT = "43594"
-
-func (c *ConnectionHandler) Listen() {
-	tcpaddr, _ := net.ResolveTCPAddr("tcp", ":43594")
-	ln, err := net.ListenTCP("tcp", tcpaddr)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	log.Printf("Listening on %s", PORT)
-
-	for {
-		conn, err := ln.AcceptTCP()
-		if err != nil {
-			// TODO: Handle error
-		}
-		newConn := &Connection{
-			TCPConn: conn,
-			Context: context.Background(),
-			Player: entity.NewPlayer(),
-		}
-		newConn.SetValue(LoginState, 0)
-		go c.listener(newConn)
-		go c.writer(newConn)
-	}
-}
-
-func (c *ConnectionHandler) writer(conn *Connection) {
+func (c *ConnectionHandler) Writer(conn *Connection) {
 	for {
 		if conn.GetValue(ConnectionStatus) == Disconnected {
 			return
@@ -90,22 +61,24 @@ func (c *ConnectionHandler) writer(conn *Connection) {
 		if conn.GetValue("INITIALIZED") != 1 {
 
 			conn.W([]int{-48, -1, -1})
-			conn.W([]int{73, 1, 18, 1, -110, 81, 0, 59, -26, -43, -80, 7, -1, 16, -52, 0, -1, -1, 0, 0, 0, 0, 1, 18, 0, 1, 26, 1, 36, 1, 0, 1, 33, 1, 42, 1, 10, 0, 0, 0, 0, 0, 3, 40, 3, 55, 3, 51, 3, 52, 3, 53, 3, 54, 3, 56, 0, 0, 1, -88, -5, 9, 73, 127, 3, 0, 0})
+			//outgoing.SendMapRegion(conn)
+			conn.W([]int{81, 0, 59, -26, -43, -80, 7, -1, 16, -52, 0, -1, -1, 0, 0, 0, 0, 1, 18, 0, 1, 26, 1, 36, 1, 0, 1, 33, 1, 42, 1, 10, 0, 0, 0, 0, 0, 3, 40, 3, 55, 3, 51, 3, 52, 3, 53, 3, 54, 3, 56, 0, 0, 1, -88, -5, 9, 73, 127, 3, 0, 0})
 
-			playerUpdatePacket := packet.NewPlayerUpdatePacket().
+			playerUpdatePacket := packet.NewPlayerUpdatePacket(conn.Player).
 				SetUpdateRequired(true).
-				SetType(packet.Idle).
 				Build()
 			conn.Wb(playerUpdatePacket)
 
 			conn.SetValue("INITIALIZED", 1)
 		} else {
-			playerUpdatePacket := packet.NewPlayerUpdatePacket().
+			conn.Player.Tick()
+
+			playerUpdatePacket := packet.NewPlayerUpdatePacket(conn.Player).
 				SetUpdateRequired(true).
-				SetType(packet.Idle).
 				Build()
 			conn.Wb(playerUpdatePacket)
 
+			conn.Player.PostUpdate()
 
 			for len(conn.PacketQueue) > 0 {
 				p := conn.PacketQueue[0]
@@ -115,19 +88,17 @@ func (c *ConnectionHandler) writer(conn *Connection) {
 					handler.HandlePacket(conn.Player, p)
 				}
 			}
-
-			conn.Player.Tick()
 		}
 
 		time.Sleep(500 * time.Millisecond)
 	}
 }
 
-func (c *ConnectionHandler) listener(conn *Connection) {
+func (c *ConnectionHandler) Listener(conn *Connection) {
 	fmt.Printf("Serving %s\n", conn.TCPConn.RemoteAddr().String())
 
 	for {
-		if conn.GetValue(LoginState) != 2 {
+		if conn.Player.LoginState != 2 {
 			continue
 		}
 
@@ -136,7 +107,7 @@ func (c *ConnectionHandler) listener(conn *Connection) {
 		opCode, err := buf.ReadByte()
 		if err != nil {
 			log.Printf("error reading packetId %s", err.Error())
-			conn.SetValue(ConnectionStatus, Disconnected)
+			conn.Player.LoginState = -1
 			return
 		}
 

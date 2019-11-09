@@ -1,5 +1,7 @@
 package packet
 
+import "rsps/model"
+
 // TODO: Full helms and capes and such
 
 var defaultAppearance = []uint{
@@ -31,7 +33,7 @@ type PlayerAppearance struct {
 }
 
 func (p *PlayerAppearance) ToBytes() []byte {
-	stream := NewStream()
+	stream := model.NewStream()
 
 	stream.WriteByte(0)    // gender
 	stream.WriteByte(3)    // prayer icon
@@ -91,12 +93,13 @@ func (p *PlayerAppearance) ToBytes() []byte {
 	stream.WriteByte(3)                               // combat level
 	stream.Write([]byte{0, 0})                        // player skill level
 
-	updateSize := len(stream.buffer)-1
-	out := append([]byte{byte(^updateSize)}, stream.Flush()...)
+	buffer := stream.Flush()
+	updateSize := len(buffer)-1
+	out := append([]byte{byte(^updateSize)}, buffer...)
 	return out
 }
 
-func (p *PlayerAppearance) wordOrByte(stream *Stream, slot uint) {
+func (p *PlayerAppearance) wordOrByte(stream *model.Stream, slot uint) {
 	if slot > 1 {
 		stream.WriteWord(0x200 + slot)
 	} else {
