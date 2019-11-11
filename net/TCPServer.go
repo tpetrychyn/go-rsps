@@ -3,6 +3,7 @@ package net
 import (
 	"log"
 	"net"
+	"rsps/entity"
 	"strconv"
 )
 
@@ -26,6 +27,8 @@ func (server *TcpServer) Start() {
 	defer listener.Close()
 
 	log.Printf("Local channel bound at %v \n", server.Port)
+	world := entity.WorldProvider()
+	go world.Tick()
 
 	l := &UpstreamLoginHandler{}
 
@@ -35,7 +38,7 @@ func (server *TcpServer) Start() {
 			continue
 		}
 
-		client := NewTcpClient(connection, l)
+		client := NewTcpClient(connection, l, world)
 
 		go client.Read()
 		go client.Write()

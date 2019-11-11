@@ -7,32 +7,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../net/PacketSizes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/TCPServer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/PacketListener.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/login/LoginHandshakeResponse.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/login/LoginResponse.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../entity/Message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../entity/Region.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../entity/World.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/ConfigurationPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/CreateGroundItemPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/RemoveGroundItemPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendPositionPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SidebarInterfacePacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../util/Math.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RS2006.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Character.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/CharacterModel.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/PlayerModel.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Position.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/Connection.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/ConnectionHandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/UpstreamLoginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPServer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/Packet.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/Packet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/MapRegionPacketWriter.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/MapRegionPacketWriter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="290">
-              <caret line="11386" column="36" lean-forward="true" selection-start-line="11386" selection-start-column="36" selection-end-line="11386" selection-end-column="36" />
+              <caret line="11386" column="36" selection-start-line="11386" selection-start-column="36" selection-end-line="11386" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4154#4155#0" expanded="true" />
@@ -64,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/RSApplet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="553" column="34" lean-forward="true" selection-start-line="553" selection-start-column="34" selection-end-line="553" selection-end-column="34" />
+            <state relative-caret-position="9112">
+              <caret line="553" column="34" selection-start-line="553" selection-start-column="34" selection-end-line="553" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -91,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Stream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="4165">
               <caret line="275" column="15" selection-start-line="275" selection-start-column="15" selection-end-line="275" selection-end-column="15" />
             </state>
           </provider>
@@ -156,9 +151,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="596" />
-    <option name="y" value="117" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="y" value="11" />
     <option name="width" value="1316" />
     <option name="height" value="942" />
   </component>
@@ -168,6 +163,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -183,24 +180,6 @@
             <path>
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -208,13 +187,6 @@
               <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
               <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
@@ -224,8 +196,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -298,11 +268,15 @@
       <workItem from="1573255910836" duration="437000" />
       <workItem from="1573256382877" duration="2036000" />
       <workItem from="1573325931232" duration="5916000" />
+      <workItem from="1573405921364" duration="1320000" />
+      <workItem from="1573425311430" duration="599000" />
+      <workItem from="1573438290857" duration="2125000" />
+      <workItem from="1573504001950" duration="855000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23231000" />
+    <option name="totallyTimeSpent" value="28130000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -314,10 +288,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="596" y="117" width="1316" height="942" extended-state="1" />
-    <editor active="true" />
+    <frame x="-7" y="11" width="1316" height="942" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28821656" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30732483" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -326,7 +299,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32880098" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -396,10 +369,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RS2006.iml">
+    <entry file="file://$PROJECT_DIR$/RS2006.iml" />
+    <entry file="file://$PROJECT_DIR$/2006Redone Client.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="33" />
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="11386" column="36" selection-start-line="11386" selection-start-column="36" selection-end-line="11386" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4154#4155#0" expanded="true" />
+            <element signature="e#4185#4186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RSApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9112">
+          <caret line="553" column="34" selection-start-line="553" selection-start-column="34" selection-end-line="553" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -417,36 +410,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2006Redone Client.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="35" selection-start-column="35" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/RSApplet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="553" column="34" lean-forward="true" selection-start-line="553" selection-start-column="34" selection-end-line="553" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="4165">
           <caret line="275" column="15" selection-start-line="275" selection-start-column="15" selection-end-line="275" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="11386" column="36" lean-forward="true" selection-start-line="11386" selection-start-column="36" selection-end-line="11386" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4154#4155#0" expanded="true" />
-            <element signature="e#4185#4186#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

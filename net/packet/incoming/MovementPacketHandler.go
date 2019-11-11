@@ -1,7 +1,6 @@
 package incoming
 
 import (
-	"bytes"
 	"encoding/binary"
 	"rsps/entity"
 	"rsps/model"
@@ -18,24 +17,28 @@ type MovementPacketHandler struct {}
 func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *packet.Packet) {
 	player.MovementQueue.Reset()
 
-	buffer := bytes.NewBuffer(packet.Payload)
+	if packet.Opcode == 248 {
+		packet.Size -= 14
+	}
+
 	steps := int((packet.Size - 5) / 2)
 	path := make([]Point, steps)
-	var firstStepX uint16
-	_ = binary.Read(buffer, binary.LittleEndian, &firstStepX)
-	firstStepX = firstStepX + 128
+	firstStepX := packet.ReadBEShortA()
 	for i := 0; i < steps; i++ {
 		var point Point
-		_ = binary.Read(buffer, binary.BigEndian, &point)
+		_ = binary.Read(packet.Buffer, binary.BigEndian, &point)
 		path[i] = point
 	}
-	var firstStepY uint16
-	_ = binary.Read(buffer, binary.LittleEndian, &firstStepY)
+	firstStepY := packet.ReadBEShort()
 
 	positions := make([]*model.Position, steps+1)
 	positions[0] = &model.Position{
 		X: firstStepX,
 		Y: firstStepY,
+	}
+
+	if player.GetPosition().GetDistance(positions[0]) >= 22 {
+		return
 	}
 
 	for i := 0; i < steps; i++ {

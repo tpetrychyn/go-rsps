@@ -2,32 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/net/PacketSizes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/TCPServer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/PacketListener.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/login/LoginHandshakeResponse.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/login/LoginResponse.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/Message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/Region.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/World.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/ConfigurationPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/CreateGroundItemPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/RemoveGroundItemPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SendPositionPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SidebarInterfacePacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/Math.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/RS2006.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Character.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/CharacterModel.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/PlayerModel.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Position.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/Connection.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/ConnectionHandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/UpstreamLoginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPServer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/Packet.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/Packet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/MapRegionPacketWriter.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/MapRegionPacketWriter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,18 +49,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/net/packet" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/net/packet/outgoing" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\entity" />
       <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
       <recent name="C:\Users\Taylor\go\src\rsps" />
       <recent name="C:\Users\Taylor\go\src\rsps\net" />
-      <recent name="C:\Users\Taylor\go\src\rsps\entity" />
       <recent name="C:\Users\Taylor\go\src\rsps\model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
       <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
       <recent name="C:\Users\Taylor\go\src\rsps\net" />
       <recent name="C:\Users\Taylor\go\src\rsps\model" />
@@ -177,6 +173,7 @@
       <configuration name="GoApplicationRunConfiguration">
         <watch expression="m.Position.GetRegionX()" language="go" />
         <watch expression="uint(m.Position.GetRegionX() + 6 + 128)" language="go" />
+        <watch expression="uint16(value)" language="go" />
       </configuration>
       <configuration name="GoTestRunConfiguration">
         <watch expression="value&gt;&gt;2" language="go" />

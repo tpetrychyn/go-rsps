@@ -3,9 +3,16 @@ package outgoing
 import (
 	"bufio"
 	"bytes"
-	"rsps/entity"
 	"rsps/model"
 )
+
+type PlayerInterface interface {
+	GetLastDirection() model.Direction
+	GetPrimaryDirection() model.Direction
+	GetSecondaryDirection() model.Direction
+	GetPosition() *model.Position
+	GetLastKnownRegion() *model.Position
+}
 
 type PlayerUpdateType int
 
@@ -20,13 +27,13 @@ type PlayerUpdatePacket struct {
 	typ            PlayerUpdateType
 	updateRequired bool
 	clearFlag      bool
-	player         *entity.Player
+	player         PlayerInterface
 	otherPlayers   []interface{}
 }
 
-func NewPlayerUpdatePacket (player *entity.Player) *PlayerUpdatePacket {
+func NewPlayerUpdatePacket(player PlayerInterface) *PlayerUpdatePacket {
 	return &PlayerUpdatePacket{
-		player:         player,
+		player: player,
 	}
 }
 
@@ -61,9 +68,9 @@ func (p *PlayerUpdatePacket) Build() []byte {
 	var updateType = p.typ
 	if p.typ == Teleport {
 		updateType = Teleport
-	} else if p.player.LastDirection != model.None {
+	} else if p.player.GetSecondaryDirection() != model.None {
 		updateType = Running
-	} else if p.player.PrimaryDirection != model.None {
+	} else if p.player.GetPrimaryDirection() != model.None {
 		updateType = Moving
 	} else {
 		updateType = Idle
@@ -77,20 +84,20 @@ func (p *PlayerUpdatePacket) Build() []byte {
 			break
 		case Moving:
 			stream.WriteBits(2, 1)
-			stream.WriteBits(3, uint(p.player.PrimaryDirection))
+			stream.WriteBits(3, uint(p.player.GetPrimaryDirection()))
 			stream.WriteBits(1, 1)
 		case Running:
 			stream.WriteBits(2, 2)
-			stream.WriteBits(3, uint(p.player.PrimaryDirection))
-			stream.WriteBits(3, uint(p.player.LastDirection))
+			stream.WriteBits(3, uint(p.player.GetPrimaryDirection()))
+			stream.WriteBits(3, uint(p.player.GetSecondaryDirection()))
 			stream.WriteBits(1, 1)
 		case Teleport:
 			stream.WriteBits(2, 3)
 			stream.WriteBits(2, 0)
 			stream.WriteBits(1, 1)
 			stream.WriteBits(1, 1)
-			stream.WriteBits(7, uint(p.player.Position.GetLocalY()))
-			stream.WriteBits(7, uint(p.player.Position.GetLocalX()))
+			stream.WriteBits(7, uint(p.player.GetPosition().GetLocalY()))
+			stream.WriteBits(7, uint(p.player.GetPosition().GetLocalX()))
 		}
 	} else {
 		stream.WriteBits(1, 0)

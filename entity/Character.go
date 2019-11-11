@@ -1,32 +1,16 @@
 package entity
 
-import (
-	"rsps/model"
-)
+import "rsps/model"
 
-type Character struct {
-	MovementQueue    *MovementQueue
-	Position         *model.Position
-	PrimaryDirection model.Direction
-	LastDirection    model.Direction
-}
-
-func NewCharacter(p *model.Position) *Character {
-	c := &Character{
-		Position:         p,
-		PrimaryDirection: model.None,
-		LastDirection:    model.None,
-	}
-	c.MovementQueue = NewMovementQueue(c)
-
-	return c
-}
-
-func (c *Character) Tick() {
-	c.MovementQueue.Tick()
-}
-
-func (c *Character) PostUpdate() {
-	c.PrimaryDirection = model.None
-	c.LastDirection = model.None
+type Character interface{
+	GetPosition() *model.Position
+	SetPosition(*model.Position)
+	GetPrimaryDirection() model.Direction
+	SetPrimaryDirection(model.Direction)
+	GetSecondaryDirection() model.Direction
+	SetSecondaryDirection(model.Direction)
+	GetLastDirection() model.Direction
+	SetLastDirection(model.Direction)
+	GetLastKnownRegion() *model.Position
+	SetLastKnownRegion(*model.Position)
 }
