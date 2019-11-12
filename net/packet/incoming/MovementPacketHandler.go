@@ -7,6 +7,7 @@ import (
 	"rsps/net/packet"
 )
 
+// TODO: Use model.point, it broke last attempt
 type Point struct {
 	X int8
 	Y int8
@@ -23,13 +24,13 @@ func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *pack
 
 	steps := int((packet.Size - 5) / 2)
 	path := make([]Point, steps)
-	firstStepX := packet.ReadBEShortA()
+	firstStepX := packet.ReadLEShortA()
 	for i := 0; i < steps; i++ {
 		var point Point
 		_ = binary.Read(packet.Buffer, binary.BigEndian, &point)
 		path[i] = point
 	}
-	firstStepY := packet.ReadBEShort()
+	firstStepY := packet.ReadLEShort()
 
 	positions := make([]*model.Position, steps+1)
 	positions[0] = &model.Position{

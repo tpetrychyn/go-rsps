@@ -16,8 +16,8 @@ func NewStream() *Stream {
 	}
 
 	return &Stream{
-		buffer:      buffer,
-		bitPosition: 0,
+		buffer:        buffer,
+		bitPosition:   0,
 		currentOffset: 0,
 	}
 }
@@ -67,6 +67,24 @@ func (s *Stream) WriteByte(value byte) {
 	}
 
 	s.buffer[s.currentOffset] = value
+	s.currentOffset++
+}
+
+func (s *Stream) WriteInt(value int) {
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, 0)
+	}
+
+	s.buffer[s.currentOffset] = byte(value >> 24)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value >> 16)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value >> 8)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value)
 	s.currentOffset++
 }
 

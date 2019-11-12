@@ -7,27 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../entity/Message.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../entity/Region.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../entity/World.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/ConfigurationPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/CreateGroundItemPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/RemoveGroundItemPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendPositionPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SidebarInterfacePacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../util/Math.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/Item.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/ItemContainer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/Movement.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/EquipItemPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/InterfaceButtonPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/InventoryItemPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/LogoutPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendItemContainerPacket.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../entity/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Character.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Position.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Stream.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPServer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/UpstreamLoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/UpstreamLoginHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/Packet.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/Packet.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -151,9 +147,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-7" />
-    <option name="y" value="11" />
+    <option name="y" value="12" />
     <option name="width" value="1316" />
     <option name="height" value="942" />
   </component>
@@ -163,8 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,23 +173,14 @@
             </path>
             <path>
               <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2006Redone Client" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2006Redone Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,12 +256,14 @@
       <workItem from="1573405921364" duration="1320000" />
       <workItem from="1573425311430" duration="599000" />
       <workItem from="1573438290857" duration="2125000" />
-      <workItem from="1573504001950" duration="855000" />
+      <workItem from="1573504001950" duration="1536000" />
+      <workItem from="1573513308053" duration="549000" />
+      <workItem from="1573520550787" duration="1505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28130000" />
+    <option name="totallyTimeSpent" value="30865000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -288,9 +275,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="11" width="1316" height="942" extended-state="0" />
+    <frame x="-7" y="12" width="1316" height="942" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30732483" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31687897" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -299,7 +287,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32880098" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />

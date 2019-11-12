@@ -12,6 +12,7 @@ type PlayerInterface interface {
 	GetSecondaryDirection() model.Direction
 	GetPosition() *model.Position
 	GetLastKnownRegion() *model.Position
+	GetEquipment() *model.ItemContainer
 }
 
 type PlayerUpdateType int
@@ -120,7 +121,7 @@ func (p *PlayerUpdatePacket) Build() []byte {
 		//p.buf.WriteByte(10)
 
 		pa := &PlayerAppearance{
-			//Legs: 4730,
+			Equipment: p.player.GetEquipment(),
 		}
 		buffer.Write(pa.ToBytes())
 	}

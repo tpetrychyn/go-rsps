@@ -2,21 +2,20 @@ package entity
 
 import (
 	"github.com/google/uuid"
+	"log"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
 )
 
 type Player struct {
-	Id                 uuid.UUID
-	MovementQueue      *MovementQueue
-	Position           *model.Position
-	Region             *Region
-	LastKnownRegion    *model.Position
-	PrimaryDirection   model.Direction
-	SecondaryDirection model.Direction
-	LastDirection      model.Direction
-	IsRunning          bool
-	OutgoingQueue      []DownstreamMessage
+	Id uuid.UUID
+	*model.Movement
+	MovementQueue   *MovementQueue
+	Region          *Region
+	Inventory       *model.ItemContainer
+	Equipment       *model.ItemContainer
+	OutgoingQueue   []DownstreamMessage
+	LogoutRequested bool
 }
 
 var SIDEBARS = []int{2423, 3917, 638, 3213, 1644, 5608, 1151,
@@ -28,11 +27,13 @@ func NewPlayer() *Player {
 		Y: 3200,
 	}
 	player := &Player{
-		Id:                 uuid.New(), // TODO: Load this from database or something
-		Position:           spawn,
-		LastKnownRegion:    spawn,
-		SecondaryDirection: model.None,
-		IsRunning:          true,
+		Id: uuid.New(), // TODO: Load this from database or something
+		Movement: &model.Movement{
+			Position:           spawn,
+			LastKnownRegion:    spawn,
+			SecondaryDirection: model.None,
+			IsRunning:          true,
+		},
 	}
 	player.MovementQueue = NewMovementQueue(player)
 
@@ -48,6 +49,30 @@ func NewPlayer() *Player {
 		State:       1,
 	})
 
+	inventory := model.NewItemContainer(28)
+	inventory.Items[0] = &model.Item{
+		ItemId: 995,
+		Amount: 10000,
+	}
+	inventory.Items[1] = &model.Item{
+		ItemId: 1351,
+		Amount: 1,
+	}
+	inventory.Items[2] = &model.Item{
+		ItemId: 579,
+		Amount: 1,
+	}
+	player.Inventory = inventory
+	player.Equipment = model.NewItemContainer(14)
+
+	for k, v := range player.Inventory.Items {
+		log.Printf("k %+v v %+v", k, v)
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.InventoryItemPacket{
+			Slot: k,
+			Item: v,
+		})
+	}
+
 	return player
 }
 
@@ -59,6 +84,28 @@ func (p *Player) PostUpdate() {
 
 func (p *Player) Tick() {
 	p.MovementQueue.Tick()
+}
+
+func (p *Player) EquipItem(equipSlot, itemId uint16) {
+	var invItem *model.Item
+	var invSlot int
+	for k, v := range p.Inventory.Items {
+		if v.ItemId == int(itemId) {
+			invItem = v
+			invSlot = k
+		}
+	}
+	if invItem == nil {
+		log.Printf("you do not have that item")
+		return
+	}
+
+	p.Equipment.Items[equipSlot] = p.Inventory.Items[invSlot]
+	p.Inventory.Items[invSlot] = &model.Item{}
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.InventoryItemPacket{
+		Slot: invSlot,
+		Item: &model.Item{},
+	})
 }
 
 func (p *Player) GetPosition() *model.Position {
@@ -99,4 +146,8 @@ func (p *Player) GetLastDirection() model.Direction {
 
 func (p *Player) SetLastDirection(direction model.Direction) {
 	p.LastDirection = direction
+}
+
+func (p *Player) GetEquipment() *model.ItemContainer {
+	return p.Equipment
 }

@@ -105,6 +105,7 @@ connectionLoop:
 					log.Printf("error reading payload %s", err.Error())
 					continue
 				}
+				p.Payload = payload
 				p.Buffer = bytes.NewBuffer(payload)
 			}
 
@@ -125,12 +126,12 @@ func (client *TCPClient) Tick() {
 			client.Enqueue(v)
 		}
 		client.Player.OutgoingQueue = make([]entity.DownstreamMessage, 0)
-		//
-		//if client.Player.RegionChanged {
-		//	client.Enqueue(&outgoing.MapRegionPacket{Position: client.Player.Position})
-		//}
 		client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player).SetUpdateRequired(true))
 		client.Enqueue(&flush{})
+
+		if client.Player.LogoutRequested {
+			client.loginState = Disconnected
+		}
 	}
 }
 
@@ -138,9 +139,10 @@ func (client *TCPClient) ProcessUpstream() {
 	for upstreamMessage := range client.Upstream {
 		if msg, ok := upstreamMessage.(*packet.Packet); ok {
 			if !isIgnored(msg.Opcode) {
-				//log.Printf("upstreamMessage: %+v", msg)
+				log.Printf("upstreamMessage: %+v", msg)
 			}
-			if msg.Opcode == 164 ||  msg.Opcode == 248{
+			handler := incoming.Packets[msg.Opcode]
+			if handler != nil {
 				incoming.Packets[msg.Opcode].HandlePacket(client.Player, msg)
 			}
 		}
@@ -148,7 +150,9 @@ func (client *TCPClient) ProcessUpstream() {
 }
 
 func isIgnored(opCode byte) bool {
-	ignoredPackets := []byte{0, 3}
+	// 0 keepalive
+	// 241 click
+	ignoredPackets := []byte{0, 3, 241}
 	for _, v := range ignoredPackets {
 		if opCode == v {
 			return true

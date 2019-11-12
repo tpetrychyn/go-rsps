@@ -18,7 +18,8 @@ func (l *UpstreamLoginHandler) HandlePacket(c *TCPClient) {
 		var packet LoginZero
 		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
-			fmt.Println(err)
+			log.Println("login stage 1 error: " + err.Error())
+			c.loginState = Disconnected
 			return
 		}
 		log.Printf("packet: %+v", packet)
@@ -38,6 +39,7 @@ func (l *UpstreamLoginHandler) HandlePacket(c *TCPClient) {
 		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
 			log.Printf("login stage 1 error: " + err.Error())
+			c.loginState = Disconnected
 			return
 		}
 		log.Printf("%+v", packet)
@@ -54,17 +56,20 @@ func (l *UpstreamLoginHandler) HandlePacket(c *TCPClient) {
 		err = binary.Read(rsaBuffer, binary.BigEndian, &rsaPacket)
 		if err != nil {
 			fmt.Println(err)
+			c.loginState = Disconnected
 			return
 		}
 		name, err := rsaBuffer.ReadBytes(10)
 		if err != nil {
 			fmt.Println(err)
+			c.loginState = Disconnected
 			return
 		}
 		log.Printf("%s", string(name))
 		pass, err := rsaBuffer.ReadBytes(10)
 		if err != nil {
 			fmt.Println(err)
+			c.loginState = Disconnected
 			return
 		}
 		log.Printf("%s", string(pass))
