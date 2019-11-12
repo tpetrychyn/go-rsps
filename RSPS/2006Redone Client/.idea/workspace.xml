@@ -7,23 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../model/Item.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../model/ItemContainer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../model/Movement.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/EquipItemPacketHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/InterfaceButtonPacketHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/InventoryItemPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/LogoutPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendItemContainerPacket.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/UpstreamLoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/UpstreamLoginHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/Packet.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/Packet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -147,7 +132,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="y" value="12" />
     <option name="width" value="1316" />
@@ -258,12 +243,12 @@
       <workItem from="1573438290857" duration="2125000" />
       <workItem from="1573504001950" duration="1536000" />
       <workItem from="1573513308053" duration="549000" />
-      <workItem from="1573520550787" duration="1505000" />
+      <workItem from="1573520550787" duration="1836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30865000" />
+    <option name="totallyTimeSpent" value="31196000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -275,7 +260,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="12" width="1316" height="942" extended-state="1" />
+    <frame x="-7" y="12" width="1316" height="942" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31687897" />

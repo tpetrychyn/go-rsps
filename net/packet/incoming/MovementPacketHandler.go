@@ -16,7 +16,7 @@ type Point struct {
 type MovementPacketHandler struct {}
 
 func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *packet.Packet) {
-	player.MovementQueue.Reset()
+	player.MovementQueue.Clear()
 
 	if packet.Opcode == 248 {
 		packet.Size -= 14

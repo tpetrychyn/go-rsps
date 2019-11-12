@@ -56,7 +56,7 @@ func (m *MovementQueue) Tick() {
 	}
 }
 
-func (m *MovementQueue) Reset() {
+func (m *MovementQueue) Clear() {
 	m.points = make([]*model.Point, 0)
 }
 

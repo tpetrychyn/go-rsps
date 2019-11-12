@@ -99,13 +99,23 @@ func (p *Player) EquipItem(equipSlot, itemId uint16) {
 		log.Printf("you do not have that item")
 		return
 	}
-
+	
 	p.Equipment.Items[equipSlot] = p.Inventory.Items[invSlot]
 	p.Inventory.Items[invSlot] = &model.Item{}
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.InventoryItemPacket{
 		Slot: invSlot,
 		Item: &model.Item{},
 	})
+}
+
+func (p *Player) Teleport(position *model.Position) {
+	p.LastDirection = model.None
+	p.PrimaryDirection = model.None
+	p.Position = position
+	p.LastKnownRegion = p.Position
+	p.MovementQueue.Clear()
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.MapRegionPacket{Position: p.Position})
+	p.OutgoingQueue = append(p.OutgoingQueue, outgoing.NewPlayerUpdatePacket(p).SetUpdateRequired(true).SetTyp(outgoing.Teleport))
 }
 
 func (p *Player) GetPosition() *model.Position {
