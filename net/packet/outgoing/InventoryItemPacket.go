@@ -18,7 +18,12 @@ func (i *InventoryItemPacket) Write(writer *bufio.Writer) {
 	payload := model.NewStream()
 	payload.WriteWord(3214)
 	payload.WriteByte(byte(i.Slot))
-	payload.WriteWord(uint(i.ItemId + 1))
+	if i.ItemId > 0 {
+		payload.WriteWord(uint(i.ItemId + 1))
+	} else {
+		payload.WriteWord(0)
+	}
+
 	if i.Amount > 254 {
 		payload.WriteByte(255)
 		payload.WriteInt(i.Amount)

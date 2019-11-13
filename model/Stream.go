@@ -33,7 +33,12 @@ func (s *Stream) Flush() []byte {
 }
 
 func (s *Stream) Write(bytes []byte) {
-	s.buffer = append(s.buffer, bytes...)
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, bytes...)
+	} else {
+		s.buffer = bytes
+	}
+
 	s.currentOffset += uint(len(bytes))
 }
 
@@ -61,6 +66,18 @@ func (s *Stream) WriteWordA(value uint) {
 	s.currentOffset++
 }
 
+func (s *Stream) WriteWordBEA(value uint) {
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, 0)
+	}
+
+	s.buffer[s.currentOffset] = byte(value + 128)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value >> 8)
+	s.currentOffset++
+}
+
 func (s *Stream) WriteByte(value byte) {
 	if s.currentOffset > 0 {
 		s.buffer = append(s.buffer, 0)
@@ -85,6 +102,24 @@ func (s *Stream) WriteInt(value int) {
 	s.currentOffset++
 	s.buffer = append(s.buffer, 0)
 	s.buffer[s.currentOffset] = byte(value)
+	s.currentOffset++
+}
+
+func (s *Stream) WriteDWord_v2(value int) {
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, 0)
+	}
+
+	s.buffer[s.currentOffset] = byte(value >> 16)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value >> 24)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0 )
+	s.buffer[s.currentOffset] = byte(value >> 8)
 	s.currentOffset++
 }
 

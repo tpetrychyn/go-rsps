@@ -55,3 +55,9 @@ func (p *Packet) ReadByte() byte {
 	value, _ := p.Buffer.ReadByte()
 	return value
 }
+
+func (p *Packet) ReadByteS() byte {
+	value, _ := p.Buffer.ReadByte()
+	return 128 - value
+}
+

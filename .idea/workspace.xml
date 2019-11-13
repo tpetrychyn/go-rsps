@@ -2,12 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/definitions/items.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/ChatPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/MoveItemPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/RemoveEquipmentPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/FlashSidebarPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/HintPackets.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SendMessagePacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/players/shocker.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/ItemDefinitions.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Item.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Item.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/ItemContainer.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/ItemContainer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Movement.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Movement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Stream.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPServer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/UpstreamLoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/LoginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/Packet.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/Packet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/EquipItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/EquipItemPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/incoming/InterfaceButtonPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/InterfaceButtonPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/InventoryItemPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/InventoryItemPacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/SendItemContainerPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/SendItemContainerPacket.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +48,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SuIWc7SdlAHBSQVCqN1aTjOmQB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -38,19 +62,19 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\incoming" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net" />
+      <recent name="C:\Users\Taylor\go\src\rsps\model" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Taylor\go\src\rsps\entity" />
       <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
       <recent name="C:\Users\Taylor\go\src\rsps" />
       <recent name="C:\Users\Taylor\go\src\rsps\net" />
       <recent name="C:\Users\Taylor\go\src\rsps\model" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net" />
-      <recent name="C:\Users\Taylor\go\src\rsps\model" />
-      <recent name="C:\Users\Taylor\go\src\rsps" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -143,6 +167,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

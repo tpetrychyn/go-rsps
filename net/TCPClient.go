@@ -31,12 +31,12 @@ type TCPClient struct {
 	writer       *bufio.Writer
 	Upstream     chan entity.UpstreamMessage
 	Downstream   chan entity.DownstreamMessage
-	loginHandler *UpstreamLoginHandler
+	loginHandler *LoginHandler
 	Encryptor    *isaac.ISAAC
 	Decryptor    *isaac.ISAAC
 }
 
-func NewTcpClient(connnection net.Conn, loginHandler *UpstreamLoginHandler, world *entity.World) *TCPClient {
+func NewTcpClient(connnection net.Conn, loginHandler *LoginHandler, world *entity.World) *TCPClient {
 	player := entity.NewPlayer()
 	world.AddPlayerToRegion(player)
 	return &TCPClient{
@@ -72,6 +72,10 @@ connectionLoop:
 			client.Enqueue(&initType{})
 			client.Enqueue(&outgoing.MapRegionPacket{Position: client.Player.Position})
 			client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player).SetUpdateRequired(true).SetTyp(outgoing.Teleport))
+			for _, v := range client.Player.OutgoingQueue {
+				client.Enqueue(v)
+			}
+			client.Player.OutgoingQueue = make([]entity.DownstreamMessage, 0)
 			client.Enqueue(&flush{})
 			client.loginState = IngameStage
 			break
@@ -138,7 +142,7 @@ func (client *TCPClient) Tick() {
 func (client *TCPClient) ProcessUpstream() {
 	for upstreamMessage := range client.Upstream {
 		if msg, ok := upstreamMessage.(*packet.Packet); ok {
-			if !isIgnored(msg.Opcode) {
+			if !isIgnored(msg.Opcode) && incoming.Packets[msg.Opcode] == nil {
 				log.Printf("upstreamMessage: %+v", msg)
 			}
 			handler := incoming.Packets[msg.Opcode]

@@ -30,7 +30,7 @@ func (server *TcpServer) Start() {
 	world := entity.WorldProvider()
 	go world.Tick()
 
-	l := &UpstreamLoginHandler{}
+	l := &LoginHandler{}
 
 	for {
 		connection, err := listener.Accept()

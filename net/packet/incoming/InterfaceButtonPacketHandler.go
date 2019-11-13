@@ -9,6 +9,8 @@ import (
 )
 
 const LOGOUT = 2458
+const WALK_BUTTON = 152
+const RUN_BUTTON = 153
 const VARROCK_TELEPORT_BUTTON = 1164
 const LUMBRIDGE_TELEPORT_BUTTON = 1167
 const FALADOR_TELEPORT_BUTTON = 1170
@@ -25,6 +27,13 @@ func (i *InterfaceButtonPacketHandler) HandlePacket(player *entity.Player, packe
 	case LOGOUT:
 		player.LogoutRequested = true
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.LogoutPacket{})
+
+	case WALK_BUTTON:
+		player.IsRunning = false
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.ConfigurationPacket{InterfaceId: 173,State:0})
+	case RUN_BUTTON:
+		player.IsRunning = true
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.ConfigurationPacket{InterfaceId: 173,State:1})
 
 	case VARROCK_TELEPORT_BUTTON:
 		player.Teleport(&model.Position{X: 3210, Y: 3424})

@@ -7,8 +7,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../definitions/items.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/ChatPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/MoveItemPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/RemoveEquipmentPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/FlashSidebarPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/HintPackets.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendMessagePacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../players/shocker.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../util/ItemDefinitions.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../model/Item.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Item.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../model/ItemContainer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/ItemContainer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../model/Movement.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Movement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Stream.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPServer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/UpstreamLoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/LoginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/Packet.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/Packet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/EquipItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/EquipItemPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/InterfaceButtonPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/InterfaceButtonPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/InventoryItemPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/InventoryItemPacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/SendItemContainerPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendItemContainerPacket.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="11386" column="36" selection-start-line="11386" selection-start-column="36" selection-end-line="11386" selection-end-column="36" />
+            <state relative-caret-position="324">
+              <caret line="11388" column="9" lean-forward="true" selection-start-line="11388" selection-start-column="9" selection-end-line="11388" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4154#4155#0" expanded="true" />
@@ -133,8 +158,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="y" value="12" />
+    <option name="x" value="559" />
+    <option name="y" value="4" />
     <option name="width" value="1316" />
     <option name="height" value="942" />
   </component>
@@ -243,12 +268,14 @@
       <workItem from="1573438290857" duration="2125000" />
       <workItem from="1573504001950" duration="1536000" />
       <workItem from="1573513308053" duration="549000" />
-      <workItem from="1573520550787" duration="1836000" />
+      <workItem from="1573520550787" duration="2422000" />
+      <workItem from="1573600835013" duration="2198000" />
+      <workItem from="1573610425542" duration="2015000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31196000" />
+    <option name="totallyTimeSpent" value="35995000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -260,10 +287,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="12" width="1316" height="942" extended-state="0" />
+    <frame x="559" y="4" width="1316" height="942" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31687897" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3272293" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -352,8 +379,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="11386" column="36" selection-start-line="11386" selection-start-column="36" selection-end-line="11386" selection-end-column="36" />
+        <state relative-caret-position="324">
+          <caret line="11388" column="9" lean-forward="true" selection-start-line="11388" selection-start-column="9" selection-end-line="11388" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4154#4155#0" expanded="true" />

@@ -13,15 +13,23 @@ type SendItemContainerPacket struct {
 func (s *SendItemContainerPacket) Write(writer *bufio.Writer) {
 	// TODO: This does not work
 	writer.WriteByte(53)
-	buffer := model.NewStream()
 
+	buffer := model.NewStream()
 	buffer.WriteWord(s.InterfaceId)
 	buffer.WriteWord(s.ItemContainer.Capacity)
 
-	for _, _ = range s.ItemContainer.Items {
-		buffer.WriteByte(0)
-		buffer.WriteByte(0)
-		buffer.WriteByte(0)
+	for _, v := range s.ItemContainer.Items {
+		if v.Amount > 254 {
+			buffer.WriteByte(255)
+			buffer.WriteDWord_v2(v.Amount)
+		} else {
+			buffer.WriteByte(byte(v.Amount))
+		}
+		if v.ItemId > 0 {
+			buffer.WriteWordBEA(uint(v.ItemId + 1))
+		} else {
+			buffer.WriteWordBEA(0)
+		}
 	}
 
 	b := buffer.Flush()

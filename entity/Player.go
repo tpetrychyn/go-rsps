@@ -1,14 +1,21 @@
 package entity
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/google/uuid"
+	"io/ioutil"
 	"log"
+	"os"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"rsps/util"
+	"time"
 )
 
 type Player struct {
-	Id uuid.UUID
+	Id   uuid.UUID
+	Name string
 	*model.Movement
 	MovementQueue   *MovementQueue
 	Region          *Region
@@ -27,7 +34,9 @@ func NewPlayer() *Player {
 		Y: 3200,
 	}
 	player := &Player{
-		Id: uuid.New(), // TODO: Load this from database or something
+		Id:        uuid.New(), // TODO: Load this from database or something
+		Inventory: model.NewItemContainer(28),
+		Equipment: model.NewItemContainer(14),
 		Movement: &model.Movement{
 			Position:           spawn,
 			LastKnownRegion:    spawn,
@@ -44,36 +53,57 @@ func NewPlayer() *Player {
 		})
 	}
 
-	player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.ConfigurationPacket{
-		InterfaceId: 173,
-		State:       1,
+	return player
+}
+
+type PlayerSave struct {
+	Position *model.Position
+	Inventory []*model.Item `json:"inventory"`
+}
+
+func (p *Player) SavePlayer() {
+	save := &PlayerSave{Position: p.Position, Inventory: p.Inventory.Items}
+
+	file, _ := json.MarshalIndent(save, "", " ")
+
+	_ = ioutil.WriteFile(fmt.Sprintf("./players/%s.json", p.Name), file, 0644)
+}
+
+func (p *Player) LoadPlayer(name string) error {
+	fname := fmt.Sprintf("./players/%s", name) + ".json"
+	log.Printf("%+v", fname)
+	file, err := os.Open(fname)
+	if err != nil {
+		return err
+	}
+	var playerSave PlayerSave
+	b, err := ioutil.ReadAll(file)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(b, &playerSave)
+	if err != nil {
+		return err
+	}
+	if len(playerSave.Inventory) > 0 {
+		p.Inventory.Items = playerSave.Inventory
+	}
+
+	if playerSave.Position != nil {
+		p.Position = playerSave.Position
+		p.LastKnownRegion = playerSave.Position
+	}
+
+	p.Name = name
+
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendItemContainerPacket{
+		ItemContainer: p.Inventory,
+		InterfaceId:   3214,
 	})
 
-	inventory := model.NewItemContainer(28)
-	inventory.Items[0] = &model.Item{
-		ItemId: 995,
-		Amount: 10000,
-	}
-	inventory.Items[1] = &model.Item{
-		ItemId: 1351,
-		Amount: 1,
-	}
-	inventory.Items[2] = &model.Item{
-		ItemId: 579,
-		Amount: 1,
-	}
-	player.Inventory = inventory
-	player.Equipment = model.NewItemContainer(14)
-
-	for k, v := range player.Inventory.Items {
-		log.Printf("k %+v v %+v", k, v)
-		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.InventoryItemPacket{
-			Slot: k,
-			Item: v,
-		})
-	}
-
-	return player
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Welcome to TaylorScape"})
+	log.Printf("loaded %s", fname)
+	return nil
 }
 
 func (p *Player) PostUpdate() {
@@ -82,29 +112,34 @@ func (p *Player) PostUpdate() {
 	p.LastDirection = model.None
 }
 
+var t = time.Now()
+
 func (p *Player) Tick() {
 	p.MovementQueue.Tick()
+	p.SavePlayer()
 }
 
-func (p *Player) EquipItem(equipSlot, itemId uint16) {
-	var invItem *model.Item
-	var invSlot int
-	for k, v := range p.Inventory.Items {
-		if v.ItemId == int(itemId) {
-			invItem = v
-			invSlot = k
-		}
-	}
+func (p *Player) EquipItem(invSlot, itemId uint16) {
+	invItem := p.Inventory.FindItem(int(itemId))
 	if invItem == nil {
-		log.Printf("you do not have that item")
+		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendMessagePacket{Message: "You do not have that item."})
+		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.InventoryItemPacket{Slot: int(invSlot), Item: &model.Item{}})
 		return
 	}
-	
-	p.Equipment.Items[equipSlot] = p.Inventory.Items[invSlot]
+
+	def := util.GetItemDefinition(int(itemId))
+	slot := outgoing.EQUIPMENT_SLOTS[def.Equipment.Slot]
+
+	p.Equipment.Items[slot] = invItem
 	p.Inventory.Items[invSlot] = &model.Item{}
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.InventoryItemPacket{
-		Slot: invSlot,
+		Slot: int(invSlot),
 		Item: &model.Item{},
+	})
+
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendItemContainerPacket{
+		ItemContainer: p.Equipment,
+		InterfaceId:   model.EQUIPMENT_INTERFACE_ID,
 	})
 }
 
@@ -118,46 +153,17 @@ func (p *Player) Teleport(position *model.Position) {
 	p.OutgoingQueue = append(p.OutgoingQueue, outgoing.NewPlayerUpdatePacket(p).SetUpdateRequired(true).SetTyp(outgoing.Teleport))
 }
 
-func (p *Player) GetPosition() *model.Position {
-	return p.Position
-}
-
-func (p *Player) SetPosition(position *model.Position) {
-	p.Position = position
-}
-
-func (p *Player) GetLastKnownRegion() *model.Position {
-	return p.LastKnownRegion
-}
-
-func (p *Player) SetLastKnownRegion(position *model.Position) {
-	p.LastKnownRegion = position
-}
-
-func (p *Player) GetPrimaryDirection() model.Direction {
-	return p.PrimaryDirection
-}
-
-func (p *Player) SetPrimaryDirection(direction model.Direction) {
-	p.PrimaryDirection = direction
-}
-
-func (p *Player) GetSecondaryDirection() model.Direction {
-	return p.SecondaryDirection
-}
-
-func (p *Player) SetSecondaryDirection(direction model.Direction) {
-	p.SecondaryDirection = direction
-}
-
-func (p *Player) GetLastDirection() model.Direction {
-	return p.LastDirection
-}
-
-func (p *Player) SetLastDirection(direction model.Direction) {
-	p.LastDirection = direction
-}
-
 func (p *Player) GetEquipment() *model.ItemContainer {
 	return p.Equipment
+}
+
+func (p *Player) AddItem(id, amount int) {
+	slot := p.Inventory.AddItem(id, amount)
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.InventoryItemPacket{
+		Slot: slot,
+		Item: &model.Item{
+			ItemId: id,
+			Amount: 1,
+		},
+	})
 }

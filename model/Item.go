@@ -1,6 +1,6 @@
 package model
 
 type Item struct {
-	ItemId int
-	Amount int
+	ItemId int `json:"itemId"`
+	Amount int `json:"amount"`
 }

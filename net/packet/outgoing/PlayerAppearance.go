@@ -33,19 +33,19 @@ type PlayerAppearance struct {
 	Feet      int
 }
 
-const (
-	HAT_SLOT    = 0
-	CAPE_SLOT   = 1
-	AMULET_SLOT = 2
-	WEAPON_SLOT = 3
-	CHEST_SLOT  = 4
-	SHIELD_SLOT = 5
-	LEGS_SLOT   = 7
-	HANDS_SLOT  = 9
-	FEET_SLOT   = 10
-	RING_SLOT   = 12
-	ARROW_SLOT  = 13
-)
+var EQUIPMENT_SLOTS = map[string]int {
+	"head": 0,
+	"cape": 1,
+	"neck": 2,
+	"weapon": 3,
+	"chest": 4,
+	"shield": 5,
+	"legs": 7,
+	"hands": 9,
+	"feet": 10,
+	"ring": 12,
+	"ammo": 13,
+}
 
 func (p *PlayerAppearance) ToBytes() []byte {
 	stream := model.NewStream()
@@ -54,23 +54,23 @@ func (p *PlayerAppearance) ToBytes() []byte {
 	stream.WriteByte(255) // prayer icon
 	stream.WriteByte(255) // pk icon
 
-	p.wordOrByte(stream, p.Equipment.Items[HAT_SLOT].ItemId)
-	p.wordOrByte(stream, p.Equipment.Items[CAPE_SLOT].ItemId)
-	p.wordOrByte(stream, p.Equipment.Items[AMULET_SLOT].ItemId)
-	p.wordOrByte(stream, p.Equipment.Items[WEAPON_SLOT].ItemId)
+	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["head"]].ItemId)
+	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["cape"]].ItemId)
+	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["neck"]].ItemId)
+	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["weapon"]].ItemId)
 
 	if p.Chest > 1 {
-		stream.WriteWord(0x200 + uint(p.Equipment.Items[CHEST_SLOT].ItemId))
+		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["chest"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[2])
 	}
 
-	p.wordOrByte(stream, p.Equipment.Items[SHIELD_SLOT].ItemId)
+	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["shield"]].ItemId)
 
 	stream.WriteWord(0x100 + defaultAppearance[3]) //!isFullBody
 
 	if p.Legs > 1 {
-		stream.WriteWord(0x200 + uint(p.Equipment.Items[LEGS_SLOT].ItemId))
+		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["legs"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[5])
 	}
@@ -78,12 +78,12 @@ func (p *PlayerAppearance) ToBytes() []byte {
 	stream.WriteWord(0x100 + defaultAppearance[1]) //isFullHelm
 
 	if p.Hands > 1 {
-		stream.WriteWord(0x200 + uint(p.Equipment.Items[HANDS_SLOT].ItemId))
+		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["hands"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[4])
 	}
 	if p.Feet > 1 {
-		stream.WriteWord(0x200 + uint(p.Equipment.Items[FEET_SLOT].ItemId))
+		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["feet"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[6])
 	}
