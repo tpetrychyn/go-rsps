@@ -28,6 +28,7 @@ func (e *Equipment) EquipItem(invSlot, itemId uint16) {
 
 	def := util.GetItemDefinition(int(itemId))
 	slot := outgoing.EQUIPMENT_SLOTS[def.Equipment.Slot]
+	e.player.UpdateFlag.SetAppearance()
 
 	e.Items[slot] = invItem
 	e.player.Inventory.Items[invSlot] = model.NilItem
@@ -56,6 +57,7 @@ func (e *Equipment) RemoveItem(slot, id uint16) {
 	e.Items[slot] = model.NilItem
 	e.player.Inventory.AddItem(int(id), 1)
 	e.SetItem(0, 0, int(slot))
+	e.player.UpdateFlag.SetAppearance()
 
 	e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.SendItemContainerPacket{
 		ItemContainer: e.ItemContainer,

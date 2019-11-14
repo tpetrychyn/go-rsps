@@ -48,6 +48,15 @@ func CreateRegion(id uint16) *Region {
 	}
 }
 
+func (r *Region) FindGroundItemByPosition(id int, p *model.Position) *GroundItem {
+	for _, v := range r.GroundItems {
+		if v.ItemId == id && v.Position.X == p.X && v.Position.Y == p.Y {
+			return v
+		}
+	}
+	return nil
+}
+
 func (r *Region) Tick() {
 	//for k, v := range r.GroundItems {
 	//	if time.Now().Sub(v.CreatedAt) > 5*time.Second {

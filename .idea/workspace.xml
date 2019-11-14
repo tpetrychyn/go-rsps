@@ -2,23 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/entity/Equipment.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/Inventory.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/UpdateFlag.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/PickupItemPacketHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Equipment.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Equipment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Item.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Item.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/ItemContainer.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/ItemContainer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Stream.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Region.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/ChatPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/ChatPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/EquipItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/EquipItemPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/MoveItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MoveItemPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/RemoveEquipmentPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/RemoveEquipmentPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

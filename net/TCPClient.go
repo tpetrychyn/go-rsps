@@ -145,7 +145,7 @@ func (client *TCPClient) ProcessUpstream() {
 	for upstreamMessage := range client.Upstream {
 		if msg, ok := upstreamMessage.(*packet.Packet); ok {
 			if !isIgnored(msg.Opcode) && incoming.Packets[msg.Opcode] == nil {
-				log.Printf("upstreamMessage: %+v", msg)
+				log.Printf("upstreamMessage: opcode %+v, size %+v, payload %+v \n", msg.Opcode, msg.Size, msg.Payload)
 			}
 			handler := incoming.Packets[msg.Opcode]
 			if handler != nil {
@@ -158,7 +158,7 @@ func (client *TCPClient) ProcessUpstream() {
 func isIgnored(opCode byte) bool {
 	// 0 keepalive
 	// 241 click
-	ignoredPackets := []byte{0, 3, 241}
+	ignoredPackets := []byte{0, 3, 136, 241}
 	for _, v := range ignoredPackets {
 		if opCode == v {
 			return true

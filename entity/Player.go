@@ -17,6 +17,7 @@ type Player struct {
 	Equipment       *Equipment
 	OutgoingQueue   []DownstreamMessage
 	UpdateFlag      *model.UpdateFlag
+	DelayedPacket   func()
 	LogoutRequested bool
 }
 
