@@ -42,6 +42,18 @@ func (s *Stream) Write(bytes []byte) {
 	s.currentOffset += uint(len(bytes))
 }
 
+func (s *Stream) WriteWordLE(value uint) {
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, 0)
+	}
+
+	s.buffer[s.currentOffset] = byte(value)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value >> 8)
+	s.currentOffset++
+}
+
 func (s *Stream) WriteWord(value uint) {
 	if s.currentOffset > 0 {
 		s.buffer = append(s.buffer, 0)

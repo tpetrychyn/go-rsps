@@ -71,7 +71,9 @@ connectionLoop:
 		case Initialize:
 			client.Enqueue(&initType{})
 			client.Enqueue(&outgoing.MapRegionPacket{Position: client.Player.Position})
-			client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player).SetUpdateRequired(true).SetTyp(outgoing.Teleport))
+			client.Player.UpdateFlag.SetAppearance()
+			client.Player.UpdateFlag.NeedsPlacement = true
+			client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
 			for _, v := range client.Player.OutgoingQueue {
 				client.Enqueue(v)
 			}
@@ -130,7 +132,7 @@ func (client *TCPClient) Tick() {
 			client.Enqueue(v)
 		}
 		client.Player.OutgoingQueue = make([]entity.DownstreamMessage, 0)
-		client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player).SetUpdateRequired(true))
+		client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
 		client.Enqueue(&flush{})
 
 		if client.Player.LogoutRequested {

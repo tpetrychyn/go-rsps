@@ -1,9 +1,10 @@
 package incoming
 
 import (
-	"log"
+	"fmt"
 	"rsps/entity"
 	"rsps/net/packet"
+	"rsps/net/packet/outgoing"
 	"strconv"
 	"strings"
 )
@@ -25,8 +26,8 @@ func (e *ChatPacketHandler) HandlePacket(player *entity.Player, packet *packet.P
 			parts := strings.Split(chat, " ")
 			id, _ := strconv.Atoi(parts[1])
 			amount, _ := strconv.Atoi(parts[2])
-			log.Printf("adding item %d amount %d", id, amount)
-			player.AddItem(id, amount)
+			player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message:fmt.Sprintf("adding item %d amount %d", id, amount)})
+			player.Inventory.AddItem(id, amount)
 		}
 	}
 }

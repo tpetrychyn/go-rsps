@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -2884,18 +2883,18 @@ public class Game extends RSApplet {
 			stream.createFrame(241);
 			stream.writeDWord((l5 << 20) + (j5 << 19) + k4);
 		}
-		if (anInt1016 > 0) {
-			anInt1016--;
+		if (sendCameraUpdateTimer > 0) {
+			sendCameraUpdateTimer--;
 		}
 		if (super.keyArray[1] == 1 || super.keyArray[2] == 1 || super.keyArray[3] == 1 || super.keyArray[4] == 1) {
-			aBoolean1017 = true;
+			cameraMoved = true;
 		}
-		if (aBoolean1017 && anInt1016 <= 0) {
-			anInt1016 = 20;
-			aBoolean1017 = false;
+		if (cameraMoved && sendCameraUpdateTimer <= 0) {
+			sendCameraUpdateTimer = 20;
+			cameraMoved = false;
 			stream.createFrame(86);
-			stream.writeWord(anInt1184);
-			stream.method432(minimapInt1);
+			stream.writeWord(cameraHeight);
+			stream.method432(minimapRotation);
 		}
 		if (super.awtFocus && !aBoolean954) {
 			aBoolean954 = true;
@@ -5486,7 +5485,7 @@ public class Game extends RSApplet {
 	public void method81(Sprite sprite, int y, int x) {
 		int l = x * x + y * y;
 		if (l > 4225 && l < 90000) {
-			int i1 = minimapInt1 + minimapInt2 & 0x7ff;
+			int i1 = minimapRotation + minimapInt2 & 0x7ff;
 			int j1 = Model.modelIntArray1[i1];
 			int k1 = Model.modelIntArray2[i1];
 			j1 = (j1 * 256) / (minimapInt3 + 256);
@@ -5695,7 +5694,7 @@ public class Game extends RSApplet {
 				anInt896 = (int) (Math.random() * 80D) - 40;
 				minimapInt2 = (int) (Math.random() * 120D) - 60;
 				minimapInt3 = (int) (Math.random() * 30D) - 20;
-				minimapInt1 = (int) (Math.random() * 20D) - 10 & 0x7ff;
+				minimapRotation = (int) (Math.random() * 20D) - 10 & 0x7ff;
 				anInt1021 = 0;
 				anInt985 = -1;
 				destX = 0;
@@ -6993,7 +6992,7 @@ public class Game extends RSApplet {
 			if (i >= 0 && j >= 0 && i < 146 && j < 151) {
 				i -= 73;
 				j -= 75;
-				int k = minimapInt1 + minimapInt2 & 0x7ff;
+				int k = minimapRotation + minimapInt2 & 0x7ff;
 				int i1 = Texture.anIntArray1470[k];
 				int j1 = Texture.anIntArray1471[k];
 				i1 = i1 * (minimapInt3 + 256) >> 8;
@@ -7006,7 +7005,7 @@ public class Game extends RSApplet {
 				if (flag1) {
 					stream.writeWordBigEndian(i);
 					stream.writeWordBigEndian(j);
-					stream.writeWord(minimapInt1);
+					stream.writeWord(minimapRotation);
 					stream.writeWordBigEndian(57);
 					stream.writeWordBigEndian(minimapInt2);
 					stream.writeWordBigEndian(minimapInt3);
@@ -8253,8 +8252,9 @@ public class Game extends RSApplet {
 	void mouseWheelDragged(int i, int j) {
 		if (!mouseWheelDown)
 			return;
-		this.anInt1186 += i * 3;
-		this.anInt1187 += (j << 1);
+		cameraMoved = true;
+		this.mouseDragOffsetX += i * 3;
+		this.mouseDragOffsetY += (j << 1);
 	}
 
 	public void method108() {
@@ -8272,26 +8272,27 @@ public class Game extends RSApplet {
 				anInt1015 += (k - anInt1015) / 16;
 			}
 			if (super.keyArray[1] == 1) {
-				anInt1186 += (-24 - anInt1186) / 2;
+				mouseDragOffsetX += (-24 - mouseDragOffsetX) / 2;
 			} else if (super.keyArray[2] == 1) {
-				anInt1186 += (24 - anInt1186) / 2;
+				mouseDragOffsetX += (24 - mouseDragOffsetX) / 2;
 			} else {
-				anInt1186 /= 2;
+				mouseDragOffsetX /= 2;
 			}
 			if (super.keyArray[3] == 1) {
-				anInt1187 += (12 - anInt1187) / 2;
+				mouseDragOffsetY += (12 - mouseDragOffsetY) / 2;
 			} else if (super.keyArray[4] == 1) {
-				anInt1187 += (-12 - anInt1187) / 2;
+				mouseDragOffsetY += (-12 - mouseDragOffsetY) / 2;
 			} else {
-				anInt1187 /= 2;
+				mouseDragOffsetY /= 2;
 			}
-			minimapInt1 = minimapInt1 + anInt1186 / 2 & 0x7ff;
-			anInt1184 += anInt1187 / 2;
-			if (anInt1184 < 128) {
-				anInt1184 = 128;
+			minimapRotation = minimapRotation + mouseDragOffsetX / 2 & 0x7ff;
+			// SEARCHTHIS
+			cameraHeight += mouseDragOffsetY / 2;
+			if (cameraHeight < 128) {
+				cameraHeight = 128;
 			}
-			if (anInt1184 > 383) {
-				anInt1184 = 383;
+			if (cameraHeight > 383) {
+				cameraHeight = 383;
 			}
 			int l = anInt1014 >> 7;
 			int i1 = anInt1015 >> 7;
@@ -9025,16 +9026,16 @@ public class Game extends RSApplet {
 				}
 			}
 
-			compass.method352(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+			compass.method352(33, minimapRotation, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
 			aRSImageProducer_1165.initDrawingArea();
 			Texture.lineOffsets = chatBoxAreaOffsets;
 			return;
 		}
-		int i = minimapInt1 + minimapInt2 & 0x7ff;
+		int i = minimapRotation + minimapInt2 & 0x7ff;
 		int j = 48 + myPlayer.x / 32;
 		int l2 = 464 - myPlayer.y / 32;
 		aClass30_Sub2_Sub1_Sub1_1263.method352(151, i, anIntArray1229, 256 + minimapInt3, anIntArray1052, l2, 5, 25, 146, j);
-		compass.method352(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+		compass.method352(33, minimapRotation, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
 		for (int j5 = 0; j5 < anInt1071; j5++) {
 			int k = anIntArray1072[j5] * 4 + 2 - myPlayer.x / 32;
 			int i3 = anIntArray1073[j5] * 4 + 2 - myPlayer.y / 32;
@@ -9980,7 +9981,7 @@ public class Game extends RSApplet {
 	}
 
 	public void markMinimap(Sprite sprite, int i, int j) {
-		int k = minimapInt1 + minimapInt2 & 0x7ff;
+		int k = minimapRotation + minimapInt2 & 0x7ff;
 		int l = i * i + j * j;
 		if (l > 6400) {
 			return;
@@ -10062,7 +10063,6 @@ public class Game extends RSApplet {
 	public void updatePlayers(int i, Stream stream) {
 		anInt839 = 0;
 		anInt893 = 0;
-		System.out.printf("pktType: %d, size %d, stream %s\n", pktType, pktSize, Arrays.toString(stream.buffer));
 		method117(stream);
 		method134(stream);
 		method91(stream, i);
@@ -10131,7 +10131,6 @@ public class Game extends RSApplet {
 
 				socketStream.flushInputStream(inStream.buffer, 1);
 				pktType = inStream.buffer[0] & 0xff;
-				System.out.println("read " + pktType);
 				if (encryption != null) {
 					pktType = pktType; //- encryption.getNextKey() & 0xff;
 				}
@@ -11399,14 +11398,14 @@ public class Game extends RSApplet {
 		method55();
 		method104();
 		if (!aBoolean1160) {
-			int i = anInt1184;
+			int i = cameraHeight;
 			if (anInt984 / 256 > i) {
 				i = anInt984 / 256;
 			}
 			if (aBooleanArray876[4] && anIntArray1203[4] + 128 > i) {
 				i = anIntArray1203[4] + 128;
 			}
-			int k = minimapInt1 + anInt896 & 0x7ff;
+			int k = minimapRotation + anInt896 & 0x7ff;
 			setCameraPos(600 + i * 3, i, anInt1014, method42(plane, myPlayer.y, myPlayer.x) - 50, k, anInt1015);
 		}
 		int j;
@@ -11562,7 +11561,7 @@ public class Game extends RSApplet {
 		anInt1002 = 0x23201b;
 		amountOrNameInput = "";
 		aClass19_1013 = new NodeList();
-		aBoolean1017 = false;
+		cameraMoved = false;
 		anInt1018 = -1;
 		anIntArray1030 = new int[5];
 		aBoolean1031 = false;
@@ -11614,7 +11613,7 @@ public class Game extends RSApplet {
 		genericLoadingError = false;
 		reportAbuseInterfaceID = -1;
 		aClass19_1179 = new NodeList();
-		anInt1184 = 128;
+		cameraHeight = 128;
 		invOverlayInterfaceID = -1;
 		stream = Stream.create();
 		menuActionName = new String[500];
@@ -11823,8 +11822,8 @@ public class Game extends RSApplet {
 	public NodeList aClass19_1013;
 	public int anInt1014;
 	public int anInt1015;
-	public int anInt1016;
-	public boolean aBoolean1017;
+	public int sendCameraUpdateTimer;
+	public boolean cameraMoved;
 	public int anInt1018;
 	public static final int[] anIntArray1019;
 	public int anInt1021;
@@ -11979,10 +11978,10 @@ public class Game extends RSApplet {
 	public int[] tabAreaOffsets;
 	public int[] chatBoxAreaOffsets;
 	public byte[][] aByteArrayArray1183;
-	public int anInt1184;
-	public int minimapInt1;
-	public int anInt1186;
-	public int anInt1187;
+	public int cameraHeight;
+	public int minimapRotation;
+	public int mouseDragOffsetX;
+	public int mouseDragOffsetY;
 	public static int anInt1188;
 	public int invOverlayInterfaceID;
 	public int[] anIntArray1190;

@@ -12,5 +12,5 @@ func (e *EquipItemPacketHandler) HandlePacket(player *entity.Player, packet *pac
 	slot := packet.ReadShortA()
 	_ = packet.ReadShortA() //interfaceId
 
-	player.EquipItem(slot, itemId)
+	player.Equipment.EquipItem(slot, itemId)
 }
