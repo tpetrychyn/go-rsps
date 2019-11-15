@@ -18,6 +18,8 @@ func NewTcpServer(port int) *TcpServer {
 	}
 }
 
+var clients = make([]*TCPClient, 0)
+
 func (server *TcpServer) Start() {
 	listener, err := net.Listen("tcp", ":"+strconv.Itoa(server.Port))
 	if err != nil {
@@ -32,6 +34,18 @@ func (server *TcpServer) Start() {
 
 	l := &LoginHandler{}
 
+	//go func() {
+	//	for {
+	//		<-time.After(600 * time.Millisecond)
+	//		for _, c := range clients {
+	//			c.Tick()
+	//		}
+	//		for _, c := range clients {
+	//			c.Write()
+	//		}
+	//	}
+	//}()
+
 	for {
 		connection, err := listener.Accept()
 		if err != nil {
@@ -43,6 +57,7 @@ func (server *TcpServer) Start() {
 		go client.Read()
 		go client.Write()
 		go client.ProcessUpstream()
+		clients = append(clients, client)
 		go client.Tick()
 	}
 }

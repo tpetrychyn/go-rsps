@@ -6,7 +6,7 @@ import (
 )
 
 type RemoveGroundItemPacket struct {
-	Player   PlayerInterface
+	Player   model.PlayerInterface
 	Position *model.Position
 	ItemId   int
 }

@@ -29,10 +29,11 @@ func (m *PickupItemPacketHandler) pickupItemInternal(player *entity.Player, x, y
 		X: x,
 		Y: y,
 	})
-	// TODO: remove ground item
 	if groundItem == nil {
 		log.Printf("item %+v doesn't exist at x %+v, y %+v", id, x, y)
 		return
 	}
-	player.Inventory.AddItem(groundItem.ItemId, groundItem.ItemAmount)
+
+	player.Region.RemoveGroundItemIdAtPosition(int(id), &model.Position{X: x, Y: y})
+	player.Inventory.AddItem(groundItem.ItemId, groundItem.Amount)
 }

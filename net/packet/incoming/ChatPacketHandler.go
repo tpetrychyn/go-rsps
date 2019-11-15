@@ -1,12 +1,9 @@
 package incoming
 
 import (
-	"fmt"
+	"log"
 	"rsps/entity"
 	"rsps/net/packet"
-	"rsps/net/packet/outgoing"
-	"strconv"
-	"strings"
 )
 
 type ChatPacketHandler struct {}
@@ -21,15 +18,7 @@ func (e *ChatPacketHandler) HandlePacket(player *entity.Player, packet *packet.P
 	}
 
 	chat := e.unpack(word, int(size))
-	if strings.HasPrefix(chat, "$") {
-		if strings.Contains(chat, "item") {
-			parts := strings.Split(chat, " ")
-			id, _ := strconv.Atoi(parts[1])
-			amount, _ := strconv.Atoi(parts[2])
-			player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message:fmt.Sprintf("adding item %d amount %d", id, amount)})
-			player.Inventory.AddItem(id, amount)
-		}
-	}
+	log.Printf("chat: %+v", chat)
 }
 
 var xlateTable = []rune{ ' ', 'e', 't', 'a', 'o', 'i', 'h', 'n',

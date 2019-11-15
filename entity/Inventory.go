@@ -64,3 +64,15 @@ func (i *Inventory) SwapItems(from, to int) {
 		Item: fromItem,
 	})
 }
+
+func (i *Inventory) DropItem(itemId, slot int) {
+	invItem := i.FindItem(itemId)
+	if invItem == nil {
+		i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "You do not have that item."})
+		return
+	}
+
+	i.Items[slot] = model.NilItem
+	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InventoryItemPacket{Slot: slot, Item: model.NilItem})
+	i.player.Region.CreateGroundItemAtPosition(i.player, invItem, i.player.Position)
+}

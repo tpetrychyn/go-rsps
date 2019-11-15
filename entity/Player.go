@@ -16,6 +16,7 @@ type Player struct {
 	Inventory       *Inventory
 	Equipment       *Equipment
 	OutgoingQueue   []DownstreamMessage
+	LoadedPlayers   map[uuid.UUID]model.PlayerInterface
 	UpdateFlag      *model.UpdateFlag
 	DelayedPacket   func()
 	LogoutRequested bool
@@ -38,6 +39,7 @@ func NewPlayer() *Player {
 			SecondaryDirection: model.None,
 			IsRunning:          true,
 		},
+		LoadedPlayers: make(map[uuid.UUID]model.PlayerInterface),
 	}
 	player.MovementQueue = NewMovementQueue(player)
 	player.Inventory = NewInventory(player)
@@ -50,7 +52,11 @@ func (p *Player) LoadPlayer(name string) error {
 	p.Name = name
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendItemContainerPacket{
 		ItemContainer: p.Inventory.ItemContainer,
-		InterfaceId:   3214,
+		InterfaceId:   model.INVENTORY_INTERFACE_ID,
+	})
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendItemContainerPacket{
+		ItemContainer: p.Equipment.ItemContainer,
+		InterfaceId:   model.EQUIPMENT_INTERFACE_ID,
 	})
 	for k, v := range SIDEBARS {
 		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SidebarInterfacePacket{
@@ -80,6 +86,7 @@ func (p *Player) Teleport(position *model.Position) {
 	p.MovementQueue.Clear()
 	p.UpdateFlag.NeedsPlacement = true
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.MapRegionPacket{Position: p.Position})
+	world.AddPlayerToRegion(p)
 }
 
 func (p *Player) GetEquipmentItemContainer() *model.ItemContainer {
@@ -88,4 +95,51 @@ func (p *Player) GetEquipmentItemContainer() *model.ItemContainer {
 
 func (p *Player) GetUpdateFlag() *model.UpdateFlag {
 	return p.UpdateFlag
+}
+
+func (p *Player) GetPlayerId() uuid.UUID {
+	return p.Id
+}
+
+func (p *Player) GetNearbyPlayers() []model.PlayerInterface {
+	var players []model.PlayerInterface
+	adjacentRegions := p.Region.GetAdjacentIds()
+	for _, v := range adjacentRegions {
+		r := world.Regions[v]
+		if r == nil {
+			continue
+		}
+		for _, player := range r.GetPlayersAsInterface() {
+			if p.GetPlayerId() == player.GetPlayerId() {
+				continue
+			}
+			var found bool
+			for _, addedPlayer := range players {
+				if player.GetPlayerId() == addedPlayer.GetPlayerId() {
+					found = true
+					break
+				}
+			}
+			if !found {
+				players = append(players, player)
+			}
+		}
+	}
+	return players
+}
+
+func (p *Player) GetLoadedPlayers() map[uuid.UUID]model.PlayerInterface {
+	return p.LoadedPlayers
+}
+
+func (p *Player) AddLoadedPlayer(pi model.PlayerInterface) {
+	p.LoadedPlayers[pi.GetPlayerId()] = pi
+}
+
+func (p *Player) RemoveLoadedPlayer(id uuid.UUID) {
+	delete(p.LoadedPlayers, id)
+}
+
+func (p *Player) GetName() string {
+	return p.Name
 }

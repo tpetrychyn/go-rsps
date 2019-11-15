@@ -5,7 +5,9 @@ import "rsps/net/packet"
 const (
 	CHAT_OPCODE                   = 4
 	EQUIP_ITEM_OPCODE             = 41
+	DROP_ITEM_OPCODE              = 87
 	WALK_ON_COMMAND_OPCODE        = 98
+	COMMANDS_OPCODE               = 103
 	OBJECT_ACTION_ONE_OPCODE      = 132
 	REMOVE_EQUIPMENT_OPCODE       = 145
 	GAME_MOVEMENT_OPCODE          = 164
@@ -17,6 +19,8 @@ const (
 
 var Packets = map[byte]packet.PacketListener{
 	CHAT_OPCODE:                   new(ChatPacketHandler),
+	COMMANDS_OPCODE:               new(CommandsPacketHandler),
+	DROP_ITEM_OPCODE:              new(DropItemPacketHandler),
 	EQUIP_ITEM_OPCODE:             new(EquipItemPacketHandler),
 	WALK_ON_COMMAND_OPCODE:        new(MovementPacketHandler),
 	GAME_MOVEMENT_OPCODE:          new(MovementPacketHandler),

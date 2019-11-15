@@ -30,13 +30,14 @@ func (e *Equipment) EquipItem(invSlot, itemId uint16) {
 	slot := outgoing.EQUIPMENT_SLOTS[def.Equipment.Slot]
 	e.player.UpdateFlag.SetAppearance()
 
-	e.Items[slot] = invItem
-	e.player.Inventory.Items[invSlot] = model.NilItem
+	equippedItem := e.Items[slot]
+	e.player.Inventory.Items[invSlot] = equippedItem
 	e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.InventoryItemPacket{
 		Slot: int(invSlot),
-		Item: model.NilItem,
+		Item: equippedItem,
 	})
 
+	e.Items[slot] = invItem
 	e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.SendItemContainerPacket{
 		ItemContainer: e.ItemContainer,
 		InterfaceId:   model.EQUIPMENT_INTERFACE_ID,

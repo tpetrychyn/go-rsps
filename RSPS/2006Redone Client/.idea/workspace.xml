@@ -7,14 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/PickupItemPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/PlayerInterface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../model/RegionInterface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/CommandsPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../net/packet/incoming/DropItemPacketHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../entity/Equipment.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Equipment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/Inventory.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Inventory.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Region.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/World.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/ChatPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/ChatPacketHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/IncomingPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/PickupItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/PickupItemPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/SendPositionPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendPositionPacket.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="8254" column="27" selection-start-line="8254" selection-start-column="27" selection-end-line="8254" selection-end-column="27" />
+            <state relative-caret-position="199">
+              <caret line="8256" column="9" selection-start-line="8256" selection-start-column="9" selection-end-line="8256" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,7 +155,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="251" />
+    <option name="x" value="371" />
+    <option name="y" value="2" />
     <option name="width" value="1316" />
     <option name="height" value="942" />
   </component>
@@ -156,6 +166,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -176,7 +187,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -261,11 +271,12 @@
       <workItem from="1573688919847" duration="1798000" />
       <workItem from="1573702664573" duration="1582000" />
       <workItem from="1573740272794" duration="605000" />
+      <workItem from="1573776254167" duration="618000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39980000" />
+    <option name="totallyTimeSpent" value="40598000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -277,10 +288,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="251" y="0" width="1316" height="942" extended-state="0" />
+    <frame x="371" y="2" width="1316" height="942" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34394905" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3495223" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -289,7 +300,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32880098" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32880098" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -369,8 +380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="8254" column="27" selection-start-line="8254" selection-start-column="27" selection-end-line="8254" selection-end-column="27" />
+        <state relative-caret-position="199">
+          <caret line="8256" column="9" selection-start-line="8256" selection-start-column="9" selection-end-line="8256" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

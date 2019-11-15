@@ -158,7 +158,7 @@ func (client *TCPClient) ProcessUpstream() {
 func isIgnored(opCode byte) bool {
 	// 0 keepalive
 	// 241 click
-	ignoredPackets := []byte{0, 3, 136, 241}
+	ignoredPackets := []byte{0, 3, 36, 77, 78, 86, 121, 210, 136, 241}
 	for _, v := range ignoredPackets {
 		if opCode == v {
 			return true

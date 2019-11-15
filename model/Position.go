@@ -38,3 +38,10 @@ func (p *Position) GetDistance(other *Position) int {
 	deltaY := p.Y - other.Y
 	return int(math.Ceil(math.Sqrt(float64(deltaX * deltaX + deltaY * deltaY))))
 }
+
+func (p *Position) WithinRenderDistance(other *Position) bool {
+	if p.Z != other.Z { return false }
+	deltaX := int(other.X) - int(p.X)
+	deltaY := int(other.Y) - int(p.Y)
+	return deltaX <= 15 && deltaX >= -16 && deltaY <= 15 && deltaY >= -16
+}

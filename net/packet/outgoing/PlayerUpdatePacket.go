@@ -6,30 +6,14 @@ import (
 	"rsps/model"
 )
 
-type PlayerInterface interface {
-	GetLastDirection() model.Direction
-	GetPrimaryDirection() model.Direction
-	GetSecondaryDirection() model.Direction
-	GetPosition() *model.Position
-	GetLastKnownRegion() *model.Position
-	GetEquipmentItemContainer() *model.ItemContainer
-	GetUpdateFlag() *model.UpdateFlag
-}
-
 type PlayerUpdatePacket struct {
-	player       PlayerInterface
-	otherPlayers []interface{}
+	player       model.PlayerInterface
 }
 
-func NewPlayerUpdatePacket(player PlayerInterface) *PlayerUpdatePacket {
+func NewPlayerUpdatePacket(player model.PlayerInterface) *PlayerUpdatePacket {
 	return &PlayerUpdatePacket{
 		player: player,
 	}
-}
-
-func (p *PlayerUpdatePacket) SetOtherPlayers(otherPlayers []interface{}) *PlayerUpdatePacket {
-	p.otherPlayers = otherPlayers
-	return p
 }
 
 func (p *PlayerUpdatePacket) Write(writer *bufio.Writer) {
@@ -92,12 +76,63 @@ func (p *PlayerUpdatePacket) Build() []byte {
 		stream.WriteBits(1, 0)
 	}
 
-	p.otherPlayers = make([]interface{}, 1)
-	stream.WriteBits(8, uint(len(p.otherPlayers)-1))
-
-	var mask int
 	updateStream := model.NewStream()
+	p.appendUpdates(updateStream, p.player, false)
+
+	loadedPlayers := p.player.GetLoadedPlayers()
+	stream.WriteBits(8, uint(len(loadedPlayers)))
+	for _, v := range loadedPlayers {
+		if !p.player.GetPosition().WithinRenderDistance(v.GetPosition()) {
+			stream.WriteBits(1, 1)
+			stream.WriteBits(2, 3) // remove player from render?
+			p.player.RemoveLoadedPlayer(v.GetPlayerId())
+			continue
+		}
+		p.updateOtherPlayerMovement(stream, v)
+		p.appendUpdates(updateStream, v, false)
+	}
+
+	localPlayers := p.player.GetNearbyPlayers()
+	localPlayerLoop:
+	for _, v := range localPlayers {
+		if len(loadedPlayers) >= 79 {
+			break
+		}
+		if v == p.player {
+			continue
+		}
+		if !p.player.GetPosition().WithinRenderDistance(v.GetPosition()) {
+			continue
+		}
+		for _, l := range loadedPlayers {
+			if v.GetPlayerId() == l.GetPlayerId() {
+				continue localPlayerLoop
+			}
+		}
+		p.player.AddLoadedPlayer(v)
+		p.addPlayer(stream, v)
+		p.appendUpdates(updateStream, v, true)
+	}
+
+	updateBytes := updateStream.Flush()
+	if len(updateBytes) > 1 {
+		stream.WriteBits(11, 2047)
+		buffer.Write(stream.Flush())
+		buffer.Write(updateBytes)
+	} else {
+		buffer.Write(stream.Flush())
+	}
+
+	return buffer.Bytes()
+}
+
+func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, player model.PlayerInterface, updateAppearance bool) {
+	updateFlag := player.GetUpdateFlag()
+	if updateAppearance {
+		updateFlag.SetAppearance()
+	}
 	if updateFlag.UpdateRequired {
+		var mask int
 		// Setup the updateMask byte
 		if updateFlag.ForcedMovement { mask |= 0x400 }
 		if updateFlag.Graphic { mask |= 0x100 }
@@ -159,16 +194,48 @@ func (p *PlayerUpdatePacket) Build() []byte {
 			p.updateDoubleHit(updateStream)
 		}
 	}
+}
 
-	if mask > 0 {
-		stream.WriteBits(11, 2047)
-		buffer.Write(stream.Flush())
-		buffer.Write(updateStream.Flush())
+func (p *PlayerUpdatePacket) addPlayer(stream *model.Stream, player model.PlayerInterface) {
+	stream.WriteBits(11, 1) // TODO: player index
+	stream.WriteBits(1, 1)
+	stream.WriteBits(1, 1)
+	yDiff := player.GetPosition().Y - p.player.GetPosition().Y
+	xDiff := player.GetPosition().X - p.player.GetPosition().X
+	stream.WriteBits(5, uint(yDiff))
+	stream.WriteBits(5, uint(xDiff))
+}
+
+func (p *PlayerUpdatePacket) updateOtherPlayerMovement(stream *model.Stream, target model.PlayerInterface) {
+	if target.GetPrimaryDirection() == model.None {
+		if target.GetUpdateFlag().UpdateRequired {
+			stream.WriteBits(1, 1)
+			stream.WriteBits(2, 0)
+		} else {
+			stream.WriteBits(1, 0)
+		}
+	} else if target.GetSecondaryDirection() == model.None {
+		// walking
+		stream.WriteBits(1, 1)
+		stream.WriteBits(2, 1)
+		stream.WriteBits(3, uint(target.GetPrimaryDirection()))
+		if target.GetUpdateFlag().UpdateRequired {
+			stream.WriteBits(1, 1)
+		} else {
+			stream.WriteBits(1, 0)
+		}
 	} else {
-		buffer.Write(stream.Flush())
+		// Running
+		stream.WriteBits(1, 1)
+		stream.WriteBits(2, 2)
+		stream.WriteBits(3, uint(target.GetPrimaryDirection()))
+		stream.WriteBits(3, uint(target.GetSecondaryDirection()))
+		if target.GetUpdateFlag().UpdateRequired {
+			stream.WriteBits(1, 1)
+		} else {
+			stream.WriteBits(1, 0)
+		}
 	}
-
-	return buffer.Bytes()
 }
 
 func (p *PlayerUpdatePacket) updateGraphics(stream *model.Stream) {

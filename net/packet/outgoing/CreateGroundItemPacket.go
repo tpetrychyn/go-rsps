@@ -7,7 +7,7 @@ import (
 
 type CreateGroundItemPacket struct {
 	Position   *model.Position
-	Player     PlayerInterface
+	Player     model.PlayerInterface
 	ItemId     int
 	ItemAmount int
 }
