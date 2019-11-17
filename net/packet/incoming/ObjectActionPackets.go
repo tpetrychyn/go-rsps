@@ -5,6 +5,7 @@ import (
 	"rsps/entity"
 	"rsps/model"
 	"rsps/net/packet"
+	"rsps/net/packet/outgoing"
 )
 
 type ObjectActionPacket struct {}
@@ -32,5 +33,7 @@ func (e *ObjectActionPacket) handleObjectActionOneInternal(player *entity.Player
 		return
 	}
 
+	player.SkillHelper.AddExperience(model.Attack, 120000)
+	player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your knowledge in Attack increases. Gained 200 experience in Attack."})
 	log.Printf("Object Click1: x %+v, y %+v, id %+v", x, y, id)
 }

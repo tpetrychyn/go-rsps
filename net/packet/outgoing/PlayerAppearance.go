@@ -1,6 +1,8 @@
 package outgoing
 
-import "rsps/model"
+import (
+	"rsps/model"
+)
 
 // TODO: Full helms and capes and such
 
@@ -22,15 +24,6 @@ var defaultAppearance = []uint{
 
 type PlayerAppearance struct {
 	Equipment *model.ItemContainer
-	Hat       int
-	Cape      int
-	Amulet    int
-	Weapon    int
-	Chest     int
-	Shield    int
-	Legs      int
-	Hands     int
-	Feet      int
 }
 
 var EQUIPMENT_SLOTS = map[string]int {
@@ -59,7 +52,7 @@ func (p *PlayerAppearance) ToBytes() []byte {
 	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["neck"]].ItemId)
 	p.wordOrByte(stream, p.Equipment.Items[EQUIPMENT_SLOTS["weapon"]].ItemId)
 
-	if p.Chest > 1 {
+	if p.Equipment.Items[EQUIPMENT_SLOTS["chest"]].ItemId > 1 {
 		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["chest"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[2])
@@ -69,7 +62,7 @@ func (p *PlayerAppearance) ToBytes() []byte {
 
 	stream.WriteWord(0x100 + defaultAppearance[3]) //!isFullBody
 
-	if p.Legs > 1 {
+	if p.Equipment.Items[EQUIPMENT_SLOTS["legs"]].ItemId > 1 {
 		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["legs"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[5])
@@ -77,12 +70,12 @@ func (p *PlayerAppearance) ToBytes() []byte {
 
 	stream.WriteWord(0x100 + defaultAppearance[1]) //isFullHelm
 
-	if p.Hands > 1 {
+	if p.Equipment.Items[EQUIPMENT_SLOTS["hands"]].ItemId > 1 {
 		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["hands"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[4])
 	}
-	if p.Feet > 1 {
+	if p.Equipment.Items[EQUIPMENT_SLOTS["feet"]].ItemId > 1 {
 		stream.WriteWord(0x200 + uint(p.Equipment.Items[EQUIPMENT_SLOTS["feet"]].ItemId))
 	} else {
 		stream.WriteWord(0x100 + defaultAppearance[6])

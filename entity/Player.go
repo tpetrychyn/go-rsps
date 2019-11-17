@@ -9,12 +9,15 @@ import (
 type Player struct {
 	*model.Movement
 
-	Id              uuid.UUID
-	Name            string
+	Id   uuid.UUID
+	Name string
+
+	Inventory   *Inventory
+	Equipment   *Equipment
+	SkillHelper *SkillHelper
+
 	MovementQueue   *MovementQueue
 	Region          *Region
-	Inventory       *Inventory
-	Equipment       *Equipment
 	OutgoingQueue   []DownstreamMessage
 	LoadedPlayers   map[uuid.UUID]model.PlayerInterface
 	UpdateFlag      *model.UpdateFlag
@@ -27,8 +30,8 @@ var SIDEBARS = []int{2423, 3917, 638, 3213, 1644, 5608, 1151,
 
 func NewPlayer() *Player {
 	spawn := &model.Position{
-		X: 3200,
-		Y: 3200,
+		X: 2900,
+		Y: 3510,
 	}
 	player := &Player{
 		Id:         uuid.New(), // TODO: Load this from database or something
@@ -36,6 +39,7 @@ func NewPlayer() *Player {
 		Movement: &model.Movement{
 			Position:           spawn,
 			LastKnownRegion:    spawn,
+			PrimaryDirection:   model.None,
 			SecondaryDirection: model.None,
 			IsRunning:          true,
 		},
@@ -44,6 +48,7 @@ func NewPlayer() *Player {
 	player.MovementQueue = NewMovementQueue(player)
 	player.Inventory = NewInventory(player)
 	player.Equipment = NewEquipment(player)
+	player.SkillHelper = NewSkillHelper(player)
 
 	return player
 }
@@ -65,6 +70,20 @@ func (p *Player) LoadPlayer(name string) error {
 		})
 	}
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Welcome to TaylorScape"})
+
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendObjectPacket{
+		ObjectId: 2475,
+		Position: &model.Position{
+			X: 2896,
+			Y: 3505,
+			Z: 0,
+		},
+		Face:   0,
+		Typ:    10,
+		Player: p,
+	})
+
+	p.SkillHelper.SetLevelToExperience(model.Attack, 5000)
 	return nil
 }
 
@@ -76,6 +95,7 @@ func (p *Player) PostUpdate() {
 	p.PrimaryDirection = model.None
 	p.SecondaryDirection = model.None
 	p.LastDirection = model.None
+	p.UpdateFlag.Clear()
 }
 
 func (p *Player) Teleport(position *model.Position) {
@@ -105,10 +125,7 @@ func (p *Player) GetNearbyPlayers() []model.PlayerInterface {
 	var players []model.PlayerInterface
 	adjacentRegions := p.Region.GetAdjacentIds()
 	for _, v := range adjacentRegions {
-		r := world.Regions[v]
-		if r == nil {
-			continue
-		}
+		r := world.GetRegion(v)
 		for _, player := range r.GetPlayersAsInterface() {
 			if p.GetPlayerId() == player.GetPlayerId() {
 				continue

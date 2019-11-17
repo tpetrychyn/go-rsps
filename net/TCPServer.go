@@ -5,20 +5,22 @@ import (
 	"net"
 	"rsps/entity"
 	"strconv"
+	"sync"
+	"time"
 )
 
 type TcpServer struct {
-	Port         int
-	Listener     net.Listener
+	Port     int
+	Clients map[string]*TCPClient
+	Listener net.Listener
 }
 
 func NewTcpServer(port int) *TcpServer {
 	return &TcpServer{
-		Port:         port,
+		Port: port,
+		Clients: make(map[string]*TCPClient),
 	}
 }
-
-var clients = make([]*TCPClient, 0)
 
 func (server *TcpServer) Start() {
 	listener, err := net.Listen("tcp", ":"+strconv.Itoa(server.Port))
@@ -34,17 +36,33 @@ func (server *TcpServer) Start() {
 
 	l := &LoginHandler{}
 
-	//go func() {
-	//	for {
-	//		<-time.After(600 * time.Millisecond)
-	//		for _, c := range clients {
-	//			c.Tick()
-	//		}
-	//		for _, c := range clients {
-	//			c.Write()
-	//		}
-	//	}
-	//}()
+	tickGroup := new(sync.WaitGroup)
+
+	go func() {
+		for {
+			<-time.After(600 * time.Millisecond)
+			// let all clients tick in parallel threads (handle movement and pickup, etc)
+			// parallel threads minimizes advantage of pID
+			//tickGroup.Add(len(server.Clients))
+			for k, c := range server.Clients {
+				if c.loginState == IngameStage {
+					tickGroup.Add(1)
+					go c.Tick(tickGroup)
+				}
+				if c.loginState == Disconnected {
+					delete(server.Clients, k)
+				}
+			}
+			tickGroup.Wait()
+
+			// after all have ticked, issue the update packets in parallel
+			for _, c := range server.Clients {
+				if c.loginState == IngameStage {
+					go c.UpdatePacket()
+				}
+			}
+		}
+	}()
 
 	for {
 		connection, err := listener.Accept()
@@ -57,8 +75,7 @@ func (server *TcpServer) Start() {
 		go client.Read()
 		go client.Write()
 		go client.ProcessUpstream()
-		clients = append(clients, client)
-		go client.Tick()
+		server.Clients[client.connection.RemoteAddr().String()] = client
 	}
 }
 

@@ -7,24 +7,26 @@ import (
 )
 
 type PlayerUpdatePacket struct {
-	player       model.PlayerInterface
+	player model.PlayerInterface
+	buffer bytes.Buffer
 }
 
 func NewPlayerUpdatePacket(player model.PlayerInterface) *PlayerUpdatePacket {
-	return &PlayerUpdatePacket{
+	p := &PlayerUpdatePacket{
 		player: player,
 	}
+	payload := p.Build()
+	size := len(payload)
+	p.buffer.WriteByte(81)
+	p.buffer.WriteByte(byte(size >> 8))
+	p.buffer.WriteByte(byte(size))
+	p.buffer.Write(payload)
+
+	return p
 }
 
 func (p *PlayerUpdatePacket) Write(writer *bufio.Writer) {
-	payload := p.Build()
-	size := len(payload)
-	writer.WriteByte(81)
-	writer.WriteByte(byte(size >> 8))
-	writer.WriteByte(byte(size))
-	writer.Write(payload)
-
-	p.player.GetUpdateFlag().Clear()
+	writer.Write(p.buffer.Bytes())
 }
 
 func (p *PlayerUpdatePacket) Build() []byte {
@@ -89,11 +91,11 @@ func (p *PlayerUpdatePacket) Build() []byte {
 			continue
 		}
 		p.updateOtherPlayerMovement(stream, v)
-		p.appendUpdates(updateStream, v, false)
+		p.appendUpdates(updateStream, v, v.GetUpdateFlag().UpdateRequired)
 	}
 
 	localPlayers := p.player.GetNearbyPlayers()
-	localPlayerLoop:
+localPlayerLoop:
 	for _, v := range localPlayers {
 		if len(loadedPlayers) >= 79 {
 			break
@@ -126,24 +128,44 @@ func (p *PlayerUpdatePacket) Build() []byte {
 	return buffer.Bytes()
 }
 
-func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, player model.PlayerInterface, updateAppearance bool) {
-	updateFlag := player.GetUpdateFlag()
+func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target model.PlayerInterface, updateAppearance bool) {
+	updateFlag := target.GetUpdateFlag()
 	if updateAppearance {
 		updateFlag.SetAppearance()
 	}
 	if updateFlag.UpdateRequired {
 		var mask int
 		// Setup the updateMask byte
-		if updateFlag.ForcedMovement { mask |= 0x400 }
-		if updateFlag.Graphic { mask |= 0x100 }
-		if updateFlag.Animation { mask |= 0x8 }
-		if updateFlag.ForcedChat { mask |= 0x4 }
-		if updateFlag.Chat { mask |= 0x80 } // TODO: Player ignore
-		if updateFlag.EntityInteraction { mask |= 0x1 }
-		if updateFlag.Appearance { mask |= 0x10 }
-		if updateFlag.FacePosition { mask |= 0x2 }
-		if updateFlag.SingleHit { mask |= 0x20 }
-		if updateFlag.DoubleHit { mask |= 0x200 }
+		if updateFlag.ForcedMovement {
+			mask |= 0x400
+		}
+		if updateFlag.Graphic {
+			mask |= 0x100
+		}
+		if updateFlag.Animation {
+			mask |= 0x8
+		}
+		if updateFlag.ForcedChat {
+			mask |= 0x4
+		}
+		if updateFlag.Chat {
+			mask |= 0x80
+		} // TODO: Player ignore
+		if updateFlag.EntityInteraction {
+			mask |= 0x1
+		}
+		if updateFlag.Appearance {
+			mask |= 0x10
+		}
+		if updateFlag.FacePosition {
+			mask |= 0x2
+		}
+		if updateFlag.SingleHit {
+			mask |= 0x20
+		}
+		if updateFlag.DoubleHit {
+			mask |= 0x200
+		}
 
 		if mask >= 0x100 {
 			mask |= 0x40
@@ -178,7 +200,7 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, player mo
 		}
 
 		if updateFlag.Appearance {
-			pa := &PlayerAppearance{Equipment: p.player.GetEquipmentItemContainer()}
+			pa := &PlayerAppearance{Equipment: target.GetEquipmentItemContainer()}
 			updateStream.Write(pa.ToBytes())
 		}
 
@@ -200,8 +222,10 @@ func (p *PlayerUpdatePacket) addPlayer(stream *model.Stream, player model.Player
 	stream.WriteBits(11, 1) // TODO: player index
 	stream.WriteBits(1, 1)
 	stream.WriteBits(1, 1)
-	yDiff := player.GetPosition().Y - p.player.GetPosition().Y
-	xDiff := player.GetPosition().X - p.player.GetPosition().X
+	yDiff := int(player.GetPosition().Y) - int(p.player.GetPosition().Y)
+	xDiff := int(player.GetPosition().X) - int(p.player.GetPosition().X)
+	if xDiff < 0 { xDiff += 32 } // 2^5 is 32, so xDiff needs to be between 0/32
+	if yDiff < 0 { yDiff += 32 }
 	stream.WriteBits(5, uint(yDiff))
 	stream.WriteBits(5, uint(xDiff))
 }
@@ -239,7 +263,7 @@ func (p *PlayerUpdatePacket) updateOtherPlayerMovement(stream *model.Stream, tar
 }
 
 func (p *PlayerUpdatePacket) updateGraphics(stream *model.Stream) {
-	stream.WriteWordLE(90) //graphicId
+	stream.WriteWordLE(90)                            //graphicId
 	stream.WriteInt((100 << 16) + (6553600 & 0xffff)) //height + delay
 }
 

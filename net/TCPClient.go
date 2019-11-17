@@ -8,10 +8,11 @@ import (
 	"log"
 	"net"
 	"rsps/entity"
+	"rsps/model"
 	"rsps/net/packet"
 	"rsps/net/packet/incoming"
 	"rsps/net/packet/outgoing"
-	"time"
+	"sync"
 )
 
 const (
@@ -121,24 +122,22 @@ connectionLoop:
 	}
 }
 
-func (client *TCPClient) Tick() {
-	for {
-		<-time.After(600 * time.Millisecond)
-		if client.loginState == Disconnected {
-			return
-		}
-		client.Player.Tick()
-		for _, v := range client.Player.OutgoingQueue {
-			client.Enqueue(v)
-		}
-		client.Player.OutgoingQueue = make([]entity.DownstreamMessage, 0)
-		client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
-		client.Enqueue(&flush{})
-
-		if client.Player.LogoutRequested {
-			client.loginState = Disconnected
-		}
+func (client *TCPClient) Tick(wg *sync.WaitGroup) {
+	defer wg.Done()
+	client.Player.Tick()
+	for _, v := range client.Player.OutgoingQueue {
+		client.Enqueue(v)
 	}
+	client.Player.OutgoingQueue = make([]entity.DownstreamMessage, 0)
+
+	if client.Player.LogoutRequested {
+		client.loginState = Disconnected
+	}
+}
+
+func (client *TCPClient) UpdatePacket() {
+	client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
+	client.Enqueue(&flush{})
 }
 
 func (client *TCPClient) ProcessUpstream() {
@@ -170,19 +169,26 @@ func isIgnored(opCode byte) bool {
 func (client *TCPClient) Write() {
 	for downstreamMessage := range client.Downstream {
 		switch downstreamMessage.(type) {
-		default:
+		case *outgoing.LogoutPacket:
+			client.Player.Position = &model.Position{X: 0, Y: 0, Z: 255} // cheap hack to get other clients to delete this player..
 			downstreamMessage.Write(client.writer)
+			_ = client.writer.Flush()
+			return
 		case *flush:
 			downstreamMessage.Write(client.writer)
 			client.Player.PostUpdate()
+		default:
+			downstreamMessage.Write(client.writer)
 		}
 	}
 }
 
 func (client *TCPClient) connectionTerminated() {
+	log.Printf("connection dropped %+v", client.Player)
 	close(client.Downstream)
 	close(client.Upstream)
 	client.loginState = Disconnected
+	client.Player.Position = &model.Position{X: 0, Y: 0, Z: 255}
 }
 
 func (client *TCPClient) Enqueue(msg entity.DownstreamMessage) {

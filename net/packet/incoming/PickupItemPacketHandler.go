@@ -1,7 +1,6 @@
 package incoming
 
 import (
-	"log"
 	"rsps/entity"
 	"rsps/model"
 	"rsps/net/packet"
@@ -18,19 +17,15 @@ func (m *PickupItemPacketHandler) HandlePacket(player *entity.Player, packet *pa
 }
 
 func (m *PickupItemPacketHandler) pickupItemInternal(player *entity.Player, x, y, id uint16) {
-	// TODO: x & y seem off by 1?
 	if player.Position.GetDistance(&model.Position{X: x, Y: y}) > 0 {
 		player.DelayedPacket = func() {
 			m.pickupItemInternal(player, x, y, id)
 		}
 		return
 	}
-	groundItem := player.Region.FindGroundItemByPosition(int(id), &model.Position{
-		X: x,
-		Y: y,
-	})
+
+	groundItem := player.Region.FindGroundItemByPosition(int(id), &model.Position{X: x, Y: y})
 	if groundItem == nil {
-		log.Printf("item %+v doesn't exist at x %+v, y %+v", id, x, y)
 		return
 	}
 

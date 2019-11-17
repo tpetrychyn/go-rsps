@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"log"
 	"sync"
 	"time"
 )
@@ -51,10 +50,8 @@ func (w *World) AddPlayerToRegion(player *Player) {
 	previousRegion := player.Region
 	regionId := GetRegionIdByPosition(player.Position)
 	region := w.GetRegion(regionId)
+	region.Players[player.Id] = player
 	player.Region = region
-	if regionId == 12850 {
-		log.Printf("adding player to 12850")
-	}
 
 	newAdj := region.GetAdjacentIds()
 	var prevAdj []uint16

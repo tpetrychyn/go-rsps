@@ -83,7 +83,6 @@ func (r *Region) Tick() {
 }
 
 func (r *Region) OnEnter(player *Player) {
-	r.Players[player.Id] = player
 	for _, v := range r.GroundItems {
 		if v.Owner != nil && v.Owner != player { continue } // only show it if nobody owns it or you own it
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.CreateGroundItemPacket{

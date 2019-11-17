@@ -44,6 +44,7 @@ func (m *MovementQueue) Tick() {
 		diffX := m.character.GetPosition().X - m.character.GetLastKnownRegion().GetRegionX()*8
 		diffY := m.character.GetPosition().Y - m.character.GetLastKnownRegion().GetRegionY()*8
 		if p, ok := m.character.(*Player); ok {
+			p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.ClearInterfacePacket{})
 			if diffX < 16 || diffX >= 88 || diffY < 16 || diffY >= 88 {
 				p.LastKnownRegion = p.Position
 				p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.MapRegionPacket{Position: p.Position})

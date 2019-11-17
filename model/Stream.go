@@ -117,6 +117,24 @@ func (s *Stream) WriteInt(value int) {
 	s.currentOffset++
 }
 
+func (s *Stream) WriteDWord_v1(value int) {
+	if s.currentOffset > 0 {
+		s.buffer = append(s.buffer, 0)
+	}
+
+	s.buffer[s.currentOffset] = byte(value >> 8)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0)
+	s.buffer[s.currentOffset] = byte(value >> 24)
+	s.currentOffset++
+	s.buffer = append(s.buffer, 0 )
+	s.buffer[s.currentOffset] = byte(value >> 16)
+	s.currentOffset++
+}
+
 func (s *Stream) WriteDWord_v2(value int) {
 	if s.currentOffset > 0 {
 		s.buffer = append(s.buffer, 0)
