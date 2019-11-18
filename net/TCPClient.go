@@ -178,6 +178,10 @@ func (client *TCPClient) Write() {
 			downstreamMessage.Write(client.writer)
 			client.Player.PostUpdate()
 		default:
+			if client == nil || client.writer == nil {
+				log.Printf("write nil finder client %+v client.writer %+v", client, client.writer)
+			}
+			log.Printf("downstreamMessage %+v", downstreamMessage)
 			downstreamMessage.Write(client.writer)
 		}
 	}

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 	"rsps/entity"
@@ -85,7 +86,7 @@ var MagicTree = &WoodcuttingTree{
 	LogId:            1513,
 	StumpId:          7399,
 	Experience:       205,
-	Respawn:          100,
+	Respawn:          10,
 	Defence:          9,
 }
 var trees = map[int]*WoodcuttingTree{
@@ -123,22 +124,37 @@ type WoodcuttingHandler struct {
 	treePosition *model.Position
 	axe          *WoodcuttingAxe
 	tree         *WoodcuttingTree
+	treeId       int
 	tickCount    int
 }
 
 // TODO: Check level requirement for tree and axe
 func StartWoodcutting(treeId int, treePosition *model.Position, player *entity.Player) {
-	player.SkillHelper.SetLevel(model.Woodcutting, 99)
 	weapon := player.Equipment.Items[outgoing.EQUIPMENT_SLOTS["weapon"]]
 	for _, a := range axes {
 		item := player.Inventory.FindItem(a.Id)
 		if item != nil || weapon.ItemId == a.Id {
+			treeWorldObject := entity.WorldProvider().GetWorldObject(treePosition)
+			if treeWorldObject == nil {
+				treeWorldObject = &TreeWorldObject{
+					ObjectId:      treeId,
+					Position:      treePosition,
+					TreeId:        treeId,
+					StumpId:       trees[treeId].StumpId,
+					Respawn:       trees[treeId].Respawn,
+					lifepoints:    trees[treeId].LifePoints,
+					tickCount:     0,
+					shouldRefresh: false,
+				}
+				entity.WorldProvider().SetWorldObject(treeWorldObject)
+			}
 			player.UpdateFlag.SetAnimation(a.AnimationId, 4)
 			player.OngoingAction = &WoodcuttingHandler{
 				axe:          a,
 				tree:         trees[treeId],
 				treePosition: treePosition,
 				player:       player,
+				treeId:       treeId,
 			}
 			return
 		}
@@ -155,12 +171,21 @@ func (w *WoodcuttingHandler) Tick() {
 	if w.player.Inventory.IsFull() {
 		w.player.OutgoingQueue = append(w.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your inventory is too full to hold anymore logs."})
 		w.StopWoodcutting()
+		return
 	}
 
 	level := w.player.SkillHelper.Skills[model.Woodcutting].Level
 	requirement := w.tree.LevelRequirement
 	if level < requirement {
+		w.player.OutgoingQueue = append(w.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("You require level %d woodcutting to chop this tree.", w.tree.LevelRequirement)})
 		w.StopWoodcutting()
+		return
+	}
+
+	treeWorldObject := entity.WorldProvider().GetWorldObject(w.treePosition)
+	if treeWorldObject.GetObjectId() == w.tree.StumpId {
+		w.StopWoodcutting()
+		return
 	}
 
 	w.tickCount++
@@ -177,29 +202,64 @@ func (w *WoodcuttingHandler) Tick() {
 		}
 		log.Printf("luck %+v, chance %+v", luck, chance)
 		if chance >= luck {
-			err := w.player.Inventory.AddItem(w.tree.LogId, 1)
-			if err != nil {
-				w.StopWoodcutting()
+			if t, ok := treeWorldObject.(*TreeWorldObject); ok {
+				t.lifepoints--
+				if t.lifepoints <= 0 {
+					w.CutDownTree()
+				}
+
+				err := w.player.Inventory.AddItem(w.tree.LogId, 1)
+				if err != nil {
+					w.StopWoodcutting()
+				}
+				w.player.SkillHelper.AddExperience(model.Woodcutting, w.tree.Experience)
 			}
-			w.player.SkillHelper.AddExperience(model.Woodcutting, w.tree.Experience*EXP_MULTIPLIER)
-			// w.CutDownTree()
-			// TODO: Make regions have world objects and instantiate the tree when clicked and
-			//  broadcast update when cut down
 		}
 
 		w.tickCount = 0
 	}
 }
 
-var EXP_MULTIPLIER = 100000
+type TreeWorldObject struct {
+	ObjectId      int
+	Position      *model.Position
+	TreeId        int
+	StumpId       int
+	Respawn       int
+	lifepoints    int
+	tickCount     int
+	shouldRefresh bool
+}
+
+func (t *TreeWorldObject) GetPosition() *model.Position {
+	return t.Position
+}
+
+func (t *TreeWorldObject) GetObjectId() int {
+	return t.ObjectId
+}
+
+// TODO: Should only show the world object when it's cut down and delete it when it respawns..
+func (t *TreeWorldObject) Tick() {
+	t.tickCount++
+	if t.tickCount >= t.Respawn {
+		t.ObjectId = t.TreeId
+		t.shouldRefresh = true
+	}
+}
+
+func (t *TreeWorldObject) ShouldRefresh() bool {
+	return t.shouldRefresh
+}
 
 func (w *WoodcuttingHandler) CutDownTree() {
-	w.player.OutgoingQueue = append(w.player.OutgoingQueue, &outgoing.SendObjectPacket{
-		ObjectId: w.tree.StumpId,
-		Position: w.treePosition,
-		Face:     0,
-		Typ:      10,
-		Player:   w.player,
+	entity.WorldProvider().SetWorldObject(&TreeWorldObject{
+		ObjectId:  w.tree.StumpId,
+		Position:  w.treePosition,
+		TreeId:    w.treeId,
+		StumpId:   w.tree.StumpId,
+		Respawn:   w.tree.Respawn,
+		tickCount: 0,
 	})
 	w.StopWoodcutting()
 }

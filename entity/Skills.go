@@ -87,7 +87,7 @@ func (s *SkillHelper) AddExperience(skillId model.SkillId, experience int) {
 			Message:     fmt.Sprintf("Your attack level is now %d.", s.Skills[skillId].Level),
 		})
 		s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SendChatInterfacePacket{
-			InterfaceId: 6247,
+			InterfaceId: LevelupInterfaces[skillId],
 		})
 	}
 	s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SetSkillLevelPacket{
@@ -95,4 +95,9 @@ func (s *SkillHelper) AddExperience(skillId model.SkillId, experience int) {
 		Level:      s.Skills[skillId].Level,
 		Experience: s.Skills[skillId].Experience,
 	})
+}
+
+var LevelupInterfaces = map[model.SkillId]uint{
+	model.Attack: 6247,
+	model.Woodcutting: 4272,
 }

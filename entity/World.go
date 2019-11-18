@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"rsps/model"
 	"sync"
 	"time"
 )
@@ -89,5 +90,15 @@ func (w *World) AddPlayerToRegion(player *Player) {
 func (w *World) GetRegionForPlayer(player *Player) *Region {
 	regionId := GetRegionIdByPosition(player.Position)
 	return w.Regions[regionId]
+}
+
+func (w *World) SetWorldObject(worldObject model.WorldObjectInterface) {
+	regionId := GetRegionIdByPosition(worldObject.GetPosition())
+	w.GetRegion(regionId).SetWorldObject(worldObject)
+}
+
+func (w *World) GetWorldObject(position *model.Position) model.WorldObjectInterface {
+	regionId := GetRegionIdByPosition(position)
+	return w.GetRegion(regionId).GetWorldObject(position)
 }
 
