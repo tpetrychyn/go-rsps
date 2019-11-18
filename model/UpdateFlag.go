@@ -9,7 +9,11 @@ type UpdateFlag struct {
 	EntityInteraction bool
 	FacePosition      bool
 	Appearance        bool
+
 	Animation         bool
+	AnimationId       int
+	AnimationDuration int
+
 	Graphic           bool
 	SingleHit         bool
 	DoubleHit         bool
@@ -30,6 +34,10 @@ func (u *UpdateFlag) Clear() {
 	u.SingleHit = false
 	u.DoubleHit = false
 	u.Transform = false
+
+	if u.AnimationDuration >= 0 {
+		u.AnimationDuration--
+	}
 }
 
 func (u *UpdateFlag) SetChat() {
@@ -57,7 +65,16 @@ func (u *UpdateFlag) SetDoubleHit() {
 	u.DoubleHit = true
 }
 
-func (u *UpdateFlag) SetAnimation() {
+func (u *UpdateFlag) SetAnimation(id, duration int) {
 	u.UpdateRequired = true
 	u.Animation = true
+	u.AnimationId = id
+	u.AnimationDuration = duration
+}
+
+func (u *UpdateFlag) ClearAnimation() {
+	u.Animation = true
+	u.UpdateRequired = true
+	u.AnimationId = -1
+	u.AnimationDuration = 0
 }

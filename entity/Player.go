@@ -6,15 +6,20 @@ import (
 	"rsps/net/packet/outgoing"
 )
 
+type OngoingAction interface {
+	Tick()
+}
+
 type Player struct {
 	*model.Movement
 
 	Id   uuid.UUID
 	Name string
 
-	Inventory   *Inventory
-	Equipment   *Equipment
-	SkillHelper *SkillHelper
+	Inventory     *Inventory
+	Equipment     *Equipment
+	SkillHelper   *SkillHelper
+	OngoingAction OngoingAction
 
 	MovementQueue   *MovementQueue
 	Region          *Region
@@ -30,8 +35,8 @@ var SIDEBARS = []int{2423, 3917, 638, 3213, 1644, 5608, 1151,
 
 func NewPlayer() *Player {
 	spawn := &model.Position{
-		X: 2900,
-		Y: 3510,
+		X: 2704,
+		Y: 3397,
 	}
 	player := &Player{
 		Id:         uuid.New(), // TODO: Load this from database or something
@@ -89,6 +94,10 @@ func (p *Player) LoadPlayer(name string) error {
 
 func (p *Player) Tick() {
 	p.MovementQueue.Tick()
+
+	if p.OngoingAction != nil {
+		p.OngoingAction.Tick()
+	}
 }
 
 func (p *Player) PostUpdate() {

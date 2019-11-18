@@ -1,9 +1,11 @@
 package entity
 
 import (
+	"errors"
 	"log"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"rsps/util"
 )
 
 type Inventory struct {
@@ -18,8 +20,15 @@ func NewInventory(player *Player) *Inventory {
 	}
 }
 
-func (i *Inventory) AddItem(id, amount int) int {
-	slot := -1
+func (i *Inventory) AddItem(id, amount int) error {
+	var slot int
+	if !util.GetItemDefinition(id).Stackable && amount > 1 {
+		var err error
+		for a:=0;a<amount;a++ {
+			err = i.AddItem(id, 1)
+		}
+		return err
+	}
 	for k, v := range i.Items {
 		if v.ItemId == 0 {
 			slot = k
@@ -28,7 +37,8 @@ func (i *Inventory) AddItem(id, amount int) int {
 		}
 
 		if k == int(i.Capacity-1) {
-			log.Printf("inventory is full")
+			i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your inventory is too full to hold anymore."})
+			return errors.New("inventory is full")
 		}
 	}
 
@@ -39,7 +49,7 @@ func (i *Inventory) AddItem(id, amount int) int {
 			Amount: 1,
 		},
 	})
-	return slot
+	return nil
 }
 
 func (i *Inventory) SwapItems(from, to int) {
@@ -75,4 +85,13 @@ func (i *Inventory) DropItem(itemId, slot int) {
 	i.Items[slot] = model.NilItem
 	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InventoryItemPacket{Slot: slot, Item: model.NilItem})
 	i.player.Region.CreateGroundItemAtPosition(i.player, invItem, i.player.Position)
+}
+
+func (i *Inventory) IsFull() bool {
+	for _, v := range i.Items {
+		if v.ItemId == 0 {
+			return false
+		}
+	}
+	return true
 }

@@ -2,7 +2,6 @@ package incoming
 
 import (
 	"fmt"
-	"log"
 	"rsps/entity"
 	"rsps/model"
 	"rsps/net/packet"
@@ -29,12 +28,21 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 	case "item":
 		if len(parts) == 1 { return }
 		id, _ := strconv.Atoi(parts[1])
-		var amount int
+		amount := 1
 		if len(parts) > 2 {
 			amount, _ = strconv.Atoi(parts[2])
 		}
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("adding item %d amount %d", id, amount)})
 		player.Inventory.AddItem(id, amount)
+	case "object":
+		if len(parts) == 1 { return }
+		id, _ := strconv.Atoi(parts[1])
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
+			ObjectId: id,
+			Position: player.Position,
+			Face:     0,
+			Typ:      10,
+			Player:   player,
+		})
 	}
-	log.Printf("command %+v", string(stream.Flush()))
 }

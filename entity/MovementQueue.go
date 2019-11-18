@@ -53,7 +53,9 @@ func (m *MovementQueue) Tick() {
 			if GetRegionIdByPosition(p.Position) != GetRegionIdByPosition(lastPosition) {
 				WorldProvider().AddPlayerToRegion(p)
 			}
-
+		}
+	} else {
+		if p, ok := m.character.(*Player); ok {
 			if p.DelayedPacket != nil {
 				action := p.DelayedPacket
 				p.DelayedPacket = nil
@@ -61,6 +63,8 @@ func (m *MovementQueue) Tick() {
 			}
 		}
 	}
+
+
 }
 
 func (m *MovementQueue) Clear() {

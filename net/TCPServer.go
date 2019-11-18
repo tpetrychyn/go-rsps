@@ -50,6 +50,7 @@ func (server *TcpServer) Start() {
 					go c.Tick(tickGroup)
 				}
 				if c.loginState == Disconnected {
+					server.Clients[k].connection.Close()
 					delete(server.Clients, k)
 				}
 			}

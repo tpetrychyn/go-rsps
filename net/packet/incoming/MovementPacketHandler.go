@@ -17,11 +17,9 @@ type MovementPacketHandler struct {}
 
 func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *packet.Packet) {
 	player.MovementQueue.Clear()
+	player.UpdateFlag.ClearAnimation()
 	player.DelayedPacket = nil
-
-	if packet.Opcode == 98 {
-		// TODO: walk on command
-	}
+	player.OngoingAction = nil
 
 	if packet.Opcode == 248 {
 		packet.Size -= 14

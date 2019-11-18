@@ -25,6 +25,9 @@ type Region struct {
 
 func (r *Region) GetPlayersAsInterface() []model.PlayerInterface {
 	var players = make([]model.PlayerInterface, 0)
+	if r.Players == nil { // TODO: has crashed a few times nil on r.Players..
+		return players
+	}
 	for _, v := range r.Players {
 		players = append(players, v)
 	}

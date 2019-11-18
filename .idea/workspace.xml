@@ -2,25 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/entity/Skills.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Skill.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/ClearInterfacePacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SendChatInterfacePacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SendObjectPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SendTextInterfacePacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SetSkillLevelPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/WorldObject.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handler/WoodcuttingHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/ContinueDialogPacketHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Inventory.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Inventory.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Region.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/World.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/UpdateFlag.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/UpdateFlag.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/LoginHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPServer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/CommandsPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/CommandsPacketHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/PickupItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/PickupItemPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -179,6 +177,7 @@
         <watch expression="m.Position.GetRegionX()" language="go" />
         <watch expression="uint(m.Position.GetRegionX() + 6 + 128)" language="go" />
         <watch expression="uint16(value)" language="go" />
+        <watch expression="axes" language="go" />
       </configuration>
       <configuration name="GoTestRunConfiguration">
         <watch expression="value&gt;&gt;2" language="go" />

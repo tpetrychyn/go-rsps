@@ -32,9 +32,7 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 
 		c.Enqueue(&flush{})
 		c.loginState = LoginStage
-	}
-
-	if c.loginState == LoginStage {
+	} else if c.loginState == LoginStage {
 		log.Println("Login Stage 1")
 		var packet LoginPacket
 		err := binary.Read(c.connection, binary.BigEndian, &packet)

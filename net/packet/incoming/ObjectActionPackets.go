@@ -3,9 +3,9 @@ package incoming
 import (
 	"log"
 	"rsps/entity"
+	"rsps/handler"
 	"rsps/model"
 	"rsps/net/packet"
-	"rsps/net/packet/outgoing"
 )
 
 type ObjectActionPacket struct {}
@@ -33,7 +33,10 @@ func (e *ObjectActionPacket) handleObjectActionOneInternal(player *entity.Player
 		return
 	}
 
-	player.SkillHelper.AddExperience(model.Attack, 120000)
-	player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your knowledge in Attack increases. Gained 200 experience in Attack."})
+	if handler.ObjectIsWoodcuttingTree(int(id)) {
+		handler.StartWoodcutting(int(id), &model.Position{X: x, Y: y}, player)
+		return
+	}
+
 	log.Printf("Object Click1: x %+v, y %+v, id %+v", x, y, id)
 }

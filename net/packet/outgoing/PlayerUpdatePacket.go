@@ -184,7 +184,7 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		}
 
 		if updateFlag.Animation {
-			p.updateAnimation(updateStream)
+			p.updateAnimation(updateStream, target)
 		}
 
 		if updateFlag.ForcedChat {
@@ -267,8 +267,8 @@ func (p *PlayerUpdatePacket) updateGraphics(stream *model.Stream) {
 	stream.WriteInt((100 << 16) + (6553600 & 0xffff)) //height + delay
 }
 
-func (p *PlayerUpdatePacket) updateAnimation(stream *model.Stream) {
-	stream.WriteWordLE(865) //animId
+func (p *PlayerUpdatePacket) updateAnimation(stream *model.Stream, target model.PlayerInterface) {
+	stream.WriteWordLE(uint(target.GetUpdateFlag().AnimationId)) //animId
 	stream.WriteByte(^1 + 256)
 }
 
