@@ -16,6 +16,7 @@ func WorldProvider() *World {
 }
 
 type World struct {
+	// TODO: Convert this to sync.map and remove lock
 	Regions map[uint16]*Region
 	lock sync.Mutex
 }

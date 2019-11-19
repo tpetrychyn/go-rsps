@@ -3,9 +3,9 @@ package entity
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"log"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"sync"
 	"time"
 )
 
@@ -18,10 +18,10 @@ type GroundItem struct {
 }
 
 type Region struct {
-	Id                uint16
+	Id uint16
 	// TODO: convert all these maps to sync.Maps for thread safety
 	Players           map[uuid.UUID]*Player
-	GroundItems       map[uuid.UUID]*GroundItem
+	GroundItems       *sync.Map
 	WorldObjects      map[string]model.WorldObjectInterface // key is x-y as string
 	MarkedForDeletion bool
 }
@@ -38,9 +38,9 @@ func (r *Region) GetPlayersAsInterface() []model.PlayerInterface {
 }
 
 func CreateRegion(id uint16) *Region {
-	groundItems := make(map[uuid.UUID]*GroundItem, 0)
+	groundItems := new(sync.Map)
 	if id == 12850 {
-		groundItems[uuid.New()] = &GroundItem{
+		groundItems.Store(uuid.New(), &GroundItem{
 			Position: &model.Position{
 				X: 3200,
 				Y: 3200,
@@ -50,43 +50,45 @@ func CreateRegion(id uint16) *Region {
 			Amount:    1,
 			Owner:     nil,
 			CreatedAt: time.Now(),
-		}
+		})
 	}
 
 	return &Region{
-		Id:          id,
-		GroundItems: groundItems,
-		Players:     make(map[uuid.UUID]*Player),
+		Id:           id,
+		GroundItems:  groundItems,
+		Players:      make(map[uuid.UUID]*Player),
 		WorldObjects: make(map[string]model.WorldObjectInterface),
 	}
 }
 
 func (r *Region) Tick() {
-	for k, v := range r.GroundItems {
-		if time.Now().Sub(v.CreatedAt) > 10*time.Second {
+	r.GroundItems.Range(func(key, value interface{}) bool {
+		g := value.(*GroundItem)
+		if time.Now().Sub(g.CreatedAt) > 10*time.Second {
 			// TODO: this works, bronze axe is simply spawned on lumby region creation atm
 			//  adding items in constructor is good for global spawns
-			r.RemoveGroundItemIdAtPosition(v.ItemId, v.Position)
-			delete(r.GroundItems, k)
+			r.RemoveGroundItemIdAtPosition(g.ItemId, g.Position)
+			//delete(r.GroundItems, k)
+			r.GroundItems.Delete(key)
 		}
-	}
 
-	for _, item := range r.GroundItems {
-		if item.Owner != nil && time.Now().Sub(item.CreatedAt) > 5*time.Second {
+		if g.Owner != nil && time.Now().Sub(g.CreatedAt) > 5*time.Second {
 			for _, player := range r.Players {
-				if player.Id == item.Owner.Id {
+				if player.Id == g.Owner.Id {
 					continue
 				}
 				player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.CreateGroundItemPacket{
-					Position:   item.Position,
+					Position:   g.Position,
 					Player:     player,
-					ItemId:     item.ItemId,
-					ItemAmount: item.Amount,
+					ItemId:     g.ItemId,
+					ItemAmount: g.Amount,
 				})
 			}
-			item.Owner = nil
+			g.Owner = nil
 		}
-	}
+
+		return true
+	})
 
 	for _, obj := range r.WorldObjects {
 		obj.Tick()
@@ -103,7 +105,12 @@ func (r *Region) Tick() {
 		}
 	}
 
-	if len(r.Players) == 0 && len(r.GroundItems) == 0 {
+	var giLength = 0
+	r.GroundItems.Range(func(key, value interface{}) bool {
+		giLength++
+		return true
+	})
+	if len(r.Players) == 0 && giLength == 0 {
 		r.MarkedForDeletion = true
 	}
 }
@@ -112,17 +119,19 @@ func (r *Region) OnEnter(player *Player) {
 	// We must add the player to all 9 regions entered on change
 	// so that they get updates about regions around themselves
 	r.Players[player.Id] = player
-	for _, v := range r.GroundItems {
-		if v.Owner != nil && v.Owner != player {
-			continue
+	r.GroundItems.Range(func(key, value interface{}) bool {
+		g := value.(*GroundItem)
+		if g.Owner != nil && g.Owner != player {
+			return true
 		} // only show it if nobody owns it or you own it
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.CreateGroundItemPacket{
-			Position:   v.Position,
+			Position:   g.Position,
 			Player:     player,
-			ItemId:     v.ItemId,
-			ItemAmount: v.Amount,
+			ItemId:     g.ItemId,
+			ItemAmount: g.Amount,
 		})
-	}
+		return true
+	})
 
 	for _, obj := range r.WorldObjects {
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
@@ -136,13 +145,15 @@ func (r *Region) OnEnter(player *Player) {
 }
 
 func (r *Region) OnLeave(player *Player) {
-	for _, v := range r.GroundItems {
+	r.GroundItems.Range(func(key, value interface{}) bool {
+		g := value.(*GroundItem)
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.RemoveGroundItemPacket{
-			Position: v.Position,
+			Position: g.Position,
 			Player:   player,
-			ItemId:   v.ItemId,
+			ItemId:   g.ItemId,
 		})
-	}
+		return true
+	})
 	delete(r.Players, player.Id)
 }
 
@@ -154,22 +165,26 @@ func (r *Region) GetAdjacentIds() []uint16 {
 }
 
 func (r *Region) FindGroundItemByPosition(id int, p *model.Position) *GroundItem {
-	for _, v := range r.GroundItems {
-		if v.ItemId == id && v.Position.X == p.X && v.Position.Y == p.Y {
-			return v
+	var groundItem *GroundItem
+	r.GroundItems.Range(func(key, value interface{}) bool {
+		g := value.(*GroundItem)
+		if g.ItemId == id && g.Position.X == p.X && g.Position.Y == p.Y {
+			groundItem = g
+			return false
 		}
-	}
-	return nil
+		return true
+	})
+	return groundItem
 }
 
 func (r *Region) CreateGroundItemAtPosition(dropper *Player, item *model.Item, p *model.Position) {
-	r.GroundItems[uuid.New()] = &GroundItem{
+	r.GroundItems.Store(uuid.New(), &GroundItem{
 		Position:  p,
 		ItemId:    item.ItemId,
 		Amount:    item.Amount,
 		Owner:     dropper,
 		CreatedAt: time.Now(),
-	}
+	})
 
 	dropper.OutgoingQueue = append(dropper.OutgoingQueue, &outgoing.CreateGroundItemPacket{
 		Position:   dropper.Position,
@@ -180,20 +195,21 @@ func (r *Region) CreateGroundItemAtPosition(dropper *Player, item *model.Item, p
 }
 
 func (r *Region) RemoveGroundItemIdAtPosition(id int, position *model.Position) {
-	for k, v := range r.GroundItems {
-		if v.ItemId == id && v.Position.X == position.X && v.Position.Y == position.Y {
-			delete(r.GroundItems, k)
+	r.GroundItems.Range(func(key, value interface{}) bool {
+		g := value.(*GroundItem)
+		if g.ItemId == id && g.Position.X == position.X && g.Position.Y == position.Y {
+			r.GroundItems.Delete(key)
 			for _, p := range r.Players {
 				p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.RemoveGroundItemPacket{
-					Position: v.Position,
+					Position: g.Position,
 					Player:   p,
-					ItemId:   v.ItemId,
+					ItemId:   g.ItemId,
 				})
 			}
-			return
+			return false
 		}
-	}
-	log.Printf("item not found to remove")
+		return true
+	})
 }
 
 func (r *Region) SetWorldObject(worldObject model.WorldObjectInterface) {
