@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"log"
 	"rsps/model"
 	"sync"
 	"time"
@@ -33,6 +34,7 @@ func (w *World) Tick() {
 			v.Tick()
 			if v.MarkedForDeletion {
 				delete(w.Regions, k)
+				log.Printf("Deleted region %d for having no items, players, or npcs - regions loaded [%d]", k, len(w.Regions))
 			}
 		}
 		w.lock.Unlock()
@@ -51,7 +53,6 @@ func (w *World) AddPlayerToRegion(player *Player) {
 	previousRegion := player.Region
 	regionId := GetRegionIdByPosition(player.Position)
 	region := w.GetRegion(regionId)
-	region.Players[player.Id] = player
 	player.Region = region
 
 	newAdj := region.GetAdjacentIds()

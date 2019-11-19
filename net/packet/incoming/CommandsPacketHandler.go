@@ -25,8 +25,11 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 	switch command {
 	case "pos":
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("X: %d, Y: %d", player.Position.X, player.Position.Y)})
+
 	case "item":
-		if len(parts) == 1 { return }
+		if len(parts) == 1 {
+			return
+		}
 		id, _ := strconv.Atoi(parts[1])
 		amount := 1
 		if len(parts) > 2 {
@@ -34,8 +37,11 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 		}
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("adding item %d amount %d", id, amount)})
 		player.Inventory.AddItem(id, amount)
+
 	case "object":
-		if len(parts) == 1 { return }
+		if len(parts) == 1 {
+			return
+		}
 		id, _ := strconv.Atoi(parts[1])
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 			ObjectId: id,
@@ -44,5 +50,16 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 			Typ:      10,
 			Player:   player,
 		})
+
+	case "tele":
+		if len(parts) == 2 {
+			return
+		}
+		x, _ := strconv.Atoi(parts[1])
+		y, _ := strconv.Atoi(parts[1])
+		player.Teleport(&model.Position{X: uint16(x), Y: uint16(y)})
+
+	case "region":
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("You are in region: %v with %d players", entity.GetRegionIdByPosition(player.Position), len(player.Region.Players))})
 	}
 }

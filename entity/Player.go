@@ -35,8 +35,8 @@ var SIDEBARS = []int{2423, 3917, 638, 3213, 1644, 5608, 1151,
 
 func NewPlayer() *Player {
 	spawn := &model.Position{
-		X: 2704,
-		Y: 3397,
+		X: 3200,
+		Y: 3200,
 	}
 	player := &Player{
 		Id:         uuid.New(), // TODO: Load this from database or something
@@ -75,20 +75,6 @@ func (p *Player) LoadPlayer(name string) error {
 		})
 	}
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Welcome to TaylorScape"})
-
-	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendObjectPacket{
-		ObjectId: 2475,
-		Position: &model.Position{
-			X: 2896,
-			Y: 3505,
-			Z: 0,
-		},
-		Face:   0,
-		Typ:    10,
-		Player: p,
-	})
-
-	p.SkillHelper.SetLevelToExperience(model.Attack, 5000)
 	return nil
 }
 

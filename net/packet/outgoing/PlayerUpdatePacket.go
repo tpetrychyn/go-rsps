@@ -78,6 +78,8 @@ func (p *PlayerUpdatePacket) Build() []byte {
 		stream.WriteBits(1, 0)
 	}
 
+	// TODO 2019/11/19 06:18:28 downstreamMessage &{player:0xc0000501e0 buffer:{buf:[81 0 2 0 240] off:0 lastRead:0}} caused a crash
+
 	updateStream := model.NewStream()
 	p.appendUpdates(updateStream, p.player, false)
 

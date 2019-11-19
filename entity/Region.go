@@ -19,6 +19,7 @@ type GroundItem struct {
 
 type Region struct {
 	Id                uint16
+	// TODO: convert all these maps to sync.Maps for thread safety
 	Players           map[uuid.UUID]*Player
 	GroundItems       map[uuid.UUID]*GroundItem
 	WorldObjects      map[string]model.WorldObjectInterface // key is x-y as string
@@ -61,12 +62,14 @@ func CreateRegion(id uint16) *Region {
 }
 
 func (r *Region) Tick() {
-	//for k, v := range r.GroundItems {
-	//	if time.Now().Sub(v.CreatedAt) > 5*time.Second {
-	//		r.RemovedItems = append(r.RemovedItems, v)
-	//		delete(r.GroundItems, k)
-	//	}
-	//}
+	for k, v := range r.GroundItems {
+		if time.Now().Sub(v.CreatedAt) > 10*time.Second {
+			// TODO: this works, bronze axe is simply spawned on lumby region creation atm
+			//  adding items in constructor is good for global spawns
+			r.RemoveGroundItemIdAtPosition(v.ItemId, v.Position)
+			delete(r.GroundItems, k)
+		}
+	}
 
 	for _, item := range r.GroundItems {
 		if item.Owner != nil && time.Now().Sub(item.CreatedAt) > 5*time.Second {
@@ -106,6 +109,9 @@ func (r *Region) Tick() {
 }
 
 func (r *Region) OnEnter(player *Player) {
+	// We must add the player to all 9 regions entered on change
+	// so that they get updates about regions around themselves
+	r.Players[player.Id] = player
 	for _, v := range r.GroundItems {
 		if v.Owner != nil && v.Owner != player {
 			continue

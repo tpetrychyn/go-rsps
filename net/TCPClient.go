@@ -181,7 +181,7 @@ func (client *TCPClient) Write() {
 			if client == nil || client.writer == nil {
 				log.Printf("write nil finder client %+v client.writer %+v", client, client.writer)
 			}
-			log.Printf("downstreamMessage %+v", downstreamMessage)
+			//log.Printf("downstreamMessage %+v", downstreamMessage)
 			downstreamMessage.Write(client.writer)
 		}
 	}
