@@ -10,15 +10,15 @@ import (
 )
 
 type TcpServer struct {
-	Port     int
-	Clients map[string]*TCPClient
+	Port    int
+	Clients *sync.Map
 	Listener net.Listener
 }
 
 func NewTcpServer(port int) *TcpServer {
 	return &TcpServer{
-		Port: port,
-		Clients: make(map[string]*TCPClient),
+		Port:    port,
+		Clients: new(sync.Map),
 	}
 }
 
@@ -32,7 +32,6 @@ func (server *TcpServer) Start() {
 
 	log.Printf("Local channel bound at %v \n", server.Port)
 	world := entity.WorldProvider()
-	go world.Tick()
 
 	l := &LoginHandler{}
 
@@ -40,28 +39,36 @@ func (server *TcpServer) Start() {
 
 	go func() {
 		for {
+			// TODO: Could implement a tickTime at the start of each loop and fire when it hits 600ms
+			// so that the ticks have the entire 600ms to process instead of rushing at the end
 			<-time.After(600 * time.Millisecond)
 			// let all clients tick in parallel threads (handle movement and pickup, etc)
 			// parallel threads minimizes advantage of pID
 			//tickGroup.Add(len(server.Clients))
-			for k, c := range server.Clients {
-				if c.loginState == IngameStage {
+			server.Clients.Range(func(key, value interface{}) bool {
+				client := value.(*TCPClient)
+				if client.loginState == IngameStage {
 					tickGroup.Add(1)
-					go c.Tick(tickGroup)
+					go client.Tick(tickGroup)
 				}
-				if c.loginState == Disconnected {
-					server.Clients[k].connection.Close()
-					delete(server.Clients, k)
+				if client.loginState == Disconnected {
+					client.connection.Close()
+					server.Clients.Delete(key)
 				}
-			}
+				return true
+			})
 			tickGroup.Wait()
 
+			world.Tick()
+
 			// after all have ticked, issue the update packets in parallel
-			for _, c := range server.Clients {
-				if c.loginState == IngameStage {
-					go c.UpdatePacket()
+			server.Clients.Range(func(key, value interface{}) bool {
+				client := value.(*TCPClient)
+				if client.loginState == IngameStage {
+					go client.UpdatePacket()
 				}
-			}
+				return true
+			})
 		}
 	}()
 
@@ -76,7 +83,7 @@ func (server *TcpServer) Start() {
 		go client.Read()
 		go client.Write()
 		go client.ProcessUpstream()
-		server.Clients[client.connection.RemoteAddr().String()] = client
+		server.Clients.Store(client.connection.RemoteAddr().String(), client)
 	}
 }
 

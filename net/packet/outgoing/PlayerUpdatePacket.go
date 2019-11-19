@@ -3,6 +3,7 @@ package outgoing
 import (
 	"bufio"
 	"bytes"
+	"log"
 	"rsps/model"
 )
 
@@ -115,6 +116,7 @@ localPlayerLoop:
 		}
 		p.player.AddLoadedPlayer(v)
 		p.addPlayer(stream, v)
+		log.Printf("loaded new player %+v", v)
 		p.appendUpdates(updateStream, v, true)
 	}
 

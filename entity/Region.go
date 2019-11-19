@@ -18,22 +18,20 @@ type GroundItem struct {
 }
 
 type Region struct {
-	Id uint16
-	// TODO: convert all these maps to sync.Maps for thread safety
-	Players           map[uuid.UUID]*Player
+	Id                uint16
+	Players           *sync.Map
 	GroundItems       *sync.Map
-	WorldObjects      map[string]model.WorldObjectInterface // key is x-y as string
+	WorldObjects      *sync.Map
 	MarkedForDeletion bool
 }
 
 func (r *Region) GetPlayersAsInterface() []model.PlayerInterface {
 	var players = make([]model.PlayerInterface, 0)
-	if r.Players == nil { // TODO: has crashed a few times nil on r.Players..
-		return players
-	}
-	for _, v := range r.Players {
-		players = append(players, v)
-	}
+	r.Players.Range(func(key, value interface{}) bool {
+		player := value.(*Player)
+		players = append(players, player)
+		return true
+	})
 	return players
 }
 
@@ -56,8 +54,8 @@ func CreateRegion(id uint16) *Region {
 	return &Region{
 		Id:           id,
 		GroundItems:  groundItems,
-		Players:      make(map[uuid.UUID]*Player),
-		WorldObjects: make(map[string]model.WorldObjectInterface),
+		Players:      new(sync.Map),
+		WorldObjects: new(sync.Map),
 	}
 }
 
@@ -68,14 +66,14 @@ func (r *Region) Tick() {
 			// TODO: this works, bronze axe is simply spawned on lumby region creation atm
 			//  adding items in constructor is good for global spawns
 			r.RemoveGroundItemIdAtPosition(g.ItemId, g.Position)
-			//delete(r.GroundItems, k)
 			r.GroundItems.Delete(key)
 		}
 
 		if g.Owner != nil && time.Now().Sub(g.CreatedAt) > 5*time.Second {
-			for _, player := range r.Players {
+			r.Players.Range(func(key, value interface{}) bool {
+				player := value.(*Player)
 				if player.Id == g.Owner.Id {
-					continue
+					return true
 				}
 				player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.CreateGroundItemPacket{
 					Position:   g.Position,
@@ -83,17 +81,19 @@ func (r *Region) Tick() {
 					ItemId:     g.ItemId,
 					ItemAmount: g.Amount,
 				})
-			}
+				return true
+			})
 			g.Owner = nil
 		}
-
 		return true
 	})
 
-	for _, obj := range r.WorldObjects {
+	r.WorldObjects.Range(func(key, value interface{}) bool {
+		obj := value.(model.WorldObjectInterface)
 		obj.Tick()
 		if obj.ShouldRefresh() {
-			for _, player := range r.Players {
+			r.Players.Range(func(key, value interface{}) bool {
+				player := value.(*Player)
 				player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 					ObjectId: obj.GetObjectId(),
 					Position: obj.GetPosition(),
@@ -101,16 +101,24 @@ func (r *Region) Tick() {
 					Typ:      10,
 					Player:   player,
 				})
-			}
+				return true
+			})
 		}
-	}
+		return true
+	})
 
+	// TODO: Hate having to loop just to get count...
 	var giLength = 0
 	r.GroundItems.Range(func(key, value interface{}) bool {
 		giLength++
 		return true
 	})
-	if len(r.Players) == 0 && giLength == 0 {
+	var pLength = 0
+	r.Players.Range(func(key, value interface{}) bool {
+		pLength++
+		return true
+	})
+	if pLength == 0 && giLength == 0 {
 		r.MarkedForDeletion = true
 	}
 }
@@ -118,7 +126,7 @@ func (r *Region) Tick() {
 func (r *Region) OnEnter(player *Player) {
 	// We must add the player to all 9 regions entered on change
 	// so that they get updates about regions around themselves
-	r.Players[player.Id] = player
+	r.Players.Store(player.Id, player)
 	r.GroundItems.Range(func(key, value interface{}) bool {
 		g := value.(*GroundItem)
 		if g.Owner != nil && g.Owner != player {
@@ -133,7 +141,8 @@ func (r *Region) OnEnter(player *Player) {
 		return true
 	})
 
-	for _, obj := range r.WorldObjects {
+	r.WorldObjects.Range(func(key, value interface{}) bool {
+		obj := value.(model.WorldObjectInterface)
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 			ObjectId: obj.GetObjectId(),
 			Position: obj.GetPosition(),
@@ -141,7 +150,8 @@ func (r *Region) OnEnter(player *Player) {
 			Typ:      10,
 			Player:   player,
 		})
-	}
+		return true
+	})
 }
 
 func (r *Region) OnLeave(player *Player) {
@@ -154,7 +164,7 @@ func (r *Region) OnLeave(player *Player) {
 		})
 		return true
 	})
-	delete(r.Players, player.Id)
+	r.Players.Delete(player.Id)
 }
 
 func (r *Region) GetAdjacentIds() []uint16 {
@@ -199,13 +209,15 @@ func (r *Region) RemoveGroundItemIdAtPosition(id int, position *model.Position) 
 		g := value.(*GroundItem)
 		if g.ItemId == id && g.Position.X == position.X && g.Position.Y == position.Y {
 			r.GroundItems.Delete(key)
-			for _, p := range r.Players {
-				p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.RemoveGroundItemPacket{
+			r.Players.Range(func(key, value interface{}) bool {
+				player := value.(*Player)
+				player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.RemoveGroundItemPacket{
 					Position: g.Position,
-					Player:   p,
+					Player:   player,
 					ItemId:   g.ItemId,
 				})
-			}
+				return true
+			})
 			return false
 		}
 		return true
@@ -214,21 +226,27 @@ func (r *Region) RemoveGroundItemIdAtPosition(id int, position *model.Position) 
 
 func (r *Region) SetWorldObject(worldObject model.WorldObjectInterface) {
 	key := fmt.Sprintf("%d-%d", worldObject.GetPosition().X, worldObject.GetPosition().Y)
-	r.WorldObjects[key] = worldObject
-	for _, p := range r.Players {
-		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendObjectPacket{
+	r.WorldObjects.Store(key, worldObject)
+	r.Players.Range(func(key, value interface{}) bool {
+		player := value.(*Player)
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 			ObjectId: worldObject.GetObjectId(),
 			Position: worldObject.GetPosition(),
 			Face:     0,
 			Typ:      10,
-			Player:   p,
+			Player:   player,
 		})
-	}
+		return true
+	})
 }
 
 func (r *Region) GetWorldObject(position *model.Position) model.WorldObjectInterface {
 	key := fmt.Sprintf("%d-%d", position.X, position.Y)
-	return r.WorldObjects[key]
+	obj, ok := r.WorldObjects.Load(key)
+	if !ok {
+		return nil
+	}
+	return obj.(model.WorldObjectInterface)
 }
 
 func GetRegionIdByPosition(p *model.Position) uint16 {

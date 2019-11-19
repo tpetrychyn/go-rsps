@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"rsps/entity"
 	"rsps/model"
@@ -42,7 +41,7 @@ var NormalTree = &WoodcuttingTree{
 	StumpId:          1342,
 	Experience:       40,
 	Respawn:          20,
-	Defence:          1,
+	Defence:          0,
 }
 var OakTree = &WoodcuttingTree{
 	LevelRequirement: 15,
@@ -183,13 +182,17 @@ func (w *WoodcuttingHandler) Tick() {
 	}
 
 	treeWorldObject := entity.WorldProvider().GetWorldObject(w.treePosition)
+	if treeWorldObject == nil {
+		w.StopWoodcutting()
+		return
+	}
 	if treeWorldObject.GetObjectId() == w.tree.StumpId {
 		w.StopWoodcutting()
 		return
 	}
 
 	w.tickCount++
-	if w.tickCount >= 4 {
+	if w.tickCount >= 2 {
 		luck := 1 + rand.Float64()*(10-1)
 		strength := w.axe.Strength
 		defence := w.tree.Defence
@@ -200,7 +203,7 @@ func (w *WoodcuttingHandler) Tick() {
 		if chance > 9.5 {
 			chance = 9.5
 		}
-		log.Printf("luck %+v, chance %+v", luck, chance)
+		//log.Printf("luck %+v, chance %+v", luck, chance)
 		if chance >= luck {
 			if t, ok := treeWorldObject.(*TreeWorldObject); ok {
 				t.lifepoints--

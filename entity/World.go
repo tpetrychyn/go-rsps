@@ -1,13 +1,12 @@
 package entity
 
 import (
-	"log"
 	"rsps/model"
 	"sync"
-	"time"
 )
 
 var world *World
+
 func WorldProvider() *World {
 	if world == nil {
 		world = CreateWorld()
@@ -16,38 +15,32 @@ func WorldProvider() *World {
 }
 
 type World struct {
-	// TODO: Convert this to sync.map and remove lock
-	Regions map[uint16]*Region
-	lock sync.Mutex
+	Regions *sync.Map
 }
 
 func CreateWorld() *World {
 	return &World{
-		Regions: make(map[uint16]*Region),
+		Regions: new(sync.Map),
 	}
 }
 
 func (w *World) Tick() {
-	for {
-		<- time.After(600 * time.Millisecond)
-		w.lock.Lock()
-		for k, v := range w.Regions {
-			v.Tick()
-			if v.MarkedForDeletion {
-				delete(w.Regions, k)
-				log.Printf("Deleted region %d for having no items, players, or npcs - regions loaded [%d]", k, len(w.Regions))
-			}
+	//for {
+	//<-time.After(600 * time.Millisecond)
+	w.Regions.Range(func(key, value interface{}) bool {
+		region := value.(*Region)
+		if region.MarkedForDeletion {
+			w.Regions.Delete(key)
+			return true
 		}
-		w.lock.Unlock()
-	}
+		region.Tick()
+		return true
+	})
+	//}
 }
 func (w *World) GetRegion(id uint16) *Region {
-	w.lock.Lock()
-	if w.Regions[id] == nil {
-		w.Regions[id] = CreateRegion(id)
-	}
-	w.lock.Unlock()
-	return w.Regions[id]
+	region, _ := w.Regions.LoadOrStore(id, CreateRegion(id))
+	return region.(*Region)
 }
 
 func (w *World) AddPlayerToRegion(player *Player) {
@@ -91,7 +84,7 @@ func (w *World) AddPlayerToRegion(player *Player) {
 
 func (w *World) GetRegionForPlayer(player *Player) *Region {
 	regionId := GetRegionIdByPosition(player.Position)
-	return w.Regions[regionId]
+	return w.GetRegion(regionId)
 }
 
 func (w *World) SetWorldObject(worldObject model.WorldObjectInterface) {
@@ -103,4 +96,3 @@ func (w *World) GetWorldObject(position *model.Position) model.WorldObjectInterf
 	regionId := GetRegionIdByPosition(position)
 	return w.GetRegion(regionId).GetWorldObject(position)
 }
-

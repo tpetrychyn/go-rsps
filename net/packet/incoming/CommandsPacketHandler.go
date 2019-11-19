@@ -60,6 +60,6 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 		player.Teleport(&model.Position{X: uint16(x), Y: uint16(y)})
 
 	case "region":
-		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("You are in region: %v with %d players", entity.GetRegionIdByPosition(player.Position), len(player.Region.Players))})
+		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("You are in region: %v", entity.GetRegionIdByPosition(player.Position))})
 	}
 }
