@@ -25,6 +25,7 @@ type Player struct {
 	Region          *Region
 	OutgoingQueue   []DownstreamMessage
 	LoadedPlayers   map[uuid.UUID]model.PlayerInterface
+	LoadedNpcs      map[uuid.UUID]model.NpcInterface
 	UpdateFlag      *model.UpdateFlag
 	DelayedPacket   func()
 	LogoutRequested bool
@@ -49,6 +50,7 @@ func NewPlayer() *Player {
 			IsRunning:          true,
 		},
 		LoadedPlayers: make(map[uuid.UUID]model.PlayerInterface),
+		LoadedNpcs: make(map[uuid.UUID]model.NpcInterface),
 	}
 	player.MovementQueue = NewMovementQueue(player)
 	player.Inventory = NewInventory(player)
@@ -154,4 +156,34 @@ func (p *Player) RemoveLoadedPlayer(id uuid.UUID) {
 
 func (p *Player) GetName() string {
 	return p.Name
+}
+
+func (p *Player) GetNearbyNpcs() []model.NpcInterface {
+	var npcs []model.NpcInterface
+	adjacentRegions := p.Region.GetAdjacentIds()
+	for _, v := range adjacentRegions {
+		r := world.GetRegion(v)
+		for _, npc := range r.GetNpcsAsInterface() {
+			var found bool
+			for _, addedNpc := range npcs {
+				if npc.GetId() == addedNpc.GetId() {
+					found = true
+					break
+				}
+			}
+			if !found {
+				npcs = append(npcs, npc)
+			}
+		}
+	}
+	return npcs
+}
+func (p *Player) GetLoadedNpcs() map[uuid.UUID]model.NpcInterface {
+	return p.LoadedNpcs
+}
+func (p *Player) AddLoadedNpc(n model.NpcInterface) {
+	p.LoadedNpcs[n.GetId()] = n
+}
+func (p *Player) RemoveLoadedNpc(id uuid.UUID) {
+	delete(p.LoadedNpcs, id)
 }

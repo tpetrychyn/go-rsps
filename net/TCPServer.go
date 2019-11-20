@@ -36,6 +36,7 @@ func (server *TcpServer) Start() {
 	l := &LoginHandler{}
 
 	tickGroup := new(sync.WaitGroup)
+	updateGroup := new(sync.WaitGroup)
 
 	go func() {
 		for {
@@ -45,6 +46,7 @@ func (server *TcpServer) Start() {
 			// let all clients tick in parallel threads (handle movement and pickup, etc)
 			// parallel threads minimizes advantage of pID
 			//tickGroup.Add(len(server.Clients))
+			world.Tick()
 			server.Clients.Range(func(key, value interface{}) bool {
 				client := value.(*TCPClient)
 				if client.loginState == IngameStage {
@@ -59,16 +61,18 @@ func (server *TcpServer) Start() {
 			})
 			tickGroup.Wait()
 
-			world.Tick()
-
 			// after all have ticked, issue the update packets in parallel
 			server.Clients.Range(func(key, value interface{}) bool {
 				client := value.(*TCPClient)
 				if client.loginState == IngameStage {
-					go client.UpdatePacket()
+					updateGroup.Add(1)
+					go client.UpdatePacket(updateGroup)
 				}
 				return true
 			})
+
+			updateGroup.Wait()
+			world.PostUpdate()
 		}
 	}()
 

@@ -135,8 +135,10 @@ func (client *TCPClient) Tick(wg *sync.WaitGroup) {
 	}
 }
 
-func (client *TCPClient) UpdatePacket() {
+func (client *TCPClient) UpdatePacket(wg *sync.WaitGroup) {
+	defer wg.Done()
 	client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
+	client.Enqueue(outgoing.NewNpcUpdatePacket(client.Player))
 	client.Enqueue(&flush{})
 }
 
@@ -168,24 +170,20 @@ func isIgnored(opCode byte) bool {
 
 func (client *TCPClient) Write() {
 	for downstreamMessage := range client.Downstream {
+		if client == nil || client.writer == nil {
+			log.Printf("write nil finder client %+v client.writer %+v", client, client.writer)
+		}
+		if downstreamMessage == nil {
+			log.Printf("write nil finder downstreamMessage %+v", downstreamMessage)
+		}
+		downstreamMessage.Write(client.writer)
 		switch downstreamMessage.(type) {
+		case *flush:
+			_ = client.writer.Flush()
+			client.Player.PostUpdate()
 		case *outgoing.LogoutPacket:
-			client.Player.Position = &model.Position{X: 0, Y: 0, Z: 255} // cheap hack to get other clients to delete this player..
-			downstreamMessage.Write(client.writer)
 			_ = client.writer.Flush()
 			return
-		case *flush:
-			downstreamMessage.Write(client.writer)
-			client.Player.PostUpdate()
-		default:
-			if client == nil || client.writer == nil {
-				log.Printf("write nil finder client %+v client.writer %+v", client, client.writer)
-			}
-			if downstreamMessage == nil {
-				log.Printf("write nil finder downstreamMessage %+v", downstreamMessage)
-
-			}
-			downstreamMessage.Write(client.writer)
 		}
 	}
 }

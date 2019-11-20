@@ -17,5 +17,10 @@ type PlayerInterface interface {
 	AddLoadedPlayer(PlayerInterface)
 	RemoveLoadedPlayer(uuid.UUID)
 
+	GetNearbyNpcs() []NpcInterface
+	GetLoadedNpcs() map[uuid.UUID]NpcInterface
+	AddLoadedNpc(NpcInterface)
+	RemoveLoadedNpc(uuid.UUID)
+
 	GetName() string
 }

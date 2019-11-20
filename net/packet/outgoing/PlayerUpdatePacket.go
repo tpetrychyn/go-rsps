@@ -3,7 +3,6 @@ package outgoing
 import (
 	"bufio"
 	"bytes"
-	"log"
 	"rsps/model"
 )
 
@@ -79,8 +78,6 @@ func (p *PlayerUpdatePacket) Build() []byte {
 		stream.WriteBits(1, 0)
 	}
 
-	// TODO 2019/11/19 06:18:28 downstreamMessage &{player:0xc0000501e0 buffer:{buf:[81 0 2 0 240] off:0 lastRead:0}} caused a crash
-
 	updateStream := model.NewStream()
 	p.appendUpdates(updateStream, p.player, false)
 
@@ -116,7 +113,6 @@ localPlayerLoop:
 		}
 		p.player.AddLoadedPlayer(v)
 		p.addPlayer(stream, v)
-		log.Printf("loaded new player %+v", v)
 		p.appendUpdates(updateStream, v, true)
 	}
 
@@ -133,9 +129,10 @@ localPlayerLoop:
 }
 
 func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target model.PlayerInterface, updateAppearance bool) {
-	updateFlag := target.GetUpdateFlag()
+	updateFlag := *target.GetUpdateFlag() // copy the targets updateFlag so we don't force the original players
 	if updateAppearance {
 		updateFlag.SetAppearance()
+		updateFlag.SetFacePosition(updateFlag.FacePosition)
 	}
 	if updateFlag.UpdateRequired {
 		var mask int
@@ -161,7 +158,7 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		if updateFlag.Appearance {
 			mask |= 0x10
 		}
-		if updateFlag.FacePosition {
+		if updateFlag.Face {
 			mask |= 0x2
 		}
 		if updateFlag.SingleHit {
@@ -208,8 +205,8 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 			updateStream.Write(pa.ToBytes())
 		}
 
-		if updateFlag.FacePosition {
-
+		if updateFlag.Face {
+			p.facePosition(updateStream, target)
 		}
 
 		if updateFlag.SingleHit {
@@ -288,4 +285,18 @@ func (p *PlayerUpdatePacket) updateDoubleHit(stream *model.Stream) {
 	stream.WriteByte(128 - 1) // blue, red, green, yellow
 	stream.WriteByte(90)
 	stream.WriteByte(^99 + 256)
+}
+
+func (p *PlayerUpdatePacket) facePosition(stream *model.Stream, target model.PlayerInterface) {
+	var x uint16
+	var y uint16
+	if target.GetUpdateFlag().FacePosition == nil {
+		x = 0
+		y = 0
+	} else {
+		x = 2 * target.GetUpdateFlag().FacePosition.X + 1
+		y = 2 * target.GetUpdateFlag().FacePosition.Y + 1
+	}
+	stream.WriteWordBEA(uint(x))
+	stream.WriteWordLE(uint(y))
 }

@@ -25,8 +25,6 @@ func CreateWorld() *World {
 }
 
 func (w *World) Tick() {
-	//for {
-	//<-time.After(600 * time.Millisecond)
 	w.Regions.Range(func(key, value interface{}) bool {
 		region := value.(*Region)
 		if region.MarkedForDeletion {
@@ -36,8 +34,16 @@ func (w *World) Tick() {
 		region.Tick()
 		return true
 	})
-	//}
 }
+
+func (w *World) PostUpdate() {
+	w.Regions.Range(func(key, value interface{}) bool {
+		region := value.(*Region)
+		region.PostUpdate()
+		return true
+	})
+}
+
 func (w *World) GetRegion(id uint16) *Region {
 	region, _ := w.Regions.LoadOrStore(id, CreateRegion(id))
 	return region.(*Region)

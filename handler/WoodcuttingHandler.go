@@ -39,7 +39,7 @@ var NormalTree = &WoodcuttingTree{
 	LifePoints:       1,
 	LogId:            1511,
 	StumpId:          1342,
-	Experience:       40,
+	Experience:       100,
 	Respawn:          20,
 	Defence:          0,
 }
@@ -155,10 +155,10 @@ func StartWoodcutting(treeId int, treePosition *model.Position, player *entity.P
 				player:       player,
 				treeId:       treeId,
 			}
+			player.UpdateFlag.SetFacePosition(treePosition)
 			return
 		}
 	}
-
 	player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "You do not have an axe that you have the woodcutting level to use."})
 }
 

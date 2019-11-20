@@ -20,19 +20,10 @@ type GroundItem struct {
 type Region struct {
 	Id                uint16
 	Players           *sync.Map
+	Npcs              *sync.Map
 	GroundItems       *sync.Map
 	WorldObjects      *sync.Map
 	MarkedForDeletion bool
-}
-
-func (r *Region) GetPlayersAsInterface() []model.PlayerInterface {
-	var players = make([]model.PlayerInterface, 0)
-	r.Players.Range(func(key, value interface{}) bool {
-		player := value.(*Player)
-		players = append(players, player)
-		return true
-	})
-	return players
 }
 
 func CreateRegion(id uint16) *Region {
@@ -51,12 +42,27 @@ func CreateRegion(id uint16) *Region {
 		})
 	}
 
+	npcs := new(sync.Map)
+	if id == 12850 {
+		npcs.Store(uuid.New(), NewNpc())
+	}
+
+
 	return &Region{
 		Id:           id,
 		GroundItems:  groundItems,
 		Players:      new(sync.Map),
+		Npcs:         npcs,
 		WorldObjects: new(sync.Map),
 	}
+}
+
+func (r *Region) PostUpdate() {
+	r.Npcs.Range(func(key, value interface{}) bool {
+		npc := value.(*Npc)
+		npc.PostUpdate()
+		return true
+	})
 }
 
 func (r *Region) Tick() {
@@ -104,6 +110,12 @@ func (r *Region) Tick() {
 				return true
 			})
 		}
+		return true
+	})
+
+	r.Npcs.Range(func(key, value interface{}) bool {
+		npc := value.(*Npc)
+		npc.Tick()
 		return true
 	})
 
@@ -247,6 +259,26 @@ func (r *Region) GetWorldObject(position *model.Position) model.WorldObjectInter
 		return nil
 	}
 	return obj.(model.WorldObjectInterface)
+}
+
+func (r *Region) GetPlayersAsInterface() []model.PlayerInterface {
+	var players = make([]model.PlayerInterface, 0)
+	r.Players.Range(func(key, value interface{}) bool {
+		player := value.(*Player)
+		players = append(players, player)
+		return true
+	})
+	return players
+}
+
+func (r *Region) GetNpcsAsInterface() []model.NpcInterface {
+	var npcs = make([]model.NpcInterface, 0)
+	r.Npcs.Range(func(key, value interface{}) bool {
+		npc := value.(*Npc)
+		npcs = append(npcs, npc)
+		return true
+	})
+	return npcs
 }
 
 func GetRegionIdByPosition(p *model.Position) uint16 {
