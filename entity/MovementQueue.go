@@ -7,11 +7,11 @@ import (
 )
 
 type MovementQueue struct {
-	character Character
+	character model.Character
 	points    []*model.Point
 }
 
-func NewMovementQueue(c Character) *MovementQueue {
+func NewMovementQueue(c model.Character) *MovementQueue {
 	return &MovementQueue{
 		character: c,
 		points:    make([]*model.Point, 0),

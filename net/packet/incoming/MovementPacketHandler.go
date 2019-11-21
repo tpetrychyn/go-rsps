@@ -17,7 +17,8 @@ type MovementPacketHandler struct {}
 
 func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *packet.Packet) {
 	player.MovementQueue.Clear()
-	player.UpdateFlag.ClearAnimation()
+	//player.UpdateFlag.ClearAnimation()
+	player.UpdateFlag.SetEntityInteraction(nil)
 	player.DelayedPacket = nil
 	player.OngoingAction = nil
 

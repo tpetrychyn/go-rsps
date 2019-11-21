@@ -8,7 +8,6 @@ import (
 	"log"
 	"net"
 	"rsps/entity"
-	"rsps/model"
 	"rsps/net/packet"
 	"rsps/net/packet/incoming"
 	"rsps/net/packet/outgoing"
@@ -37,15 +36,14 @@ type TCPClient struct {
 	Decryptor    *isaac.ISAAC
 }
 
-func NewTcpClient(connnection net.Conn, loginHandler *LoginHandler, world *entity.World) *TCPClient {
-	player := entity.NewPlayer()
-	world.AddPlayerToRegion(player)
+func NewTcpClient(connection net.Conn, loginHandler *LoginHandler, world *entity.World) *TCPClient {
+	player := world.AddPlayer()
 	return &TCPClient{
 		World:        world,
 		Player:       player,
-		connection:   connnection,
-		reader:       bufio.NewReader(connnection),
-		writer:       bufio.NewWriter(connnection),
+		connection:   connection,
+		reader:       bufio.NewReader(connection),
+		writer:       bufio.NewWriter(connection),
 		Upstream:     make(chan entity.UpstreamMessage, 64),
 		Downstream:   make(chan entity.DownstreamMessage, 256),
 		loginHandler: loginHandler,
@@ -75,6 +73,8 @@ connectionLoop:
 			client.Player.UpdateFlag.SetAppearance()
 			client.Player.UpdateFlag.NeedsPlacement = true
 			client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
+			client.Enqueue(&outgoing.PlayerDetailsPacket{Pid:client.Player.Id})
+			client.Enqueue(&outgoing.SendSongPacket{Song:-1})
 			for _, v := range client.Player.OutgoingQueue {
 				client.Enqueue(v)
 			}
@@ -190,10 +190,10 @@ func (client *TCPClient) Write() {
 
 func (client *TCPClient) connectionTerminated() {
 	log.Printf("connection dropped %+v", client.Player)
+	client.World.RemovePlayer(client.Player.Id)
+	client.loginState = Disconnected
 	close(client.Downstream)
 	close(client.Upstream)
-	client.loginState = Disconnected
-	client.Player.Position = &model.Position{X: 0, Y: 0, Z: 255}
 }
 
 func (client *TCPClient) Enqueue(msg entity.DownstreamMessage) {

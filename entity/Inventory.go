@@ -22,7 +22,7 @@ func NewInventory(player *Player) *Inventory {
 
 func (i *Inventory) AddItem(id, amount int) error {
 	var slot int
-	if !util.GetItemDefinition(id).Stackable && amount > 1 {
+	if !util.GetItemDefinition(id).Stackable && !util.GetItemDefinition(id).Noted && amount > 1 {
 		var err error
 		for a:=0;a<amount;a++ {
 			err = i.AddItem(id, 1)
@@ -46,7 +46,7 @@ func (i *Inventory) AddItem(id, amount int) error {
 		Slot: slot,
 		Item: &model.Item{
 			ItemId: id,
-			Amount: 1,
+			Amount: amount,
 		},
 	})
 	return nil

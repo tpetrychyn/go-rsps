@@ -2,7 +2,6 @@ package entity
 
 import (
 	"fmt"
-	"math"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
 	"time"
@@ -32,22 +31,8 @@ func NewSkillHelper(p *Player) *SkillHelper {
 	}
 }
 
-func getLevelForExperience(experience int) int {
-	points := 0.0
-	if experience > 13034430 {
-		return 99
-	}
-	for l := 1; l < 99; l++ {
-		points += math.Floor(float64(l) + 300.0*math.Pow(2.0, float64(l)/7.0))
-		if int(math.Floor(points/4)) >= experience {
-			return l
-		}
-	}
-	return 1
-}
-
 func (s *SkillHelper) SetLevelToExperience(skillId model.SkillId, experience int) {
-	s.Skills[skillId].Level = getLevelForExperience(experience)
+	s.Skills[skillId].Level = s.Skills[skillId].GetLevelForExperience()
 	s.Skills[skillId].Experience = experience
 	s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SetSkillLevelPacket{
 		SkillNum:   int(skillId),
@@ -76,7 +61,7 @@ func (s *SkillHelper) SetExperience(skillId model.SkillId, experience int) {
 
 func (s *SkillHelper) AddExperience(skillId model.SkillId, experience int) {
 	s.Skills[skillId].Experience += experience
-	if getLevelForExperience(s.Skills[skillId].Experience) > s.Skills[skillId].Level {
+	if s.Skills[skillId].GetLevelForExperience() > s.Skills[skillId].Level {
 		s.Skills[skillId].Level += 1
 		s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SendTextInterfacePacket{
 			InterfaceId: LevelupInterfaces[skillId].FirstLine,

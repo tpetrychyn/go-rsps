@@ -42,17 +42,11 @@ func CreateRegion(id uint16) *Region {
 		})
 	}
 
-	npcs := new(sync.Map)
-	if id == 12850 {
-		npcs.Store(uuid.New(), NewNpc())
-	}
-
-
 	return &Region{
 		Id:           id,
 		GroundItems:  groundItems,
 		Players:      new(sync.Map),
-		Npcs:         npcs,
+		Npcs:         new(sync.Map),
 		WorldObjects: new(sync.Map),
 	}
 }
@@ -209,7 +203,7 @@ func (r *Region) CreateGroundItemAtPosition(dropper *Player, item *model.Item, p
 	})
 
 	dropper.OutgoingQueue = append(dropper.OutgoingQueue, &outgoing.CreateGroundItemPacket{
-		Position:   dropper.Position,
+		Position:   p,
 		Player:     dropper,
 		ItemId:     item.ItemId,
 		ItemAmount: item.Amount,

@@ -3,7 +3,6 @@ package outgoing
 import (
 	"bufio"
 	"bytes"
-	"log"
 	"rsps/model"
 )
 
@@ -39,7 +38,7 @@ func (n *NpcUpdatePacket) Build() []byte {
 	loadedNpcs := n.player.GetLoadedNpcs()
 	stream.WriteBits(8, uint(len(loadedNpcs)))
 	for _, v := range loadedNpcs {
-		if !n.player.GetPosition().WithinRenderDistance(v.GetPosition()) {
+		if !n.player.GetPosition().WithinRenderDistance(v.GetPosition()) || v.GetMarkedForDeletion() {
 			stream.WriteBits(1, 1)
 			stream.WriteBits(2, 3)
 			n.player.RemoveLoadedNpc(v.GetId())
@@ -70,7 +69,6 @@ localNpcsLoop:
 	}
 
 	updateBytes := updateStream.Flush()
-	log.Printf("%+v", updateBytes)
 	if len(updateBytes) > 1 {
 		stream.WriteBits(14, 16383)
 		buffer.Write(stream.Flush())
@@ -115,7 +113,7 @@ func (n *NpcUpdatePacket) updateNpcMovement(stream *model.Stream, target model.N
 }
 
 func (n *NpcUpdatePacket) addNewNpc(npc model.NpcInterface, stream *model.Stream) {
-	stream.WriteBits(14, uint(npc.GetNpcId()))
+	stream.WriteBits(14, uint(npc.GetId()))
 	z := int(npc.GetPosition().Y) - int(n.player.GetPosition().Y)
 	if z < 0 {
 		z += 32
@@ -128,7 +126,7 @@ func (n *NpcUpdatePacket) addNewNpc(npc model.NpcInterface, stream *model.Stream
 	stream.WriteBits(5, uint(z))
 
 	stream.WriteBits(1, 0)
-	stream.WriteBits(12, uint(npc.GetNpcType()))
+	stream.WriteBits(12, uint(npc.GetType()))
 
 	if npc.GetUpdateFlag().UpdateRequired {
 		stream.WriteBits(1, 1)
@@ -144,19 +142,74 @@ func (n *NpcUpdatePacket) appendUpdates(npc model.NpcInterface, updateStream *mo
 	if flag.Animation {
 		mask |= 0x10
 	}
+	if flag.SingleHit {
+		mask |= 0x08
+	}
+	if flag.Graphic {
+		mask |= 0x8
+	}
+	if flag.EntityInteraction {
+		mask |= 0x20
+	}
+	if flag.ForcedChat {
+		mask |= 0x1
+	}
+	if flag.DoubleHit {
+		mask |= 0x40
+	}
+	if flag.Transform {
+		mask |= 0x2
+	}
+	if flag.Face {
+		mask |= 0x4
+	}
 
 	updateStream.WriteByte(byte(mask))
 
 	if flag.Animation {
-		n.updateAnimation(npc, updateStream)
+		n.updateAnimation(updateStream, npc)
+	}
+
+	if flag.SingleHit {
+		n.updateSingleHit(updateStream, npc)
+	}
+
+	if flag.Graphic {
+	}
+
+	if flag.EntityInteraction {
+		n.updateEntityInteraction(updateStream, npc)
 	}
 }
 
-func (n *NpcUpdatePacket) updateAnimation(npc model.NpcInterface, updateStream *model.Stream) {
+func (n *NpcUpdatePacket) updateAnimation(updateStream *model.Stream, npc model.NpcInterface) {
 	anim := npc.GetUpdateFlag().AnimationId
 	if anim < 0 {
 		anim = 65535
 	}
 	updateStream.WriteWordLE(uint(anim)) //animId
 	updateStream.WriteByte(1)
+}
+
+func (n *NpcUpdatePacket) updateEntityInteraction(stream *model.Stream, npc model.Character) {
+	i := npc.GetInteractingWith()
+	if n, ok := i.(model.NpcInterface); ok {
+		stream.WriteWordLE(uint(n.GetId()))
+	} else if p, ok := i.(model.PlayerInterface); ok {
+		stream.WriteWord(uint(32768 + p.GetId()))
+	} else {
+		stream.WriteWordLE(255)
+	}
+}
+
+func (n *NpcUpdatePacket) updateSingleHit(stream *model.Stream, npc model.Character) {
+	damage := npc.GetUpdateFlag().SingleHitDamage
+	stream.WriteByte(byte(damage) + 128)
+	if damage > 0 {
+		stream.WriteByte(255)
+	} else {
+		stream.WriteByte(0)
+	}
+	stream.WriteByte(byte(npc.GetCurrentHitpoints()) + 128)
+	stream.WriteByte(byte(npc.GetMaxHitpoints()))
 }

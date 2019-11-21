@@ -1,20 +1,22 @@
 package entity
 
 import (
-	"github.com/google/uuid"
-	"log"
 	"rsps/model"
+	"time"
 )
 
 type Npc struct {
 	*model.Movement
-	Id         uuid.UUID
-	NpcId      int
-	NpcType    int
-	UpdateFlag *model.UpdateFlag
+	Id                int
+	NpcType           int
+	CurrentHitpoints  int
+	MaxHitpoints      int
+	UpdateFlag        *model.UpdateFlag
+	Killer            *Player
+	MarkedForDeletion bool
 }
 
-func NewNpc() *Npc {
+func NewNpc(id int) *Npc {
 	spawn := &model.Position{
 		X: 3201,
 		Y: 3200,
@@ -27,44 +29,41 @@ func NewNpc() *Npc {
 			PrimaryDirection:   model.None,
 			SecondaryDirection: model.None,
 		},
-		Id:    uuid.UUID{},
-		UpdateFlag: &model.UpdateFlag{},
-		NpcId: 1,
-		NpcType: 2,
+		Id:               id,
+		NpcType:          2,
+		CurrentHitpoints: 10,
+		MaxHitpoints:     10,
+		UpdateFlag:       &model.UpdateFlag{},
 	}
 }
 
-var flip = 0
 func (n *Npc) Tick() {
-	//if n.UpdateFlag.AnimationDuration <= 0 {
-		if flip == 0 {
-			n.UpdateFlag.SetAnimation(422, 2)
-			flip = 1
-		} else if flip == 1 {
-			//n.UpdateFlag.ClearAnimation()
-			flip = 2
-		} else if flip == 2 {
-			n.UpdateFlag.SetAnimation(404, 2)
-			log.Printf("set to 404")
-			flip = 3
-		} else {
-			//n.UpdateFlag.ClearAnimation()
-			flip = 0
-		}
-	//}
+	if n.CurrentHitpoints <= 0 && !n.MarkedForDeletion {
+		n.UpdateFlag.SetAnimation(836, 2)
+		n.MarkedForDeletion = true
+		go func() {
+			<-time.After(1 * time.Second)
+			world := WorldProvider()
+			region := world.GetRegion(GetRegionIdByPosition(n.Position))
+			if n.Killer != nil {
+				region.CreateGroundItemAtPosition(n.Killer, &model.Item{
+					ItemId: 995,
+					Amount: 10000,
+				}, n.Position)
+			}
+			world.RemoveNpc(n.Id)
+		}()
+	}
 }
 
 func (n *Npc) PostUpdate() {
 	n.UpdateFlag.Clear()
 }
 
-func (n *Npc) GetId() uuid.UUID {
+func (n *Npc) GetId() int {
 	return n.Id
 }
-func (n *Npc) GetNpcId() int {
-	return n.NpcId
-}
-func (n *Npc) GetNpcType() int {
+func (n *Npc) GetType() int {
 	return n.NpcType
 }
 func (n *Npc) GetPrimaryDirection() model.Direction {
@@ -76,4 +75,25 @@ func (n *Npc) GetUpdateFlag() *model.UpdateFlag {
 
 func (n *Npc) GetPosition() *model.Position {
 	return n.Position
+}
+
+func (n *Npc) GetInteractingWith() model.Character {
+	return n.UpdateFlag.InteractingWith
+}
+
+func (n *Npc) GetCurrentHitpoints() int {
+	return n.CurrentHitpoints
+}
+
+func (n *Npc) GetMaxHitpoints() int {
+	return n.MaxHitpoints
+}
+
+func (n *Npc) TakeDamage(damage int) {
+	n.UpdateFlag.SetSingleHit(damage)
+	n.CurrentHitpoints -= damage
+}
+
+func (n *Npc) GetMarkedForDeletion() bool {
+	return n.MarkedForDeletion
 }

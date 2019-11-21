@@ -10,17 +10,26 @@ var world *World
 func WorldProvider() *World {
 	if world == nil {
 		world = CreateWorld()
+		world.AddNpc(2, &model.Position{
+			X: 3200,
+			Y: 3200,
+			Z: 0,
+		})
 	}
 	return world
 }
 
 type World struct {
 	Regions *sync.Map
+	Players *sync.Map
+	Npcs    *sync.Map
 }
 
 func CreateWorld() *World {
 	return &World{
 		Regions: new(sync.Map),
+		Players: new(sync.Map),
+		Npcs:    new(sync.Map),
 	}
 }
 
@@ -47,6 +56,59 @@ func (w *World) PostUpdate() {
 func (w *World) GetRegion(id uint16) *Region {
 	region, _ := w.Regions.LoadOrStore(id, CreateRegion(id))
 	return region.(*Region)
+}
+
+func (w *World) AddNpc(npcType int, position *model.Position) {
+	region := w.GetRegion(GetRegionIdByPosition(position))
+	for id := 0; id < 2000; id++ {
+		_, ok := w.Npcs.Load(id)
+		if !ok {
+			npc := NewNpc(id)
+			w.Npcs.Store(id, npc)
+			region.Npcs.Store(id, npc)
+			return
+		}
+	}
+}
+
+func (w *World) RemoveNpc(id int) {
+	n, ok := w.Npcs.Load(id)
+	if !ok {
+		return
+	}
+	npc := n.(*Npc)
+	region := w.GetRegion(GetRegionIdByPosition(npc.Position))
+	region.Npcs.Delete(id)
+	w.Npcs.Delete(id)
+}
+
+func (w *World) AddPlayer() *Player {
+	for id := 0; id < 2000; id++ {
+		_, ok := w.Players.Load(id)
+		if !ok {
+			player := NewPlayer(id)
+			w.Players.Store(id, player)
+			w.AddPlayerToRegion(player)
+			return player
+		}
+	}
+	return nil
+}
+
+func (w *World) RemovePlayer(id int) {
+	p, ok := w.Players.Load(id)
+	if !ok {
+		return
+	}
+	player := p.(*Player)
+	regionId := GetRegionIdByPosition(player.Position)
+	region := w.GetRegion(regionId)
+
+	adj := region.GetAdjacentIds()
+	for _, x := range adj {
+		world.GetRegion(x).OnLeave(player)
+	}
+	w.Players.Delete(id)
 }
 
 func (w *World) AddPlayerToRegion(player *Player) {

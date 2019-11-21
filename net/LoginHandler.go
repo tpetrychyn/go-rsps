@@ -14,8 +14,7 @@ import (
 type LoginHandler struct{}
 
 func (l *LoginHandler) HandlePacket(c *TCPClient) {
-	if c.loginState == 0 {
-		log.Printf("Login Stage %d", c.loginState)
+	if c.loginState == HandshakeStage {
 		var packet LoginZero
 		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
@@ -23,7 +22,6 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 			c.loginState = Disconnected
 			return
 		}
-		log.Printf("packet: %+v", packet)
 
 		c.Enqueue(&login.LoginHandshakeResponse{
 			LoginStatus:      login.MayProceed,
@@ -33,7 +31,6 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 		c.Enqueue(&flush{})
 		c.loginState = LoginStage
 	} else if c.loginState == LoginStage {
-		log.Println("Login Stage 1")
 		var packet LoginPacket
 		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
@@ -41,7 +38,6 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 			c.loginState = Disconnected
 			return
 		}
-		log.Printf("%+v", packet)
 
 		e, _ := new(big.Int).SetString("33280025241734061313051117678670856264399753710527826596057587687835856000539511539311834363046145710983857746766009612538140077973762171163294453513440619295457626227183742315140865830778841533445402605660729039310637444146319289077374748018792349647460850308384280105990607337322160553135806205784213241305", 10)
 		m, _ := new(big.Int).SetString("91553247461173033466542043374346300088148707506479543786501537350363031301992107112953015516557748875487935404852620239974482067336878286174236183516364787082711186740254168914127361643305190640280157664988536979163450791820893999053469529344247707567448479470137716627440246788713008490213212272520901741443", 10)
@@ -64,14 +60,14 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 			c.loginState = Disconnected
 			return
 		}
-		log.Printf("%s", string(name))
-		pass, err := rsaBuffer.ReadBytes(10)
+		//log.Printf("%s", string(name))
+		_, err = rsaBuffer.ReadBytes(10) // password
 		if err != nil {
 			fmt.Println(err)
 			c.loginState = Disconnected
 			return
 		}
-		log.Printf("%s", string(pass))
+		//log.Printf("%s", string(pass))
 
 		err = c.Player.LoadPlayer(strings.Trim(string(name), "\n"))
 		if err != nil {
@@ -102,8 +98,6 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 		outC := isaac.ISAAC{}
 		outC.Generate(sessionKey)
 		c.Encryptor = &outC
-
-		log.Printf("%+v", rsaPacket)
 
 		c.Enqueue(&login.LoginResponse{
 			ReturnCode:   login.LoginSuccess,
