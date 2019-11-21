@@ -12,6 +12,7 @@ type OngoingAction interface {
 
 type Player struct {
 	*model.Movement
+	MovementQueue *MovementQueue
 
 	Id   int
 	Name string
@@ -21,8 +22,6 @@ type Player struct {
 	SkillHelper     *SkillHelper
 	OngoingAction   OngoingAction
 	GlobalTickCount int
-
-	MovementQueue   *MovementQueue
 	Region          *Region
 	OutgoingQueue   []DownstreamMessage
 	LoadedPlayers   []model.PlayerInterface

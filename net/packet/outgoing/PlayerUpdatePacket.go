@@ -3,9 +3,7 @@ package outgoing
 import (
 	"bufio"
 	"bytes"
-	"log"
 	"rsps/model"
-	"sort"
 )
 
 type PlayerUpdatePacket struct {
@@ -90,7 +88,6 @@ func (p *PlayerUpdatePacket) Build() []byte {
 			stream.WriteBits(1, 1)
 			stream.WriteBits(2, 3) // remove player from render?
 			p.player.RemoveLoadedPlayer(v.GetId())
-			log.Printf("removing %d", v.GetId())
 			continue
 		}
 		p.updateOtherPlayerMovement(stream, v)
@@ -98,31 +95,25 @@ func (p *PlayerUpdatePacket) Build() []byte {
 	}
 
 	localPlayers := p.player.GetNearbyPlayers()
-	keys := make([]int, 0)
-	for k, _ := range localPlayers {
-		keys = append(keys, k)
-	}
-	sort.Ints(keys)
 localPlayerLoop:
-	for _, k := range keys {
-		other := localPlayers[k]
+	for _, v:= range localPlayers {
 		if len(loadedPlayers) >= 79 {
 			break
 		}
-		if other == p.player {
+		if v == p.player {
 			continue
 		}
-		if !p.player.GetPosition().WithinRenderDistance(other.GetPosition()) {
+		if !p.player.GetPosition().WithinRenderDistance(v.GetPosition()) {
 			continue
 		}
 		for _, l := range loadedPlayers {
-			if other.GetId() == l.GetId() {
+			if v.GetId() == l.GetId() {
 				continue localPlayerLoop
 			}
 		}
-		p.player.AddLoadedPlayer(other)
-		p.addPlayer(stream, other)
-		p.appendUpdates(updateStream, other, true)
+		p.player.AddLoadedPlayer(v)
+		p.addPlayer(stream, v)
+		p.appendUpdates(updateStream, v, true)
 	}
 
 	updateBytes := updateStream.Flush()
@@ -210,7 +201,7 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		}
 
 		if updateFlag.Appearance {
-			pa := &PlayerAppearance{Equipment: target.GetEquipmentItemContainer()}
+			pa := &PlayerAppearance{Target: target, Equipment: target.GetEquipmentItemContainer()}
 			updateStream.Write(pa.ToBytes())
 		}
 

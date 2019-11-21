@@ -11,4 +11,5 @@ func main() {
 	server := net.NewTcpServer(43594)
 	server.Start()
 
+	//util.LoadCache()
 }

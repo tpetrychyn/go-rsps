@@ -180,7 +180,6 @@ func (client *TCPClient) Write() {
 		switch downstreamMessage.(type) {
 		case *flush:
 			_ = client.writer.Flush()
-			client.Player.PostUpdate()
 		case *outgoing.LogoutPacket:
 			_ = client.writer.Flush()
 			return

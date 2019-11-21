@@ -23,21 +23,22 @@ var defaultAppearance = []uint{
 }
 
 type PlayerAppearance struct {
+	Target    model.PlayerInterface
 	Equipment *model.ItemContainer
 }
 
-var EQUIPMENT_SLOTS = map[string]int {
-	"head": 0,
-	"cape": 1,
-	"neck": 2,
+var EQUIPMENT_SLOTS = map[string]int{
+	"head":   0,
+	"cape":   1,
+	"neck":   2,
 	"weapon": 3,
-	"chest": 4,
+	"chest":  4,
 	"shield": 5,
-	"legs": 7,
-	"hands": 9,
-	"feet": 10,
-	"ring": 12,
-	"ammo": 13,
+	"legs":   7,
+	"hands":  9,
+	"feet":   10,
+	"ring":   12,
+	"ammo":   13,
 }
 
 func (p *PlayerAppearance) ToBytes() []byte {
@@ -97,7 +98,8 @@ func (p *PlayerAppearance) ToBytes() []byte {
 	stream.Write([]byte{0x336 >> 8, 0x336 & 0xFF})
 	stream.Write([]byte{0x338 >> 8, 0x338 & 0xFF})
 
-	stream.Write([]byte{0, 0, 1, 168, 251, 9, 73, 127}) //player name as int
+	name := []byte(p.Target.GetName())
+	stream.Write([]byte{0, 0, 0, 0, 0, 0, 0, name[0]}) //player name as int
 	stream.WriteByte(3)                                 // combat level
 	stream.Write([]byte{0, 0})                          // player skill level
 

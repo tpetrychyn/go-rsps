@@ -70,8 +70,16 @@ func (server *TcpServer) Start() {
 				}
 				return true
 			})
-
 			updateGroup.Wait()
+
+			server.Clients.Range(func(key, value interface{}) bool {
+				client := value.(*TCPClient)
+				if client.loginState == IngameStage {
+					client.Player.PostUpdate()
+				}
+				return true
+			})
+
 			world.PostUpdate()
 		}
 	}()

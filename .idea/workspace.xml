@@ -2,28 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/handler/CombatHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/incoming/ClickNpcPacketHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerDetailsPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/SendSongAndSoundPacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/libraries/netty_3_6_6_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/2006Redone file_server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/FileServer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/ChannelRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/HttpRequestWorker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/JagGrabRequestWorker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/OnDemandRequestWorker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/RequestDispatcher.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/RequestWorker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/dispatch/RequestWorkerPool.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/fs/FileDescriptor.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/fs/FileSystemConstants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/fs/Index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/fs/IndexedFileSystem.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/FileServerHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/HttpPipelineFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/JagGrabPipelineFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/NetworkConstants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/OnDemandPipelineFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/jaggrab/JagGrabRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/jaggrab/JagGrabRequestDecoder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/jaggrab/JagGrabResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/jaggrab/JagGrabResponseEncoder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/ondemand/OnDemandRequest$Priority.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/ondemand/OnDemandRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/ondemand/OnDemandRequestDecoder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/ondemand/OnDemandResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/ondemand/OnDemandResponseEncoder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/service/ServiceRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/service/ServiceRequestDecoder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/service/ServiceResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/net/service/ServiceResponseEncoder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/resource/CombinedResourceProvider.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/resource/HypertextResourceProvider.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/resource/ResourceProvider.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/out/production/2006Redone file_server/org/apollo/jagcached/resource/VirtualResourceProvider.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions/cache/main_file_cache.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions/cache/main_file_cache.idx0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions/cache/main_file_cache.idx1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions/cache/main_file_cache.idx2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions/cache/main_file_cache.idx3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions/cache/main_file_cache.idx4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/CacheLoader.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Character.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Inventory.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Inventory.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/MovementQueue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Npc.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Npc.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Region.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Skills.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/SkillHelper.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/World.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/NpcInterface.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/NpcInterface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/PlayerInterface.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/PlayerInterface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Skill.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Skill.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/UpdateFlag.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/UpdateFlag.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/LoginHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Position.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/NpcUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/NpcUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPServer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,22 +89,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/net/packet/outgoing" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/definitions/cache" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\incoming" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net" />
-      <recent name="C:\Users\Taylor\go\src\rsps\model" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Taylor\go\src\rsps\model" />
       <recent name="C:\Users\Taylor\go\src\rsps\entity" />
       <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
       <recent name="C:\Users\Taylor\go\src\rsps" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\definitions\cache" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\incoming" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
       <recent name="C:\Users\Taylor\go\src\rsps\net" />
     </key>
   </component>
@@ -182,6 +217,11 @@
           <line>504</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/util/CacheLoader.go</url>
+          <line>82</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -191,6 +231,7 @@
         <watch expression="uint16(value)" language="go" />
         <watch expression="axes" language="go" />
         <watch expression="^0" language="go" />
+        <watch expression="^0" />
       </configuration>
       <configuration name="GoTestRunConfiguration">
         <watch expression="value&gt;&gt;2" language="go" />

@@ -1,12 +1,14 @@
 package entity
 
 import (
+	"math/rand"
 	"rsps/model"
 	"time"
 )
 
 type Npc struct {
 	*model.Movement
+	MovementQueue     *MovementQueue
 	Id                int
 	NpcType           int
 	CurrentHitpoints  int
@@ -21,8 +23,7 @@ func NewNpc(id int) *Npc {
 		X: 3201,
 		Y: 3200,
 	}
-
-	return &Npc{
+	npc := &Npc{
 		Movement: &model.Movement{
 			Position:           spawn,
 			LastKnownRegion:    spawn,
@@ -35,12 +36,41 @@ func NewNpc(id int) *Npc {
 		MaxHitpoints:     10,
 		UpdateFlag:       &model.UpdateFlag{},
 	}
+	mq := NewMovementQueue(npc)
+	npc.MovementQueue = mq
+	return npc
+}
+
+var spawn = &model.Position{
+	X: 3200,
+	Y: 3200,
+	Z: 0,
 }
 
 func (n *Npc) Tick() {
+	n.MovementQueue.Clear()
+	// TODO: refactor all this lol
+	if len(n.MovementQueue.points) == 0 && n.UpdateFlag.InteractingWith == nil {
+		n.MovementQueue.AddPosition(&model.Position{
+			X: spawn.X + uint16(rand.Intn(3 - 0)),
+			Y: spawn.Y + uint16(rand.Intn(3 - 0)),
+			Z: 0,
+		})
+	}
+
+	if n.UpdateFlag.InteractingWith != nil && n.Position.GetDistance(n.UpdateFlag.InteractingWith.GetPosition()) > 1 {
+		n.MovementQueue.AddPosition(n.UpdateFlag.InteractingWith.GetPosition())
+	}
+
+	if n.UpdateFlag.InteractingWith != nil && n.Position.GetDistance(n.UpdateFlag.InteractingWith.GetPosition()) == 0 {
+		n.MovementQueue.AddPosition(n.UpdateFlag.InteractingWith.GetPosition().AddX(1))
+	}
+
+	n.MovementQueue.Tick()
 	if n.CurrentHitpoints <= 0 && !n.MarkedForDeletion {
 		n.UpdateFlag.SetAnimation(836, 2)
 		n.MarkedForDeletion = true
+		// TODO: stop this firing twice but also dont immediately remove from players ^
 		go func() {
 			<-time.After(1 * time.Second)
 			world := WorldProvider()
@@ -57,6 +87,9 @@ func (n *Npc) Tick() {
 }
 
 func (n *Npc) PostUpdate() {
+	n.PrimaryDirection = model.None
+	n.SecondaryDirection = model.None
+	n.LastDirection = model.None
 	n.UpdateFlag.Clear()
 }
 

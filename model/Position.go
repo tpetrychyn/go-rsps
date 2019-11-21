@@ -11,6 +11,22 @@ type Position struct {
 	Z uint16
 }
 
+func (p *Position) AddX(n uint16) *Position {
+	return &Position{
+		X: p.X + 1,
+		Y: p.Y,
+		Z: 0,
+	}
+}
+
+func (p *Position) AddY(n uint16) *Position {
+	return &Position{
+		X: p.X,
+		Y: p.Y + 1,
+		Z: 0,
+	}
+}
+
 func (p *Position) GetRegionX() uint16 {
 	return (p.X >> 3) - 6
 }
