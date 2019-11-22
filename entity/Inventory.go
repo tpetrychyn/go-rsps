@@ -11,39 +11,60 @@ import (
 type Inventory struct {
 	player *Player
 	*model.ItemContainer
+	CurrentInterfaceId int
 }
 
 func NewInventory(player *Player) *Inventory {
 	return &Inventory{
-		player: player,
+		player:        player,
 		ItemContainer: model.NewItemContainer(28),
+		CurrentInterfaceId: model.INVENTORY_INTERFACE_ID,
 	}
 }
 
 func (i *Inventory) AddItem(id, amount int) error {
-	var slot int
+	var slot = -1
 	if !util.GetItemDefinition(id).Stackable && !util.GetItemDefinition(id).Noted && amount > 1 {
 		var err error
-		for a:=0;a<amount;a++ {
+		for a := 0; a < amount; a++ {
 			err = i.AddItem(id, 1)
 		}
 		return err
 	}
-	for k, v := range i.Items {
-		if v.ItemId == 0 {
-			slot = k
-			i.SetItem(id, amount, slot)
-			break
-		}
 
-		if k == int(i.Capacity-1) {
-			i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your inventory is too full to hold anymore."})
-			return errors.New("inventory is full")
+	// try to append stackable item
+	if util.GetItemDefinition(id).Stackable || util.GetItemDefinition(id).Noted {
+		for k, v := range i.Items {
+			if v.ItemId == id {
+				slot = k
+				amount = v.Amount + amount
+				i.SetItem(id, amount, slot)
+				break
+			}
 		}
 	}
 
-	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InventoryItemPacket{
-		Slot: slot,
+	// if not existing/stackable, try filling a slot
+	if slot == -1 {
+		for k,v := range i.Items {
+			// fill empty slot
+			if v.ItemId == 0 {
+				slot = k
+				i.SetItem(id, amount, slot)
+				break
+			}
+		}
+	}
+
+	// full
+	if slot == -1 {
+		i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your inventory is too full to hold anymore."})
+		return errors.New("inventory is full")
+	}
+
+	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{
+		InterfaceId: i.CurrentInterfaceId,
+		Slot:        slot,
 		Item: &model.Item{
 			ItemId: id,
 			Amount: amount,
@@ -64,14 +85,16 @@ func (i *Inventory) SwapItems(from, to int) {
 	i.Items[to] = fromItem
 	i.Items[from] = toItem
 
-	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InventoryItemPacket{
-		Slot: from,
-		Item: toItem,
+	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{
+		InterfaceId: i.CurrentInterfaceId,
+		Slot:        from,
+		Item:        toItem,
 	})
 
-	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InventoryItemPacket{
-		Slot: to,
-		Item: fromItem,
+	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{
+		InterfaceId: i.CurrentInterfaceId,
+		Slot:        to,
+		Item:        fromItem,
 	})
 }
 
@@ -83,7 +106,7 @@ func (i *Inventory) DropItem(itemId, slot int) {
 	}
 
 	i.Items[slot] = model.NilItem
-	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InventoryItemPacket{Slot: slot, Item: model.NilItem})
+	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{InterfaceId: model.INVENTORY_INTERFACE_ID, Slot: slot, Item: model.NilItem})
 	i.player.Region.CreateGroundItemAtPosition(i.player, invItem, i.player.Position)
 }
 

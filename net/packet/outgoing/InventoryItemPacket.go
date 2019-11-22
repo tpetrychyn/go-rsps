@@ -5,18 +5,19 @@ import (
 	"rsps/model"
 )
 
-type InventoryItemPacket struct {
-	Slot int
+type InterfaceItemPacket struct {
+	InterfaceId int
+	Slot        int
 	*model.Item
 }
 
-func (i *InventoryItemPacket) Write(writer *bufio.Writer) {
+func (i *InterfaceItemPacket) Write(writer *bufio.Writer) {
 	if i.Item == nil {
 		return
 	}
 	writer.WriteByte(34)
 	payload := model.NewStream()
-	payload.WriteWord(3214)
+	payload.WriteWord(uint(i.InterfaceId))
 	payload.WriteByte(byte(i.Slot))
 	if i.ItemId > 0 {
 		payload.WriteWord(uint(i.ItemId + 1))

@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"math/rand"
 	"rsps/model"
 	"time"
 )
@@ -16,9 +15,11 @@ type Npc struct {
 	UpdateFlag        *model.UpdateFlag
 	Killer            *Player
 	MarkedForDeletion bool
+	IsDying           bool
 }
 
 func NewNpc(id int) *Npc {
+	// TODO: npcs will be gone when region is deleted, need to respawn them in constructor probably
 	spawn := &model.Position{
 		X: 3201,
 		Y: 3200,
@@ -41,38 +42,16 @@ func NewNpc(id int) *Npc {
 	return npc
 }
 
-var spawn = &model.Position{
-	X: 3200,
-	Y: 3200,
-	Z: 0,
-}
-
 func (n *Npc) Tick() {
-	n.MovementQueue.Clear()
-	// TODO: refactor all this lol
-	if len(n.MovementQueue.points) == 0 && n.UpdateFlag.InteractingWith == nil {
-		n.MovementQueue.AddPosition(&model.Position{
-			X: spawn.X + uint16(rand.Intn(3 - 0)),
-			Y: spawn.Y + uint16(rand.Intn(3 - 0)),
-			Z: 0,
-		})
-	}
-
-	if n.UpdateFlag.InteractingWith != nil && n.Position.GetDistance(n.UpdateFlag.InteractingWith.GetPosition()) > 1 {
-		n.MovementQueue.AddPosition(n.UpdateFlag.InteractingWith.GetPosition())
-	}
-
-	if n.UpdateFlag.InteractingWith != nil && n.Position.GetDistance(n.UpdateFlag.InteractingWith.GetPosition()) == 0 {
-		n.MovementQueue.AddPosition(n.UpdateFlag.InteractingWith.GetPosition().AddX(1))
-	}
-
 	n.MovementQueue.Tick()
-	if n.CurrentHitpoints <= 0 && !n.MarkedForDeletion {
+
+	if n.CurrentHitpoints <= 0 && !n.IsDying {
 		n.UpdateFlag.SetAnimation(836, 2)
-		n.MarkedForDeletion = true
-		// TODO: stop this firing twice but also dont immediately remove from players ^
+		n.IsDying = true
+		n.IsFrozen = true
 		go func() {
 			<-time.After(1 * time.Second)
+			n.MarkedForDeletion = true
 			world := WorldProvider()
 			region := world.GetRegion(GetRegionIdByPosition(n.Position))
 			if n.Killer != nil {

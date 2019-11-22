@@ -61,5 +61,8 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 
 	case "region":
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("You are in region: %v", entity.GetRegionIdByPosition(player.Position))})
+
+	case "bank":
+		player.Bank.OpenBank()
 	}
 }

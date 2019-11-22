@@ -155,7 +155,6 @@ func StartWoodcutting(treeId int, treePosition *model.Position, player *entity.P
 				player:       player,
 				treeId:       treeId,
 			}
-			player.UpdateFlag.SetFacePosition(treePosition)
 			return
 		}
 	}

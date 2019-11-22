@@ -17,7 +17,7 @@ func (m *PickupItemPacketHandler) HandlePacket(player *entity.Player, packet *pa
 }
 
 func (m *PickupItemPacketHandler) pickupItemInternal(player *entity.Player, x, y, id uint16) {
-	if player.Position.GetDistance(&model.Position{X: x, Y: y}) > 0 {
+	if player.DelayedDestination != nil {
 		player.DelayedPacket = func() {
 			m.pickupItemInternal(player, x, y, id)
 		}

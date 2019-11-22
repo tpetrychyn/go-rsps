@@ -11,7 +11,6 @@ type SendItemContainerPacket struct {
 }
 
 func (s *SendItemContainerPacket) Write(writer *bufio.Writer) {
-	// TODO: This does not work
 	writer.WriteByte(53)
 
 	buffer := model.NewStream()

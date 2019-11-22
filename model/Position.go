@@ -61,3 +61,7 @@ func (p *Position) WithinRenderDistance(other *Position) bool {
 	deltaY := int(other.Y) - int(p.Y)
 	return deltaX <= 15 && deltaX >= -16 && deltaY <= 15 && deltaY >= -16
 }
+
+func (p *Position) Equals(other *Position) bool {
+	return p.X == other.X && p.Y == other.Y && p.Z == other.Z
+}

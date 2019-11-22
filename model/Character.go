@@ -17,6 +17,7 @@ type Character interface {
 	SetLastDirection(Direction)
 	GetLastKnownRegion() *Position
 	SetLastKnownRegion(*Position)
+	GetIsFrozen() bool
 
 	GetUpdateFlag() *UpdateFlag
 	GetMarkedForDeletion() bool

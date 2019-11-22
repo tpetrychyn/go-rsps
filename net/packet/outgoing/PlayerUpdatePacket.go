@@ -96,7 +96,7 @@ func (p *PlayerUpdatePacket) Build() []byte {
 
 	localPlayers := p.player.GetNearbyPlayers()
 localPlayerLoop:
-	for _, v:= range localPlayers {
+	for _, v := range localPlayers {
 		if len(loadedPlayers) >= 79 {
 			break
 		}
@@ -146,7 +146,7 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		if updateFlag.Animation {
 			mask |= 0x8
 		}
-		if updateFlag.ForcedChat {
+		if updateFlag.ForcedChat != "" {
 			mask |= 0x4
 		}
 		if updateFlag.Chat {
@@ -181,14 +181,14 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		}
 
 		if updateFlag.Graphic {
-			p.updateGraphics(updateStream)
+			p.updateGraphics(updateStream, target)
 		}
 
 		if updateFlag.Animation {
 			p.updateAnimation(updateStream, target)
 		}
 
-		if updateFlag.ForcedChat {
+		if updateFlag.ForcedChat != "" {
 
 		}
 
@@ -206,7 +206,7 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		}
 
 		if updateFlag.Face {
-			p.facePosition(updateStream, target)
+			p.updateFace(updateStream, target)
 		}
 
 		if updateFlag.SingleHit {
@@ -267,9 +267,9 @@ func (p *PlayerUpdatePacket) updateOtherPlayerMovement(stream *model.Stream, tar
 	}
 }
 
-func (p *PlayerUpdatePacket) updateGraphics(stream *model.Stream) {
-	stream.WriteWordLE(90)                            //graphicId
-	stream.WriteInt((100 << 16) + (6553600 & 0xffff)) //height + delay
+func (p *PlayerUpdatePacket) updateGraphics(stream *model.Stream, target model.PlayerInterface) {
+	stream.WriteWordLE(target.GetUpdateFlag().GraphicId) //graphicId
+	stream.WriteInt((100 << 16) + (6553600 & 0xffff))  //height + delay
 }
 
 func (p *PlayerUpdatePacket) updateAnimation(stream *model.Stream, target model.PlayerInterface) {
@@ -291,7 +291,7 @@ func (p *PlayerUpdatePacket) updateDoubleHit(stream *model.Stream) {
 	stream.WriteByte(^99 + 256)
 }
 
-func (p *PlayerUpdatePacket) facePosition(stream *model.Stream, target model.PlayerInterface) {
+func (p *PlayerUpdatePacket) updateFace(stream *model.Stream, target model.PlayerInterface) {
 	var x uint16
 	var y uint16
 	if target.GetUpdateFlag().FacePosition == nil {

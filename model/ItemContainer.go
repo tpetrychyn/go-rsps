@@ -1,8 +1,11 @@
 package model
 
 const (
-	INVENTORY_INTERFACE_ID = 3214
-	EQUIPMENT_INTERFACE_ID = 1688
+	BANK_INVENTORY_INTERFACE_ID      = 5064
+	BANK_WITH_INVENTORY_INTERFACE_ID = 5292
+	BANK_INTERFACE_ID                = 5382
+	INVENTORY_INTERFACE_ID           = 3214
+	EQUIPMENT_INTERFACE_ID           = 1688
 )
 
 type ItemContainer struct {
@@ -17,7 +20,7 @@ func NewItemContainer(capacity uint) *ItemContainer {
 	}
 	return &ItemContainer{
 		Capacity: capacity,
-		Items: items,
+		Items:    items,
 	}
 }
 

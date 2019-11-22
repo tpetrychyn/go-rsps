@@ -17,18 +17,20 @@ type Player struct {
 	Id   int
 	Name string
 
-	Inventory       *Inventory
-	Equipment       *Equipment
-	SkillHelper     *SkillHelper
-	OngoingAction   OngoingAction
-	GlobalTickCount int
-	Region          *Region
-	OutgoingQueue   []DownstreamMessage
-	LoadedPlayers   []model.PlayerInterface
-	LoadedNpcs      []model.NpcInterface
-	UpdateFlag      *model.UpdateFlag
-	DelayedPacket   func()
-	LogoutRequested bool
+	Inventory          *Inventory
+	Equipment          *Equipment
+	Bank               *Bank
+	SkillHelper        *SkillHelper
+	OngoingAction      OngoingAction
+	GlobalTickCount    int
+	Region             *Region
+	OutgoingQueue      []DownstreamMessage
+	LoadedPlayers      []model.PlayerInterface
+	LoadedNpcs         []model.NpcInterface
+	UpdateFlag         *model.UpdateFlag
+	DelayedPacket      func()
+	DelayedDestination *model.Position
+	LogoutRequested    bool
 }
 
 var SIDEBARS = []int{2423, 3917, 638, 3213, 1644, 5608, 1151,
@@ -56,6 +58,7 @@ func NewPlayer(id int) *Player {
 	player.MovementQueue = NewMovementQueue(player)
 	player.Inventory = NewInventory(player)
 	player.Equipment = NewEquipment(player)
+	player.Bank = NewBank(player)
 	player.SkillHelper = NewSkillHelper(player)
 
 	return player

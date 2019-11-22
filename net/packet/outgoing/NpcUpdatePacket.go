@@ -151,7 +151,7 @@ func (n *NpcUpdatePacket) appendUpdates(npc model.NpcInterface, updateStream *mo
 	if flag.EntityInteraction {
 		mask |= 0x20
 	}
-	if flag.ForcedChat {
+	if flag.ForcedChat != "" {
 		mask |= 0x1
 	}
 	if flag.DoubleHit {
@@ -179,6 +179,14 @@ func (n *NpcUpdatePacket) appendUpdates(npc model.NpcInterface, updateStream *mo
 
 	if flag.EntityInteraction {
 		n.updateEntityInteraction(updateStream, npc)
+	}
+
+	if flag.ForcedChat != "" {
+		n.updateForcedChat(updateStream, npc)
+	}
+
+	if flag.Face {
+		n.updateFace(updateStream, npc)
 	}
 }
 
@@ -212,4 +220,23 @@ func (n *NpcUpdatePacket) updateSingleHit(stream *model.Stream, npc model.Charac
 	}
 	stream.WriteByte(byte(npc.GetCurrentHitpoints()) + 128)
 	stream.WriteByte(byte(npc.GetMaxHitpoints()))
+}
+
+func (n *NpcUpdatePacket) updateFace(updateStream *model.Stream, npc model.NpcInterface) {
+	var x uint16
+	var y uint16
+	if npc.GetUpdateFlag().FacePosition == nil {
+		x = 0
+		y = 0
+	} else {
+		x = 2*npc.GetUpdateFlag().FacePosition.X + 1
+		y = 2*npc.GetUpdateFlag().FacePosition.Y + 1
+	}
+	updateStream.WriteWordLE(uint(x))
+	updateStream.WriteWordLE(uint(y))
+}
+
+func (n *NpcUpdatePacket) updateForcedChat(updateStream *model.Stream, npc model.NpcInterface) {
+	updateStream.Write([]byte(npc.GetUpdateFlag().ForcedChat))
+	updateStream.WriteByte(10)
 }

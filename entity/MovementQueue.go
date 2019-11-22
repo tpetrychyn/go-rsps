@@ -19,6 +19,9 @@ func NewMovementQueue(c model.Character) *MovementQueue {
 }
 
 func (m *MovementQueue) Tick() {
+	if m.character.GetIsFrozen() {
+		return
+	}
 	if len(m.points) > 0 {
 		lastPosition := m.character.GetPosition()
 		walkPoint := m.points[0]
@@ -57,9 +60,10 @@ func (m *MovementQueue) Tick() {
 		}
 	} else {
 		if p, ok := m.character.(*Player); ok {
-			if p.DelayedPacket != nil {
+			if p.DelayedDestination != nil && p.DelayedPacket != nil && p.Position.Equals(p.DelayedDestination){
 				action := p.DelayedPacket
 				p.DelayedPacket = nil
+				p.DelayedDestination = nil
 				action()
 			}
 		}

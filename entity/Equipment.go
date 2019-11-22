@@ -21,8 +21,6 @@ func NewEquipment(player *Player) *Equipment {
 func (e *Equipment) EquipItem(invSlot, itemId uint16) {
 	invItem := e.player.Inventory.FindItem(int(itemId))
 	if invItem == nil {
-		e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "You do not have that item."})
-		e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.InventoryItemPacket{Slot: int(invSlot), Item: model.NilItem})
 		return
 	}
 
@@ -32,7 +30,8 @@ func (e *Equipment) EquipItem(invSlot, itemId uint16) {
 
 	equippedItem := e.Items[slot]
 	e.player.Inventory.Items[invSlot] = equippedItem
-	e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.InventoryItemPacket{
+	e.player.OutgoingQueue = append(e.player.OutgoingQueue, &outgoing.InterfaceItemPacket{
+		InterfaceId: model.INVENTORY_INTERFACE_ID,
 		Slot: int(invSlot),
 		Item: equippedItem,
 	})

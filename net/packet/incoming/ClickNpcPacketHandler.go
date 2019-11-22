@@ -1,6 +1,7 @@
 package incoming
 
 import (
+	"log"
 	"rsps/entity"
 	"rsps/handler"
 	"rsps/model"
@@ -29,7 +30,7 @@ func (c *ClickNpcPacketHandler) handleAttackNpc(player *entity.Player, packet *p
 }
 
 func (c *ClickNpcPacketHandler) handleAttackNpcInternal(player *entity.Player, npc model.NpcInterface) {
-	if player.Position.GetDistance(npc.GetPosition()) > 1 {
+	if player.DelayedDestination != nil {
 		player.DelayedPacket = func() {
 			c.handleAttackNpcInternal(player, npc)
 		}
@@ -49,10 +50,13 @@ func (c *ClickNpcPacketHandler) handleNpcSecondClick(player *entity.Player, pack
 }
 
 func (c *ClickNpcPacketHandler) handleNpcSecondClickInternal(player *entity.Player, npc model.NpcInterface) {
-	if player.Position.GetDistance(npc.GetPosition()) > 1 {
+	if player.DelayedDestination != nil {
 		player.DelayedPacket = func() {
 			c.handleNpcSecondClickInternal(player, npc)
 		}
 		return
 	}
+
+	handler.Pickpocket(player, npc.(*entity.Npc))
+	log.Printf("second click")
 }

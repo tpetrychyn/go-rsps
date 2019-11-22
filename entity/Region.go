@@ -62,14 +62,12 @@ func (r *Region) PostUpdate() {
 func (r *Region) Tick() {
 	r.GroundItems.Range(func(key, value interface{}) bool {
 		g := value.(*GroundItem)
-		if time.Now().Sub(g.CreatedAt) > 10*time.Second {
-			// TODO: this works, bronze axe is simply spawned on lumby region creation atm
-			//  adding items in constructor is good for global spawns
+		if time.Now().Sub(g.CreatedAt) > 2*time.Minute {
 			r.RemoveGroundItemIdAtPosition(g.ItemId, g.Position)
 			r.GroundItems.Delete(key)
 		}
 
-		if g.Owner != nil && time.Now().Sub(g.CreatedAt) > 5*time.Second {
+		if g.Owner != nil && time.Now().Sub(g.CreatedAt) > 1*time.Minute {
 			r.Players.Range(func(key, value interface{}) bool {
 				player := value.(*Player)
 				if player.Id == g.Owner.Id {

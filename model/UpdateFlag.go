@@ -4,7 +4,7 @@ type UpdateFlag struct {
 	UpdateRequired bool
 	NeedsPlacement bool
 	Chat           bool
-	ForcedChat     bool
+	ForcedChat     string
 	ForcedMovement bool
 
 	EntityInteraction bool
@@ -19,7 +19,8 @@ type UpdateFlag struct {
 	AnimationId       int
 	AnimationDuration int
 
-	Graphic bool
+	Graphic   bool
+	GraphicId uint
 
 	SingleHit       bool
 	SingleHitDamage int
@@ -33,7 +34,7 @@ func (u *UpdateFlag) Clear() {
 	u.UpdateRequired = false
 	u.NeedsPlacement = false
 	u.Chat = false
-	u.ForcedChat = false
+	u.ForcedChat = ""
 	u.ForcedMovement = false
 	u.EntityInteraction = false
 	u.Face = false
@@ -73,6 +74,11 @@ func (u *UpdateFlag) SetFacePosition(position *Position) {
 	u.UpdateRequired = true
 }
 
+func (u *UpdateFlag) SetForcedChat(phrase string) {
+	u.ForcedChat = phrase
+	u.UpdateRequired = true
+}
+
 func (u *UpdateFlag) SetAppearance() {
 	u.UpdateRequired = true
 	u.Appearance = true
@@ -94,9 +100,10 @@ func (u *UpdateFlag) ClearAnimation() {
 	}
 }
 
-func (u *UpdateFlag) SetGraphic() {
+func (u *UpdateFlag) SetGraphic(graphicId int) {
 	u.UpdateRequired = true
 	u.Graphic = true
+	u.GraphicId = uint(graphicId)
 }
 
 func (u *UpdateFlag) SetSingleHit(damage int) {

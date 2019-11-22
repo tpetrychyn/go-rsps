@@ -7,6 +7,7 @@ type Movement struct {
 	SecondaryDirection Direction
 	LastDirection      Direction
 	IsRunning          bool
+	IsFrozen           bool
 }
 
 func (p *Movement) GetPosition() *Position {
@@ -47,4 +48,8 @@ func (p *Movement) GetLastDirection() Direction {
 
 func (p *Movement) SetLastDirection(direction Direction) {
 	p.LastDirection = direction
+}
+
+func (p *Movement) GetIsFrozen() bool {
+	return p.IsFrozen
 }

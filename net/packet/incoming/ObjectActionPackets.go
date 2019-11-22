@@ -8,7 +8,7 @@ import (
 	"rsps/net/packet"
 )
 
-type ObjectActionPacket struct {}
+type ObjectActionPacket struct{}
 
 func (e *ObjectActionPacket) HandlePacket(player *entity.Player, packet *packet.Packet) {
 	switch packet.Opcode {
@@ -26,10 +26,18 @@ func (e *ObjectActionPacket) handleObjectActionOne(player *entity.Player, packet
 }
 
 func (e *ObjectActionPacket) handleObjectActionOneInternal(player *entity.Player, x, y, id uint16) {
-	if player.Position.GetDistance(&model.Position{X: x, Y: y}) > 1 {
-		player.DelayedPacket = func () {
+	if player.DelayedDestination != nil {
+		player.DelayedPacket = func() {
 			e.handleObjectActionOneInternal(player, x, y, id)
 		}
+		return
+	}
+
+	player.UpdateFlag.SetFacePosition(&model.Position{X: x, Y: y})
+
+	switch id {
+	case 2213:
+		player.Bank.OpenBank()
 		return
 	}
 

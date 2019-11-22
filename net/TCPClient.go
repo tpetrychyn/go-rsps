@@ -3,7 +3,6 @@ package net
 import (
 	"bufio"
 	"bytes"
-	"encoding/binary"
 	"github.com/gtank/isaac"
 	"log"
 	"net"
@@ -50,12 +49,6 @@ func NewTcpClient(connection net.Conn, loginHandler *LoginHandler, world *entity
 	}
 }
 
-type initType struct{}
-
-func (i *initType) Write(writer *bufio.Writer) {
-	binary.Write(writer, binary.BigEndian, []int{208, 255, 255})
-}
-
 func (client *TCPClient) Read() {
 	defer client.connectionTerminated()
 
@@ -68,7 +61,6 @@ connectionLoop:
 			client.loginHandler.HandlePacket(client)
 			break
 		case Initialize:
-			client.Enqueue(&initType{})
 			client.Enqueue(&outgoing.MapRegionPacket{Position: client.Player.Position})
 			client.Player.UpdateFlag.SetAppearance()
 			client.Player.UpdateFlag.NeedsPlacement = true

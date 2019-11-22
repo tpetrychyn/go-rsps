@@ -17,7 +17,6 @@ type MovementPacketHandler struct {}
 
 func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *packet.Packet) {
 	player.MovementQueue.Clear()
-	//player.UpdateFlag.ClearAnimation()
 	player.UpdateFlag.SetEntityInteraction(nil)
 	player.DelayedPacket = nil
 	player.OngoingAction = nil
@@ -56,5 +55,9 @@ func (m *MovementPacketHandler) HandlePacket(player *entity.Player, packet *pack
 
 	for _, v := range positions {
 		player.MovementQueue.AddPosition(v)
+	}
+
+	if packet.Opcode == WALK_ON_COMMAND_OPCODE {
+		player.DelayedDestination = positions[steps]
 	}
 }
