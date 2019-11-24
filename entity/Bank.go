@@ -3,6 +3,7 @@ package entity
 import (
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"rsps/repository"
 )
 
 const MAX_BANK_SIZE = 352 // Client crashes if larger
@@ -34,7 +35,7 @@ func (b *Bank) OpenBank() {
 func (b *Bank) DepositItem(invSlot, itemId, requestedAmount int) {
 	// TODO: multiples of non-stackable items
 	// TODO: noted items
-	invItem := b.player.Inventory.FindItem(itemId)
+	invSlot, invItem := b.player.Inventory.FindItem(itemId)
 	if invItem == nil {
 		return
 	}
@@ -68,12 +69,13 @@ func (b *Bank) DepositItem(invSlot, itemId, requestedAmount int) {
 	}
 
 	if slot == -1 {
-		// TODO: bank full
+		b.player.OutgoingQueue = append(b.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "Your bank is too full to hold anymore items."})
+		return
 	}
 
 	b.player.Inventory.Items[invSlot].Amount -= requestedAmount
 	if b.player.Inventory.Items[invSlot].Amount <= 0 {
-		b.player.Inventory.Items[invSlot] = model.NilItem
+		b.player.Inventory.Items[invSlot] = &model.Item{}
 	}
 	b.player.OutgoingQueue = append(b.player.OutgoingQueue, &outgoing.InterfaceItemPacket{InterfaceId: model.BANK_INVENTORY_INTERFACE_ID, Slot: invSlot, Item: b.player.Inventory.Items[invSlot]})
 
@@ -85,10 +87,13 @@ func (b *Bank) DepositItem(invSlot, itemId, requestedAmount int) {
 			Amount: amount,
 		},
 	})
+
+	go repository.InventoryRepositorySingleton.Save(b.player.Name, b.player.Inventory.Items)
+	go repository.BankRepositorySingleton.Save(b.player.Name, b.Items)
 }
 
 func (b *Bank) WithdrawItem(bankSlot, itemId, requestedAmount int) {
-	bankItem := b.FindItem(itemId)
+	_, bankItem := b.FindItem(itemId)
 	if bankItem == nil {
 		return
 	}
@@ -104,7 +109,9 @@ func (b *Bank) WithdrawItem(bankSlot, itemId, requestedAmount int) {
 
 	b.Items[bankSlot].Amount -= requestedAmount
 	if b.Items[bankSlot].Amount <= 0 {
-		b.Items[bankSlot] = model.NilItem
+		b.Items[bankSlot] = &model.Item{}
 	}
 	b.player.OutgoingQueue = append(b.player.OutgoingQueue, &outgoing.InterfaceItemPacket{InterfaceId: model.BANK_INTERFACE_ID, Slot: bankSlot, Item: b.Items[bankSlot]})
+
+	go repository.BankRepositorySingleton.Save(b.player.Name, b.Items)
 }

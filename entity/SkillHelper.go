@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"rsps/repository"
 	"time"
 )
 
@@ -65,11 +66,11 @@ func (s *SkillHelper) AddExperience(skillId model.SkillId, experience int) {
 		s.Skills[skillId].Level += 1
 		s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SendTextInterfacePacket{
 			InterfaceId: LevelupInterfaces[skillId].FirstLine,
-			Message:     "Congratulations, you just advanced an attack level!",
+			Message:     fmt.Sprintf("Congratulations, you just advanced a %s level!", LevelupInterfaces[skillId].SkillName),
 		})
 		s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SendTextInterfacePacket{
 			InterfaceId: LevelupInterfaces[skillId].SecondLine,
-			Message:     fmt.Sprintf("Your attack level is now %d.", s.Skills[skillId].Level),
+			Message:     fmt.Sprintf("Your %s level is now %d.", LevelupInterfaces[skillId].SkillName, s.Skills[skillId].Level),
 		})
 		s.Player.OutgoingQueue = append(s.Player.OutgoingQueue, &outgoing.SendChatInterfacePacket{
 			InterfaceId: LevelupInterfaces[skillId].InterfaceId,
@@ -80,12 +81,15 @@ func (s *SkillHelper) AddExperience(skillId model.SkillId, experience int) {
 		Level:      s.Skills[skillId].Level,
 		Experience: s.Skills[skillId].Experience,
 	})
+
+	go repository.SkillRepositorySingleton.Save(s.Player.Name, s.Skills)
 }
 
 type LevelupInterface struct {
 	InterfaceId uint
 	FirstLine   uint
 	SecondLine  uint
+	SkillName   string
 }
 
 var LevelupInterfaces = map[model.SkillId]LevelupInterface{
@@ -93,10 +97,18 @@ var LevelupInterfaces = map[model.SkillId]LevelupInterface{
 		InterfaceId: 6247,
 		FirstLine:   6248,
 		SecondLine:  6249,
+		SkillName:   "attack",
 	},
 	model.Woodcutting: {
 		InterfaceId: 4272,
 		FirstLine:   4273,
 		SecondLine:  4274,
+		SkillName:   "woodcutting",
+	},
+	model.Thieving: {
+		InterfaceId: 4261,
+		FirstLine:   4263,
+		SecondLine:  4264,
+		SkillName:   "thieving",
 	},
 }

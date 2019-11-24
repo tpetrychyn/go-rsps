@@ -70,7 +70,7 @@ func (r *Region) Tick() {
 		if g.Owner != nil && time.Now().Sub(g.CreatedAt) > 1*time.Minute {
 			r.Players.Range(func(key, value interface{}) bool {
 				player := value.(*Player)
-				if player.Id == g.Owner.Id {
+				if player.Name == g.Owner.Name {
 					return true
 				}
 				player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.CreateGroundItemPacket{
@@ -128,12 +128,14 @@ func (r *Region) Tick() {
 }
 
 func (r *Region) OnEnter(player *Player) {
+	r.MarkedForDeletion = false // race condition - incase player leaves and enters in a single tick
+
 	// We must add the player to all 9 regions entered on change
 	// so that they get updates about regions around themselves
 	r.Players.Store(player.Id, player)
 	r.GroundItems.Range(func(key, value interface{}) bool {
 		g := value.(*GroundItem)
-		if g.Owner != nil && g.Owner != player {
+		if g.Owner != nil && g.Owner.Name != player.Name {
 			return true
 		} // only show it if nobody owns it or you own it
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.CreateGroundItemPacket{

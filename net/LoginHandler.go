@@ -5,9 +5,12 @@ import (
 	"encoding/binary"
 	"fmt"
 	"github.com/gtank/isaac"
+	"golang.org/x/crypto/bcrypt"
 	"log"
 	"math/big"
+	"rsps/entity"
 	"rsps/net/packet/outgoing/login"
+	"rsps/repository"
 	"strings"
 )
 
@@ -19,7 +22,7 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
 			log.Println("login stage 1 error: " + err.Error())
-			c.loginState = Disconnected
+			stopLogin(c, login.LoginServerRejected)
 			return
 		}
 
@@ -27,7 +30,6 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 			LoginStatus:      login.MayProceed,
 			ServerSessionKey: 12345678,
 		})
-
 		c.Enqueue(&flush{})
 		c.loginState = LoginStage
 	} else if c.loginState == LoginStage {
@@ -35,7 +37,7 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 		err := binary.Read(c.connection, binary.BigEndian, &packet)
 		if err != nil {
 			log.Printf("login stage 1 error: " + err.Error())
-			c.loginState = Disconnected
+			stopLogin(c, login.LoginServerRejected)
 			return
 		}
 
@@ -51,36 +53,56 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 		err = binary.Read(rsaBuffer, binary.BigEndian, &rsaPacket)
 		if err != nil {
 			fmt.Println(err)
-			c.loginState = Disconnected
+			stopLogin(c, login.BadSessionId)
 			return
 		}
 		name, err := rsaBuffer.ReadBytes(10)
 		if err != nil {
 			fmt.Println(err)
-			c.loginState = Disconnected
+			stopLogin(c, login.BadSessionId)
 			return
 		}
 		//log.Printf("%s", string(name))
-		_, err = rsaBuffer.ReadBytes(10) // password
+		pass, err := rsaBuffer.ReadBytes(10) // password
 		if err != nil {
 			fmt.Println(err)
-			c.loginState = Disconnected
+			stopLogin(c, login.BadSessionId)
 			return
 		}
 		//log.Printf("%s", string(pass))
 
-		err = c.Player.LoadPlayer(strings.Trim(string(name), "\n"))
+		playerName := strings.TrimSpace(string(name))
+		// load player
+		player := entity.NewPlayer()
+		playerPosition, hashedPassword, err := c.PlayerRepository.Load(playerName)
+		if err == repository.PlayerNotFoundError {
+			hashedPassword, err = c.PlayerRepository.Create(playerName, pass, player.Position)
+			if err != nil {
+				stopLogin(c, login.LoginServerRejected)
+			}
+		} else if err != nil {
+			log.Printf("load player err: %s", err.Error())
+			stopLogin(c, login.InvalidCredentials)
+			return
+		} else {
+			player.Position = playerPosition
+		}
+
+		// check password
+		err = bcrypt.CompareHashAndPassword(hashedPassword, pass)
 		if err != nil {
-			log.Printf(err.Error())
-			c.loginState = Disconnected
-			c.Enqueue(&login.LoginResponse{
-				ReturnCode:   login.InvalidCredentials,
-				PlayerRights: 0,
-				Flagged:      0,
-			})
-			c.Enqueue(&flush{})
+			stopLogin(c, login.InvalidCredentials)
 			return
 		}
+
+		c.Player = player
+		err = c.Player.LoadPlayer(playerName)
+		if err != nil {
+			log.Printf(err.Error())
+			stopLogin(c, login.LoginServerRejected)
+			return
+		}
+		c.World.AddPlayer(player)
 
 		inC := isaac.ISAAC{}
 
@@ -92,7 +114,7 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 		inC.Generate(sessionKey)
 		c.Decryptor = &inC
 
-		for i := 0;i<4;i++ {
+		for i := 0; i < 4; i++ {
 			sessionKey[i] += 50
 		}
 		outC := isaac.ISAAC{}
@@ -108,6 +130,16 @@ func (l *LoginHandler) HandlePacket(c *TCPClient) {
 
 		c.loginState = Initialize
 	}
+}
+
+func stopLogin(c *TCPClient, reason byte) {
+	c.loginState = Disconnected
+	c.Enqueue(&login.LoginResponse{
+		ReturnCode:   reason,
+		PlayerRights: 0,
+		Flagged:      0,
+	})
+	c.Enqueue(&flush{})
 }
 
 type LoginPacket struct {

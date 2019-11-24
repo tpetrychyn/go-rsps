@@ -5,6 +5,7 @@ import (
 	"log"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"rsps/repository"
 	"rsps/util"
 )
 
@@ -70,6 +71,8 @@ func (i *Inventory) AddItem(id, amount int) error {
 			Amount: amount,
 		},
 	})
+
+	go repository.InventoryRepositorySingleton.Save(i.player.Name, i.Items)
 	return nil
 }
 
@@ -96,18 +99,22 @@ func (i *Inventory) SwapItems(from, to int) {
 		Slot:        to,
 		Item:        fromItem,
 	})
+
+	go repository.InventoryRepositorySingleton.Save(i.player.Name, i.Items)
 }
 
 func (i *Inventory) DropItem(itemId, slot int) {
-	invItem := i.FindItem(itemId)
+	_, invItem := i.FindItem(itemId)
 	if invItem == nil {
 		i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.SendMessagePacket{Message: "You do not have that item."})
 		return
 	}
 
-	i.Items[slot] = model.NilItem
-	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{InterfaceId: model.INVENTORY_INTERFACE_ID, Slot: slot, Item: model.NilItem})
+	i.Items[slot] = &model.Item{}
+	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{InterfaceId: model.INVENTORY_INTERFACE_ID, Slot: slot, Item: &model.Item{}})
 	i.player.Region.CreateGroundItemAtPosition(i.player, invItem, i.player.Position)
+
+	go repository.InventoryRepositorySingleton.Save(i.player.Name, i.Items)
 }
 
 func (i *Inventory) IsFull() bool {

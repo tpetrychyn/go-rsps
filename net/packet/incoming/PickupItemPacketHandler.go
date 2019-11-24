@@ -1,6 +1,7 @@
 package incoming
 
 import (
+	"log"
 	"rsps/entity"
 	"rsps/model"
 	"rsps/net/packet"
@@ -13,6 +14,7 @@ func (m *PickupItemPacketHandler) HandlePacket(player *entity.Player, packet *pa
 	itemId := packet.ReadShort()
 	itemX := packet.ReadLEShort()
 
+	log.Printf("px %d, py %d, itemx %d, itemy %d", player.Position.X, player.Position.Y, itemX, itemY)
 	m.pickupItemInternal(player, itemX, itemY, itemId)
 }
 

@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 	"rsps/entity"
+	"rsps/repository"
 	"strconv"
 	"sync"
 	"time"
@@ -22,7 +23,7 @@ func NewTcpServer(port int) *TcpServer {
 	}
 }
 
-func (server *TcpServer) Start() {
+func (server *TcpServer) Start(playerRepository *repository.PlayerRepository) {
 	listener, err := net.Listen("tcp", ":"+strconv.Itoa(server.Port))
 	if err != nil {
 		log.Fatal(err)
@@ -67,6 +68,7 @@ func (server *TcpServer) Start() {
 				if client.loginState == IngameStage {
 					updateGroup.Add(1)
 					go client.UpdatePacket(updateGroup)
+					go client.PlayerRepository.Save(client.Player.Name, client.Player.Position)
 				}
 				return true
 			})
@@ -90,7 +92,7 @@ func (server *TcpServer) Start() {
 			continue
 		}
 
-		client := NewTcpClient(connection, l, world)
+		client := NewTcpClient(connection, l, playerRepository, world)
 
 		go client.Read()
 		go client.Write()

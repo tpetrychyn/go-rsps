@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"log"
 	"rsps/model"
 	"rsps/net/packet/outgoing"
+	"rsps/repository"
 )
 
 type OngoingAction interface {
@@ -36,14 +36,9 @@ type Player struct {
 var SIDEBARS = []int{2423, 3917, 638, 3213, 1644, 5608, 1151,
 	18128, 5065, 5715, 2449, 904, 147, 962}
 
-func NewPlayer(id int) *Player {
-	log.Printf("new player id %+v", id)
-	spawn := &model.Position{
-		X: 3200,
-		Y: 3200,
-	}
+func NewPlayer() *Player {
+	spawn := &model.Position{X: 3200, Y: 3200}
 	player := &Player{
-		Id:         id, // TODO: Load this from database or something
 		UpdateFlag: &model.UpdateFlag{},
 		Movement: &model.Movement{
 			Position:           spawn,
@@ -64,16 +59,47 @@ func NewPlayer(id int) *Player {
 	return player
 }
 
+func (p *Player) SetId(id int) {
+	p.Id = id
+}
+
 func (p *Player) LoadPlayer(name string) error {
 	p.Name = name
+	loadedItems, err := repository.InventoryRepositorySingleton.Load(name)
+	if err == nil {
+		p.Inventory.ItemContainer.Items = loadedItems
+	}
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendItemContainerPacket{
 		ItemContainer: p.Inventory.ItemContainer,
 		InterfaceId:   model.INVENTORY_INTERFACE_ID,
 	})
+
+	loadedEquipment, err := repository.EquipmentRepositorySingleton.Load(name)
+	if err == nil {
+		p.Equipment.ItemContainer.Items = loadedEquipment
+	}
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendItemContainerPacket{
 		ItemContainer: p.Equipment.ItemContainer,
 		InterfaceId:   model.EQUIPMENT_INTERFACE_ID,
 	})
+
+	loadedBank, err := repository.BankRepositorySingleton.Load(name)
+	if err == nil {
+		p.Bank.ItemContainer.Items = loadedBank
+	}
+
+	loadedSkills, err := repository.SkillRepositorySingleton.Load(name)
+	if err == nil {
+		p.SkillHelper.Skills = loadedSkills
+	}
+	for k, v := range p.SkillHelper.Skills {
+		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SetSkillLevelPacket{
+			SkillNum:   k,
+			Level:      v.Level,
+			Experience: v.Experience,
+		})
+	}
+
 	for k, v := range SIDEBARS {
 		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SidebarInterfacePacket{
 			MenuId: k,
@@ -107,7 +133,7 @@ func (p *Player) Teleport(position *model.Position) {
 	p.LastDirection = model.None
 	p.PrimaryDirection = model.None
 	p.Position = position
-	p.LastKnownRegion = p.Position
+	p.LastKnownRegion = position
 	p.MovementQueue.Clear()
 	p.UpdateFlag.NeedsPlacement = true
 	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.MapRegionPacket{Position: p.Position})

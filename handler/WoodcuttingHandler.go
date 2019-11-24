@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"rsps/entity"
 	"rsps/model"
@@ -131,7 +132,7 @@ type WoodcuttingHandler struct {
 func StartWoodcutting(treeId int, treePosition *model.Position, player *entity.Player) {
 	weapon := player.Equipment.Items[outgoing.EQUIPMENT_SLOTS["weapon"]]
 	for _, a := range axes {
-		item := player.Inventory.FindItem(a.Id)
+		_, item := player.Inventory.FindItem(a.Id)
 		if item != nil || weapon.ItemId == a.Id {
 			treeWorldObject := entity.WorldProvider().GetWorldObject(treePosition)
 			if treeWorldObject == nil {
@@ -212,6 +213,7 @@ func (w *WoodcuttingHandler) Tick() {
 
 				err := w.player.Inventory.AddItem(w.tree.LogId, 1)
 				if err != nil {
+					log.Printf("%+v", err)
 					w.StopWoodcutting()
 				}
 				w.player.SkillHelper.AddExperience(model.Woodcutting, w.tree.Experience)

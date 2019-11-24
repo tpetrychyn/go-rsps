@@ -10,6 +10,7 @@ import (
 	"rsps/net/packet"
 	"rsps/net/packet/incoming"
 	"rsps/net/packet/outgoing"
+	"rsps/repository"
 	"sync"
 )
 
@@ -22,30 +23,32 @@ const (
 )
 
 type TCPClient struct {
-	World        *entity.World
-	Player       *entity.Player
-	loginState   int
-	connection   net.Conn
-	reader       *bufio.Reader
-	writer       *bufio.Writer
-	Upstream     chan entity.UpstreamMessage
-	Downstream   chan entity.DownstreamMessage
-	loginHandler *LoginHandler
-	Encryptor    *isaac.ISAAC
-	Decryptor    *isaac.ISAAC
+	World            *entity.World
+	Player           *entity.Player
+	PlayerRepository *repository.PlayerRepository
+	loginState       int
+	connection       net.Conn
+	reader           *bufio.Reader
+	writer           *bufio.Writer
+	Upstream         chan entity.UpstreamMessage
+	Downstream       chan entity.DownstreamMessage
+	loginHandler     *LoginHandler
+	Encryptor        *isaac.ISAAC
+	Decryptor        *isaac.ISAAC
 }
 
-func NewTcpClient(connection net.Conn, loginHandler *LoginHandler, world *entity.World) *TCPClient {
-	player := world.AddPlayer()
+func NewTcpClient(connection net.Conn, loginHandler *LoginHandler, playerRepository *repository.PlayerRepository, world *entity.World) *TCPClient {
+	//player := world.AddPlayer()
 	return &TCPClient{
-		World:        world,
-		Player:       player,
-		connection:   connection,
-		reader:       bufio.NewReader(connection),
-		writer:       bufio.NewWriter(connection),
-		Upstream:     make(chan entity.UpstreamMessage, 64),
-		Downstream:   make(chan entity.DownstreamMessage, 256),
-		loginHandler: loginHandler,
+		World:            world,
+		//Player:           player,
+		PlayerRepository: playerRepository,
+		connection:       connection,
+		reader:           bufio.NewReader(connection),
+		writer:           bufio.NewWriter(connection),
+		Upstream:         make(chan entity.UpstreamMessage, 64),
+		Downstream:       make(chan entity.DownstreamMessage, 256),
+		loginHandler:     loginHandler,
 	}
 }
 
@@ -61,12 +64,10 @@ connectionLoop:
 			client.loginHandler.HandlePacket(client)
 			break
 		case Initialize:
-			client.Enqueue(&outgoing.MapRegionPacket{Position: client.Player.Position})
 			client.Player.UpdateFlag.SetAppearance()
-			client.Player.UpdateFlag.NeedsPlacement = true
 			client.Enqueue(outgoing.NewPlayerUpdatePacket(client.Player))
-			client.Enqueue(&outgoing.PlayerDetailsPacket{Pid:client.Player.Id})
-			client.Enqueue(&outgoing.SendSongPacket{Song:-1})
+			client.Enqueue(&outgoing.PlayerDetailsPacket{Pid: client.Player.Id})
+			client.Enqueue(&outgoing.SendSongPacket{Song: -1})
 			for _, v := range client.Player.OutgoingQueue {
 				client.Enqueue(v)
 			}
@@ -180,8 +181,10 @@ func (client *TCPClient) Write() {
 }
 
 func (client *TCPClient) connectionTerminated() {
-	log.Printf("connection dropped %+v", client.Player)
-	client.World.RemovePlayer(client.Player.Id)
+	if client.Player != nil {
+		log.Printf("connection dropped %+v", client.Player)
+		client.World.RemovePlayer(client.Player.Id)
+	}
 	client.loginState = Disconnected
 	close(client.Downstream)
 	close(client.Upstream)

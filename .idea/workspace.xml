@@ -2,43 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/entity/Bank.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/PickpocketHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/incoming/CloseWindowPacketHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/incoming/ItemContainerActionPackets.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/packet/outgoing/InventoryInterfacePacket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/BankRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/EquipmentRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/InventoryRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/PlayerRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/SkillRepository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone file_server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Bank.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Bank.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Equipment.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Equipment.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Inventory.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Inventory.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/MovementQueue.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/MovementQueue.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Npc.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Npc.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Region.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/SkillHelper.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/SkillHelper.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/World.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/PickpocketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/PickpocketHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/WoodcuttingHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/WoodcuttingHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Character.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Item.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Item.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/ItemContainer.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/ItemContainer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Movement.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Movement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Position.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/UpdateFlag.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/UpdateFlag.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/LoginHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/LoginHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/ClickNpcPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/ClickNpcPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/CommandsPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/CommandsPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/MovementPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/TCPServer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/incoming/PickupItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/PickupItemPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/RemoveEquipmentPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/RemoveItemPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/InventoryItemPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/InventoryItemPacket.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/NpcUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/NpcUpdatePacket.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/SendItemContainerPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/SendItemContainerPacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/SendPositionPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/SendPositionPacket.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -57,28 +68,31 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/entity" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/repository" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Taylor\go\src\rsps\entity" />
-      <recent name="C:\Users\Taylor\go\src\rsps\definitions\cache" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\incoming" />
-      <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Taylor\go\src\rsps\model" />
       <recent name="C:\Users\Taylor\go\src\rsps\entity" />
       <recent name="C:\Users\Taylor\go\src\rsps\net\packet" />
       <recent name="C:\Users\Taylor\go\src\rsps" />
       <recent name="C:\Users\Taylor\go\src\rsps\net" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Taylor\go\src\rsps\repository" />
+      <recent name="C:\Users\Taylor\go\src\rsps\entity" />
+      <recent name="C:\Users\Taylor\go\src\rsps\definitions\cache" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\outgoing" />
+      <recent name="C:\Users\Taylor\go\src\rsps\net\packet\incoming" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -187,7 +201,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://C:/Go/src/bufio/bufio.go</url>
-          <line>504</line>
+          <line>507</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">

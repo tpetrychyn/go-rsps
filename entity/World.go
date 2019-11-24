@@ -82,17 +82,16 @@ func (w *World) RemoveNpc(id int) {
 	w.Npcs.Delete(id)
 }
 
-func (w *World) AddPlayer() *Player {
+func (w *World) AddPlayer(player *Player) {
 	for id := 0; id < 2000; id++ {
 		_, ok := w.Players.Load(id)
 		if !ok {
-			player := NewPlayer(id)
+			player.Id = id
+			player.Teleport(player.Position)
 			w.Players.Store(id, player)
-			w.AddPlayerToRegion(player)
-			return player
+			return
 		}
 	}
-	return nil
 }
 
 func (w *World) RemovePlayer(id int) {

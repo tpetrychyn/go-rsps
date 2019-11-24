@@ -16,7 +16,7 @@ type ItemContainer struct {
 func NewItemContainer(capacity uint) *ItemContainer {
 	items := make([]*Item, capacity)
 	for k, _ := range items {
-		items[k] = NilItem
+		items[k] = &Item{}
 	}
 	return &ItemContainer{
 		Capacity: capacity,
@@ -31,11 +31,11 @@ func (i *ItemContainer) SetItem(id, amount, slot int) {
 	}
 }
 
-func (i *ItemContainer) FindItem(id int) *Item {
-	for _, v := range i.Items {
+func (i *ItemContainer) FindItem(id int) (int, *Item) {
+	for k, v := range i.Items {
 		if v.ItemId == id {
-			return v
+			return k, v
 		}
 	}
-	return nil
+	return -1, nil
 }
