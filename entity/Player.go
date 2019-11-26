@@ -184,13 +184,8 @@ func (p *Player) AddLoadedPlayer(pi model.PlayerInterface) {
 	p.LoadedPlayers = append(p.LoadedPlayers, pi)
 }
 
-func (p *Player) RemoveLoadedPlayer(id int) {
-	for k, v := range p.LoadedPlayers {
-		if v.GetId() == id {
-			p.LoadedPlayers = append(p.LoadedPlayers[:k], p.LoadedPlayers[k+1:]...)
-			return
-		}
-	}
+func (p *Player) RemoveLoadedPlayer(i int) {
+	p.LoadedPlayers = append(p.LoadedPlayers[:i], p.LoadedPlayers[i+1:]...)
 }
 
 func (p *Player) GetName() string {
@@ -251,3 +246,30 @@ func (p *Player) TakeDamage(damage int) {
 func (p *Player) GetMarkedForDeletion() bool {
 	return p.LogoutRequested
 }
+//
+//func (p *Player) String() string {
+//	return "'"
+//}
+//
+//func (p *Player) BinaryOp(op token.Token, rhs objects.Object) (objects.Object, error) {
+//	return nil, nil
+//}
+//func (p *Player) IsFalsy() bool {
+//	return false
+//}
+//func (p *Player) Equals(x objects.Object) bool {
+//	return false
+//}
+//
+//func (p *Player) Copy() objects.Object {
+//	return nil
+//}
+//func (p *Player) TypeName() string {
+//	return ""
+//}
+//
+//func (p *Player) IndexGet(index objects.Object) (objects.Object, error) {
+//	val, _ := reflections.GetField(p, strings.Trim(index.String(), "\""))
+//	obj, _ := objects.FromInterface(val)
+//	return obj, nil
+//}

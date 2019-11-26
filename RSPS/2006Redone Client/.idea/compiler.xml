@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="2006Redone Client" target="9" />
+      <module name="2006Redone Client" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

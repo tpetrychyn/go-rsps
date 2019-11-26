@@ -1,5 +1,5 @@
 @echo off
 title 2006Redone
-cd bin
+cd target/classes
 java Main
 pause

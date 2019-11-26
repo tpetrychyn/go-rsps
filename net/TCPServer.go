@@ -41,13 +41,12 @@ func (server *TcpServer) Start(playerRepository *repository.PlayerRepository) {
 
 	go func() {
 		for {
-			// TODO: Could implement a tickTime at the start of each loop and fire when it hits 600ms
-			// so that the ticks have the entire 600ms to process instead of rushing at the end
-			<-time.After(600 * time.Millisecond)
+			var tickTime = time.Now()
+
+			world.Tick()
+
 			// let all clients tick in parallel threads (handle movement and pickup, etc)
 			// parallel threads minimizes advantage of pID
-			//tickGroup.Add(len(server.Clients))
-			world.Tick()
 			server.Clients.Range(func(key, value interface{}) bool {
 				client := value.(*TCPClient)
 				if client.loginState == IngameStage {
@@ -81,8 +80,9 @@ func (server *TcpServer) Start(playerRepository *repository.PlayerRepository) {
 				}
 				return true
 			})
-
 			world.PostUpdate()
+
+			<- time.After((600 * time.Millisecond) - time.Now().Sub(tickTime))
 		}
 	}()
 

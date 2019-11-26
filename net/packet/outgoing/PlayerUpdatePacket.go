@@ -83,24 +83,26 @@ func (p *PlayerUpdatePacket) Build() []byte {
 
 	loadedPlayers := p.player.GetLoadedPlayers()
 	stream.WriteBits(8, uint(len(loadedPlayers)))
+	var i = 0
 	for _, v := range loadedPlayers {
 		if !p.player.GetPosition().WithinRenderDistance(v.GetPosition()) || v.GetMarkedForDeletion() {
 			stream.WriteBits(1, 1)
 			stream.WriteBits(2, 3) // remove player from render?
-			p.player.RemoveLoadedPlayer(v.GetId())
+			p.player.RemoveLoadedPlayer(i)
 			continue
 		}
 		p.updateOtherPlayerMovement(stream, v)
 		p.appendUpdates(updateStream, v, v.GetUpdateFlag().UpdateRequired)
+		i++
 	}
 
 	localPlayers := p.player.GetNearbyPlayers()
 localPlayerLoop:
 	for _, v := range localPlayers {
-		if len(loadedPlayers) >= 79 {
+		if p.player.GetUpdateFlag().NeedsPlacement || len(loadedPlayers) >= 79 {
 			break
 		}
-		if v == p.player {
+		if v.GetId() == p.player.GetId() {
 			continue
 		}
 		if !p.player.GetPosition().WithinRenderDistance(v.GetPosition()) {

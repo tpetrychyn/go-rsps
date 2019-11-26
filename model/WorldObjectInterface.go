@@ -6,3 +6,24 @@ type WorldObjectInterface interface {
 	Tick()
 	ShouldRefresh() bool
 }
+
+type DefaultWorldObject struct {
+	ObjectId int
+	Position *Position
+}
+
+func (d *DefaultWorldObject) GetObjectId() int {
+	return d.ObjectId
+}
+
+func (d *DefaultWorldObject) GetPosition() *Position {
+	return d.Position
+}
+
+func (d *DefaultWorldObject) ShouldRefresh() bool {
+	return true
+}
+
+func (d *DefaultWorldObject) Tick() {
+	return
+}

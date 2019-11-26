@@ -2,6 +2,7 @@ package outgoing
 
 import (
 	"rsps/model"
+	"strconv"
 )
 
 // TODO: Full helms and capes and such
@@ -98,8 +99,9 @@ func (p *PlayerAppearance) ToBytes() []byte {
 	stream.Write([]byte{0x336 >> 8, 0x336 & 0xFF})
 	stream.Write([]byte{0x338 >> 8, 0x338 & 0xFF})
 
-	name := []byte(p.Target.GetName())
-	stream.Write([]byte{0, 0, 0, 0, 0, 0, 0, name[0]}) //player name as int
+	//name := []byte(p.Target.GetName())
+	l := playerNameToInt64(strconv.Itoa(p.Target.GetId()))
+	stream.Write([]byte{byte(l >> 56), byte(l >> 48), byte(l >> 40), byte(l >> 32), byte(l >> 24), byte(l >> 16), byte(l >> 8), byte(l)}) //player name as int
 	stream.WriteByte(3)                                 // combat level
 	stream.Write([]byte{0, 0})                          // player skill level
 
@@ -115,4 +117,23 @@ func (p *PlayerAppearance) wordOrByte(stream *model.Stream, slot int) {
 	} else {
 		stream.WriteByte(0)
 	}
+}
+
+func playerNameToInt64(name string) int64 {
+	l := int64(0)
+	for i:=0;i<len(name);i++ {
+		c := name[i]
+		l *= 37
+		if c >= 'A' && c <= 'Z' {
+			l += 1 + int64(c) - 65
+		} else if c >= 'a' && c <= 'z' {
+			l += 1 + int64(c) - 97
+		} else if c >= '0' && c <= '9' {
+			l += 27 + int64(c) - 48
+		}
+	}
+	for l % 37 == 0 && l != 0 {
+		l /= 37
+	}
+	return l
 }

@@ -1,7 +1,10 @@
 package incoming
 
 import (
+	"context"
+	"github.com/mattn/anko/vm"
 	"log"
+	"reflect"
 	"rsps/entity"
 	"rsps/handler"
 	"rsps/model"
@@ -34,6 +37,42 @@ func (e *ObjectActionPacket) handleObjectActionOneInternal(player *entity.Player
 	}
 
 	player.UpdateFlag.SetFacePosition(&model.Position{X: x, Y: y})
+
+	f := handler.ObjectObservers[int(id)]
+	if f != nil {
+		if f, ok := f.(func(ctx context.Context, value reflect.Value, value2 reflect.Value) (reflect.Value, reflect.Value)); ok {
+			e := handler.WorldModule()
+			err := e.Define("player", player)
+			err = e.Define("exec", func() { f(context.Background(), reflect.ValueOf(player), reflect.ValueOf(nil)) })
+			_, err = vm.Execute(e, nil, `exec()`)
+			if err != nil {
+				log.Printf("err %s", err.Error())
+			}
+		}
+	}
+	//handler.LoadScripts(player)
+
+	//if handler.ObjectObservers[int(id)] != nil {
+	//	f := handler.ObjectObservers[int(id)].Function
+	//	c := handler.ObjectObservers[int(id)].CompiledScript
+	//
+	//	o, err := objects.FromInterface(player)
+	//	if err != nil {
+	//		log.Printf("err %s", err.Error())
+	//		return
+	//	}
+	//	c.Set("player", o)
+	//	c.Set("object", o)
+	//	err = c.Set("execute", f)
+	//	if err != nil {
+	//		log.Printf("err %s", err.Error())
+	//		return
+	//	}
+	//	if err := c.Run(); err != nil {
+	//		log.Printf("err %s", err.Error())
+	//	}
+	//	return
+	//}
 
 	switch id {
 	case 2213:

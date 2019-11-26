@@ -1,0 +1,4 @@
+bind.object(1530, func(player, object) {
+   world.setObject(7399, 3232, 3234)
+   printf("clicked obj %+v \n", player.Name)
+})

@@ -83,7 +83,7 @@ func (w *World) RemoveNpc(id int) {
 }
 
 func (w *World) AddPlayer(player *Player) {
-	for id := 0; id < 2000; id++ {
+	for id := 1; id < 2000; id++ {
 		_, ok := w.Players.Load(id)
 		if !ok {
 			player.Id = id
@@ -152,6 +152,12 @@ func (w *World) AddPlayerToRegion(player *Player) {
 func (w *World) GetRegionForPlayer(player *Player) *Region {
 	regionId := GetRegionIdByPosition(player.Position)
 	return w.GetRegion(regionId)
+}
+
+func (w *World) AddWorldObject(id int, position *model.Position) {
+	obj := &model.DefaultWorldObject{ObjectId: id, Position: position}
+	regionId := GetRegionIdByPosition(position)
+	w.GetRegion(regionId).SetWorldObject(obj)
 }
 
 func (w *World) SetWorldObject(worldObject model.WorldObjectInterface) {

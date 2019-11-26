@@ -7,6 +7,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"rsps/handler"
 	"rsps/net"
 	"rsps/repository"
 	"rsps/util"
@@ -14,6 +15,8 @@ import (
 )
 
 func main() {
+	handler.LoadScripts()
+
 	db := initDatabase()
 	playerRepository := repository.NewPlayerRepository(db)
 

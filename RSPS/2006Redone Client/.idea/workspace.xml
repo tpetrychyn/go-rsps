@@ -7,24 +7,100 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../entity/Skills.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../model/Skill.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendChatInterfacePacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendObjectPacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SendTextInterfacePacket.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../net/packet/outgoing/SetSkillLevelPacket.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/Region.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/World.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/Stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/TCPClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/TCPServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/TCPServer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/ObjectActionPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/PickupItemPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/PickupItemPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerAppearance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerAppearance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2006Redone Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/2006Redone Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/run.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Animable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Animable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Animable_Sub3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Animable_Sub3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Animable_Sub4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Animable_Sub4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Animable_Sub5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Animable_Sub5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Animation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Animation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Background.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Background.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Censor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Censor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class18.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class21.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class29.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class29.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class30_Sub1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class30_Sub1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class32.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class32.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class33.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class33.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class36.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class36.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class39.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class39.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class40.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class40.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class43.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class43.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class47.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class47.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class56.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class56.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class56_Sub1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class56_Sub1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class56_Sub1_Sub1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class56_Sub1_Sub1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class56_Sub1_Sub2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class56_Sub1_Sub2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Class6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Class6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ClientSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ClientSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CollisionMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CollisionMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Decompressor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Decompressor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DrawingArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DrawingArea.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DummyClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DummyClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Entity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/EntityDef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EntityDef.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Flo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Flo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Ground.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ground.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/IDK.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/IDK.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ISAACRandomGen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ISAACRandomGen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/InputStream_Sub1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InputStream_Sub1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ItemDef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ItemDef.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/2006Redone Client.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MRUNodes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MRUNodes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Midi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Midi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MouseDetection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MouseDetection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NPC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NodeCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NodeCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NodeList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NodeList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NodeSub.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NodeSub.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NodeSubList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NodeSubList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Object1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Object1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Object2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Object2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Object3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Object3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Object4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Object4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Object5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Object5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ObjectDef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ObjectDef.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ObjectManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ObjectManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OnDemandData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OnDemandData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OnDemandFetcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OnDemandFetcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OnDemandFetcherParent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OnDemandFetcherParent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RSApplet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RSApplet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RSFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RSFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RSImageProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RSImageProducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RSInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RSInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RSSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RSSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Runnable_Impl1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Runnable_Impl1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Signlink$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Signlink$Position.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Signlink.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Signlink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SizeConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SizeConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Skills.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SoundPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SoundPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sounds.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sounds.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SpotAnim.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SpotAnim.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sprite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Stream.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Stream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StreamLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StreamLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TextClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TextClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TextDrawingArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TextDrawingArea.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TextInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TextInput.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Texture.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Texture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/VarBit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/VarBit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Varp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Varp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WorldController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/WorldController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/run.bat" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -42,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="8256" column="9" selection-start-line="8256" selection-start-column="9" selection-end-line="8256" selection-end-column="9" />
+            <state relative-caret-position="12">
+              <caret line="8245" column="18" selection-start-line="8245" selection-start-column="18" selection-end-line="8245" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -155,9 +231,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="371" />
-    <option name="y" value="2" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="357" />
+    <option name="y" value="1" />
     <option name="width" value="1316" />
     <option name="height" value="942" />
   </component>
@@ -167,8 +243,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,6 +263,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -198,10 +274,10 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -274,11 +350,12 @@
       <workItem from="1573740272794" duration="605000" />
       <workItem from="1573776254167" duration="618000" />
       <workItem from="1573958705661" duration="1200000" />
+      <workItem from="1574723736916" duration="1091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41798000" />
+    <option name="totallyTimeSpent" value="42889000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -290,9 +367,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="371" y="2" width="1316" height="942" extended-state="0" />
+    <frame x="357" y="1" width="1316" height="942" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.35509554" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.36066878" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -301,7 +379,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32880098" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32880098" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32880098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -381,8 +459,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="8256" column="9" selection-start-line="8256" selection-start-column="9" selection-end-line="8256" selection-end-column="9" />
+        <state relative-caret-position="12">
+          <caret line="8245" column="18" selection-start-line="8245" selection-start-column="18" selection-end-line="8245" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -428,7 +506,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -436,6 +513,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -447,6 +525,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Bundled Protobuf Distribution</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -458,6 +537,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>13</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -469,10 +549,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
+          <last-edited>2006Redone Client</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -492,6 +574,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>client</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
