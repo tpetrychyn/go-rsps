@@ -233,6 +233,7 @@ type TreeWorldObject struct {
 	lifepoints    int
 	tickCount     int
 	shouldRefresh bool
+	face          int
 }
 
 func (t *TreeWorldObject) GetPosition() *model.Position {
@@ -241,6 +242,14 @@ func (t *TreeWorldObject) GetPosition() *model.Position {
 
 func (t *TreeWorldObject) GetObjectId() int {
 	return t.ObjectId
+}
+
+func (t *TreeWorldObject) GetFace() int {
+	return t.face
+}
+
+func (t *TreeWorldObject) GetType() int {
+	return 10
 }
 
 // TODO: Should only show the world object when it's cut down and delete it when it respawns..

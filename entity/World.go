@@ -154,8 +154,8 @@ func (w *World) GetRegionForPlayer(player *Player) *Region {
 	return w.GetRegion(regionId)
 }
 
-func (w *World) AddWorldObject(id int, position *model.Position) {
-	obj := &model.DefaultWorldObject{ObjectId: id, Position: position}
+func (w *World) AddWorldObject(id int, position *model.Position, face int, typ int) {
+	obj := &model.DefaultWorldObject{ObjectId: id, Position: position, Face: face, Type: typ}
 	regionId := GetRegionIdByPosition(position)
 	w.GetRegion(regionId).SetWorldObject(obj)
 }

@@ -95,8 +95,8 @@ func (r *Region) Tick() {
 				player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 					ObjectId: obj.GetObjectId(),
 					Position: obj.GetPosition(),
-					Face:     0,
-					Typ:      10,
+					Face:     obj.GetFace(),
+					Typ:      obj.GetType(),
 					Player:   player,
 				})
 				return true
@@ -152,8 +152,8 @@ func (r *Region) OnEnter(player *Player) {
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 			ObjectId: obj.GetObjectId(),
 			Position: obj.GetPosition(),
-			Face:     0,
-			Typ:      10,
+			Face:     obj.GetFace(),
+			Typ:      obj.GetType(),
 			Player:   player,
 		})
 		return true
@@ -238,8 +238,8 @@ func (r *Region) SetWorldObject(worldObject model.WorldObjectInterface) {
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendObjectPacket{
 			ObjectId: worldObject.GetObjectId(),
 			Position: worldObject.GetPosition(),
-			Face:     0,
-			Typ:      10,
+			Face:     worldObject.GetFace(),
+			Typ:      worldObject.GetType(),
 			Player:   player,
 		})
 		return true

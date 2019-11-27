@@ -36,14 +36,29 @@ func (e *ObjectActionPacket) handleObjectActionOneInternal(player *entity.Player
 		return
 	}
 
-	player.UpdateFlag.SetFacePosition(&model.Position{X: x, Y: y})
+	objPosition := &model.Position{X: x, Y: y}
+	object := entity.WorldProvider().GetWorldObject(objPosition)
+	if object == nil {
+		object = &model.DefaultWorldObject{
+			ObjectId: int(id),
+			Position: objPosition,
+			Face:     0,
+			Type:     10,
+		}
+	}
+
+	player.UpdateFlag.SetFacePosition(objPosition)
 
 	f := handler.ObjectObservers[int(id)]
 	if f != nil {
 		if f, ok := f.(func(ctx context.Context, value reflect.Value, value2 reflect.Value) (reflect.Value, reflect.Value)); ok {
 			e := handler.WorldModule()
-			err := e.Define("player", player)
-			err = e.Define("exec", func() { f(context.Background(), reflect.ValueOf(player), reflect.ValueOf(nil)) })
+			err := e.Define("exec", func() {
+				_, err := f(context.Background(), reflect.ValueOf(player), reflect.ValueOf(object))
+				if !err.IsNil() {
+					log.Printf("err %s", err)
+				}
+			})
 			_, err = vm.Execute(e, nil, `exec()`)
 			if err != nil {
 				log.Printf("err %s", err.Error())

@@ -1,0 +1,18 @@
+bind.object(1530, func(player, object) {
+   printf("%+v", object)
+   if object.Face != 1 {
+      world.setObject(1530, 3230, 3235, 1, 0)
+   } else {
+      world.setObject(1530, 3230, 3235, 0, 0)
+   }
+})
+
+bind.object(2882, func(player, object) {
+   pos = NewPosition(3268, 3227, 0)
+   if player.Position.X == 3268 {
+      printf("moving player east, player pos %d \n", player.Position)
+      pos = NewPosition(3267, 3227, 0)
+   }
+   printf("teleportto %+v \n", pos)
+   player.Teleport(pos)
+})

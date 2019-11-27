@@ -11,6 +11,14 @@ type Position struct {
 	Z uint16
 }
 
+func NewPosition(x, y, z uint16) *Position {
+	return &Position{
+		X: x,
+		Y: y,
+		Z: z,
+	}
+}
+
 func (p *Position) AddX(n uint16) *Position {
 	return &Position{
 		X: p.X + 1,

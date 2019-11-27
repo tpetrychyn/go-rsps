@@ -7,6 +7,7 @@ import (
 	"github.com/mattn/anko/vm"
 	"io/ioutil"
 	"log"
+	"os"
 	"rsps/entity"
 	"rsps/model"
 )
@@ -16,79 +17,25 @@ type ObjectObserver struct {
 	CompiledScript *script.Compiled
 }
 
-
 var ObjectObservers = make(map[int]interface{})
+var CommandObservers = make(map[string]interface{})
 
-var scriptsDir = "./scripts2"
+var scriptsDir = "./scripts"
 
-//func LoadScripts() error {
-//	files, err := ioutil.ReadDir(scriptsDir)
-//	if err != nil {
-//		panic(err)
-//	}
-//
-//	importModules := stdlib.GetModuleMap(stdlib.AllModuleNames()...)
-//	for _, file := range files {
-//		var c *script.Compiled
-//		code, err := ioutil.ReadFile(fmt.Sprintf("%s/%s", scriptsDir, file.Name()))
-//		if err != nil {
-//			panic(err)
-//		}
-//		s := script.New(code)
-//		s.SetImports(importModules)
-//
-//		bindObjectFirstClick := &objects.UserFunction{
-//			Value: func(args ...objects.Object) (ret objects.Object, err error) {
-//				objectId := args[0]
-//				f := args[1]
-//				ob := &ObjectObserver{
-//					Function:       f,
-//					CompiledScript: c,
-//				}
-//
-//				oid, _ := strconv.Atoi(objectId.String())
-//				ObjectObservers[oid] = ob
-//				return nil, nil
-//			},
-//		}
-//
-//		execute := &objects.UserFunction{
-//			Value: func(args ...objects.Object) (ret objects.Object, err error) {
-//				log.Printf("called empty execute")
-//				return nil, nil
-//			},
-//		}
-//
-//		s.Add("state", "bind")
-//		s.Add("execute", execute)
-//		s.Add("bindObjectFirstClick", bindObjectFirstClick)
-//		s.Add("object", nil)
-//		s.Add("player", nil)
-//		s.Add("setObject", SetObject())
-//
-//		c, err = s.Compile()
-//		if err != nil {
-//			panic(err)
-//		}
-//
-//		if err := c.Run(); err != nil {
-//			panic(err)
-//		}
-//
-//		c.Set("state", "execute")
-//	}
-//
-//	return nil
-//}
-//
-func SetObject(id, x, y int) {
-	entity.WorldProvider().AddWorldObject(id, &model.Position{
-		X: uint16(x),
-		Y: uint16(y),
-		Z: 0,
-	})
+func SetObject(id, x, y, face, typ int) {
+	entity.WorldProvider().AddWorldObject(id,
+		&model.Position{
+			X: uint16(x),
+			Y: uint16(y),
+			Z: 0,
+		},
+		face,
+		typ)
 }
 
+func GetObject(x, y int) model.WorldObjectInterface {
+	return entity.WorldProvider().GetWorldObject(&model.Position{X: uint16(x), Y: uint16(y)})
+}
 
 func LoadScripts() {
 	files, err := ioutil.ReadDir(scriptsDir)
@@ -96,15 +43,27 @@ func LoadScripts() {
 		panic(err)
 	}
 
+	parseScripts(scriptsDir, files)
+}
+
+func parseScripts(directory string, files []os.FileInfo) {
 	for _, file := range files {
-		data, err := ioutil.ReadFile(fmt.Sprintf("%s/%s", scriptsDir, file.Name()))
+		if file.IsDir() {
+			dir, err := ioutil.ReadDir(scriptsDir + "/" + file.Name())
+			if err != nil {
+				continue
+			}
+			parseScripts(directory + "/" + file.Name(), dir)
+			continue
+		}
+		data, err := ioutil.ReadFile(fmt.Sprintf("%s/%s", directory, file.Name()))
 		if err != nil {
 			log.Println("Error reading script file for object action:", err)
 		}
 
 		e := WorldModule()
 		e.Define("printf", fmt.Printf)
-		_, err = vm.Execute(e, nil, string(data))
+		_, err = vm.Execute(e, &vm.Options{Debug: true}, string(data))
 		if err != nil {
 			log.Println("error binding:", err)
 		}
@@ -119,13 +78,21 @@ func WorldModule() *env.Env {
 	e := env.NewEnv()
 	_ = e.Define("bind", map[string]interface{}{
 		"object": func(id int, f interface{}) {
+			log.Printf("bound obj %d", id)
 			ObjectObservers[id] = f
+		},
+		"command": func(command string, f interface{}) {
+			log.Printf("bound command %s", command)
+			CommandObservers[command] = f
 		},
 	})
 
 	_ = e.Define("world", map[string]interface{}{
 		"setObject": SetObject,
+		"getObject": GetObject,
 	})
+
+	_ = e.Define("NewPosition", model.NewPosition)
 
 	return e
 }

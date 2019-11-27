@@ -3,6 +3,8 @@ package model
 type WorldObjectInterface interface {
 	GetObjectId() int
 	GetPosition() *Position
+	GetFace() int
+	GetType() int
 	Tick()
 	ShouldRefresh() bool
 }
@@ -10,6 +12,8 @@ type WorldObjectInterface interface {
 type DefaultWorldObject struct {
 	ObjectId int
 	Position *Position
+	Face     int
+	Type     int
 }
 
 func (d *DefaultWorldObject) GetObjectId() int {
@@ -21,9 +25,17 @@ func (d *DefaultWorldObject) GetPosition() *Position {
 }
 
 func (d *DefaultWorldObject) ShouldRefresh() bool {
-	return true
+	return false
 }
 
 func (d *DefaultWorldObject) Tick() {
 	return
+}
+
+func (d *DefaultWorldObject) GetFace() int {
+	return d.Face
+}
+
+func (d *DefaultWorldObject) GetType() int {
+	return d.Type
 }

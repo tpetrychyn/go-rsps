@@ -1,0 +1,3 @@
+bind.command("pos", func(player, args) {
+	printf("%+v", args)
+})
