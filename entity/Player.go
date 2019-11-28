@@ -6,10 +6,6 @@ import (
 	"rsps/repository"
 )
 
-type OngoingAction interface {
-	Tick()
-}
-
 type Player struct {
 	*model.Movement
 	MovementQueue *MovementQueue
@@ -21,12 +17,12 @@ type Player struct {
 	Equipment          *Equipment
 	Bank               *Bank
 	SkillHelper        *SkillHelper
-	OngoingAction      OngoingAction
+	OngoingAction      model.OngoingAction
 	GlobalTickCount    int
 	Region             *Region
 	OutgoingQueue      []DownstreamMessage
 	LoadedPlayers      []model.PlayerInterface
-	LoadedNpcs         []model.NpcInterface
+	LoadedNpcs         map[int]model.NpcInterface
 	UpdateFlag         *model.UpdateFlag
 	DelayedPacket      func()
 	DelayedDestination *model.Position
@@ -48,7 +44,7 @@ func NewPlayer() *Player {
 			IsRunning:          true,
 		},
 		LoadedPlayers: make([]model.PlayerInterface, 0),
-		LoadedNpcs:    make([]model.NpcInterface, 0),
+		LoadedNpcs:    make(map[int]model.NpcInterface, 0),
 	}
 	player.MovementQueue = NewMovementQueue(player)
 	player.Inventory = NewInventory(player)
@@ -192,8 +188,8 @@ func (p *Player) GetName() string {
 	return p.Name
 }
 
-func (p *Player) GetNearbyNpcs() []model.NpcInterface {
-	var npcs []model.NpcInterface
+func (p *Player) GetNearbyNpcs() map[int]model.NpcInterface {
+	npcs := make(map[int]model.NpcInterface)
 	adjacentRegions := p.Region.GetAdjacentIds()
 	for _, v := range adjacentRegions {
 		r := world.GetRegion(v)
@@ -206,25 +202,27 @@ func (p *Player) GetNearbyNpcs() []model.NpcInterface {
 				}
 			}
 			if !found {
-				npcs = append(npcs, npc)
+				npcs[npc.GetId()] = npc
 			}
 		}
 	}
 	return npcs
 }
-func (p *Player) GetLoadedNpcs() []model.NpcInterface {
+func (p *Player) GetLoadedNpcs() map[int]model.NpcInterface {
 	return p.LoadedNpcs
 }
 func (p *Player) AddLoadedNpc(n model.NpcInterface) {
-	p.LoadedNpcs = append(p.LoadedNpcs, n)
+	//p.LoadedNpcs = append(p.LoadedNpcs, n)
+	p.LoadedNpcs[n.GetId()] = n
 }
 func (p *Player) RemoveLoadedNpc(id int) {
-	for k, v := range p.LoadedNpcs {
-		if v.GetId() == id {
-			p.LoadedNpcs = append(p.LoadedNpcs[:k], p.LoadedNpcs[k+1:]...)
-			return
-		}
-	}
+	delete(p.LoadedNpcs, id)
+	//for k, v := range p.LoadedNpcs {
+	//	if v.GetId() == id {
+	//		p.LoadedNpcs = append(p.LoadedNpcs[:k], p.LoadedNpcs[k+1:]...)
+	//		return
+	//	}
+	//}
 }
 
 func (p *Player) GetInteractingWith() model.Character {
@@ -240,36 +238,35 @@ func (p *Player) GetMaxHitpoints() int {
 }
 
 func (p *Player) TakeDamage(damage int) {
-	p.SkillHelper.Skills[model.Hitpoints].Level -= damage
+	p.SkillHelper.SetLevel(model.Hitpoints, p.SkillHelper.Skills[model.Hitpoints].GetCurrentLevel() - damage)
+	p.UpdateFlag.SetSingleHit(damage)
 }
 
 func (p *Player) GetMarkedForDeletion() bool {
 	return p.LogoutRequested
 }
-//
-//func (p *Player) String() string {
-//	return "'"
-//}
-//
-//func (p *Player) BinaryOp(op token.Token, rhs objects.Object) (objects.Object, error) {
-//	return nil, nil
-//}
-//func (p *Player) IsFalsy() bool {
-//	return false
-//}
-//func (p *Player) Equals(x objects.Object) bool {
-//	return false
-//}
-//
-//func (p *Player) Copy() objects.Object {
-//	return nil
-//}
-//func (p *Player) TypeName() string {
-//	return ""
-//}
-//
-//func (p *Player) IndexGet(index objects.Object) (objects.Object, error) {
-//	val, _ := reflections.GetField(p, strings.Trim(index.String(), "\""))
-//	obj, _ := objects.FromInterface(val)
-//	return obj, nil
-//}
+
+func (p *Player) PlaySound(soundId int) {
+	p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendSoundPacket{Sound: soundId, Volume: 100, Delay: 0})
+}
+
+func (p *Player) ClearOngoing() {
+	p.OngoingAction = nil
+	p.DelayedPacket = nil
+}
+
+func (p *Player) GetGlobalTickCount() int {
+	return p.GlobalTickCount
+}
+
+func (p *Player) SetGlobalTickCount(g int) {
+	p.GlobalTickCount = g
+}
+
+func (p *Player) GetOngoingAction() model.OngoingAction {
+	return p.OngoingAction
+}
+
+func (p *Player) SetOngoingAction(action model.OngoingAction) {
+	p.OngoingAction = action
+}

@@ -37,7 +37,11 @@ func (n *NpcUpdatePacket) Build() []byte {
 
 	loadedNpcs := n.player.GetLoadedNpcs()
 	stream.WriteBits(8, uint(len(loadedNpcs)))
+	// TODO: since storing npcs in map, probably going to have same issue with map looping out of order
 	for _, v := range loadedNpcs {
+		if v == nil {
+			continue
+		}
 		if !n.player.GetPosition().WithinRenderDistance(v.GetPosition()) || v.GetMarkedForDeletion() {
 			stream.WriteBits(1, 1)
 			stream.WriteBits(2, 3)

@@ -1,0 +1,22 @@
+healAmounts = {"shrimps": 3, "shark": 9}
+for k, v in healAmounts {
+	bind.item(k, func(player, id, slot) {
+		if player.GlobalTickCount > 0 {
+			return
+		}
+
+		player.ClearOngoing()
+
+		currHitpoints = player.SkillHelper.Skills[HITPOINTS].GetCurrentLevel()
+		currLevel = player.SkillHelper.Skills[HITPOINTS].GetLevelForExperience()
+		healTo = currHitpoints + v
+		if healTo > currLevel {
+			healTo = currLevel
+		}
+		player.SkillHelper.SetLevel(HITPOINTS, healTo)
+		player.Inventory.RemoveItem(id, slot)
+		player.UpdateFlag.SetAnimation(829, 2)
+		player.PlaySound(317)
+		player.GlobalTickCount = 4
+	})
+}

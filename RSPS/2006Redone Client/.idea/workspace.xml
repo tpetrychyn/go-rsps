@@ -6,17 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/World.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../handler/Scripts.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../handler/Scripts.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../handler/WoodcuttingHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../handler/WoodcuttingHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/Position.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../model/WorldObjectInterface.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../model/WorldObjectInterface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/CommandsPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/CommandsPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../net/packet/incoming/ObjectActionPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../scripts2/doors.ank" beforeDir="false" afterPath="$PROJECT_DIR$/../../scripts2/doors.ank" afterDir="false" />
-    </list>
+    <list default="true" id="2c39a3c1-c853-4635-abc3-883be1fa272a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -267,11 +257,12 @@
       <workItem from="1573958705661" duration="1200000" />
       <workItem from="1574723736916" duration="1091000" />
       <workItem from="1574812808401" duration="599000" />
+      <workItem from="1574904123897" duration="22000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43488000" />
+    <option name="totallyTimeSpent" value="43510000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -284,9 +275,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="357" y="1" width="1316" height="942" extended-state="1" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.36624205" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37261146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />

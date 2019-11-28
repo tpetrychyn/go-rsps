@@ -1,0 +1,4 @@
+bind.command("npc", func(player, args) {
+	printf("%+v", world.instance)
+	world.instance.AddNpc(2, NewPosition(player.Position.X, player.Position.Y, player.Position.Z))
+})

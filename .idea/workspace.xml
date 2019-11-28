@@ -2,21 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c535aa8-404b-4cbf-8a75-ff8d8a03fd93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/commands/pos.ank" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/doors.ank" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Combat.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/packet/incoming/ClickItemPacketHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/commands/item.ank" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/commands/npc.ank" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/food.ank" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RSPS/2006Redone Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Region.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Region.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Inventory.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Inventory.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Npc.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Npc.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Player.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/World.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/World.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/CombatHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/CombatHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/Scripts.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Scripts.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/WoodcuttingHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/WoodcuttingHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Position.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Position.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/WorldObjectInterface.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/WorldObjectInterface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Character.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/PlayerInterface.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/PlayerInterface.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/packet/incoming/CommandsPacketHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/CommandsPacketHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/ObjectActionPackets.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/SendObjectPacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/SendObjectPacket.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/doors.tengo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts2/doors.ank" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/incoming/IncomingPackets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/NpcUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/NpcUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" beforeDir="false" afterPath="$PROJECT_DIR$/net/packet/outgoing/PlayerUpdatePacket.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/ItemDefinitions.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/ItemDefinitions.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +70,7 @@
     <property name="go.vendoring.notification.had.been.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">

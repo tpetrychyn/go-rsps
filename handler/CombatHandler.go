@@ -8,22 +8,20 @@ import (
 )
 
 type CombatHandler struct {
-	player    *entity.Player
-	target    model.Character
-	weapon    *util.ItemDefinition
+	attacker model.Character
+	target   model.Character
+	weapon   *util.ItemDefinition
 }
 
-func StartCombat(player *entity.Player, target model.Character) {
+func StartCombat(attacker model.Character, target model.Character) {
 	combat := &CombatHandler{
-		player: player,
+		attacker: attacker,
+		target: target,
 	}
-	if npc, ok := target.(*entity.Npc); ok {
-		combat.target = npc
+	attacker.SetOngoingAction(combat)
+	if n, ok := target.(*entity.Npc); ok {
+		n.Killer = attacker
 	}
-
-	player.OngoingAction = combat
-
-	//combat.attack()
 	combat.getWeapon()
 }
 
@@ -32,36 +30,43 @@ func (c *CombatHandler) Tick() {
 	if speed == 0 {
 		speed = 5
 	}
-	if c.player.GlobalTickCount == 0 {
-	 	c.attack()
-	 	c.player.GlobalTickCount = speed
+	if c.attacker.GetGlobalTickCount() == 0 {
+		c.attack()
+		c.attacker.SetGlobalTickCount(speed)
 	}
 }
 
 func (c *CombatHandler) getWeapon() {
-	weaponId := c.player.Equipment.Items[outgoing.EQUIPMENT_SLOTS["weapon"]].ItemId
+	weaponId := 4151//c.attacker.Equipment.Items[outgoing.EQUIPMENT_SLOTS["weapon"]].ItemId
 	weapon := util.GetItemDefinition(weaponId)
 	c.weapon = weapon
 }
 
 func (c *CombatHandler) attack() {
+	if c.target.GetCurrentHitpoints() <= 0 {
+		c.attacker.SetOngoingAction(nil)
+
+		return
+	}
+
 	c.getWeapon()
 	//log.Printf("attacking with %+v", c.weapon)
-	c.player.OutgoingQueue = append(c.player.OutgoingQueue, &outgoing.SendSoundPacket{
-		Sound:  416,
-		Volume: 100,
-		Delay:  0,
-	})
-	c.player.UpdateFlag.SetAnimation(451, 2)
+	if p, ok := c.attacker.(*entity.Player); ok {
+		p.OutgoingQueue = append(p.OutgoingQueue, &outgoing.SendSoundPacket{
+			Sound:  416,
+			Volume: 100,
+			Delay:  0,
+		})
+	}
+
+	c.attacker.GetUpdateFlag().SetAnimation(451, 2)
 
 	c.target.GetUpdateFlag().SetAnimation(404, 2)
-	c.target.GetUpdateFlag().SetEntityInteraction(c.player)
-	c.target.TakeDamage(5)
+	c.target.GetUpdateFlag().SetEntityInteraction(c.attacker)
+	c.target.TakeDamage(1)
 
-	if c.target.GetCurrentHitpoints() <= 0 {
-		c.player.OngoingAction = nil
-		if n, ok := c.target.(*entity.Npc); ok {
-			n.Killer = c.player
-		}
+	// TODO: Check auto retaliate, among other issues
+	if c.target.GetOngoingAction() == nil {
+		StartCombat(c.target, c.attacker)
 	}
 }

@@ -22,4 +22,14 @@ type Character interface {
 	GetUpdateFlag() *UpdateFlag
 	GetMarkedForDeletion() bool
 	GetInteractingWith() Character
+
+	GetGlobalTickCount() int
+	SetGlobalTickCount(int)
+
+	GetOngoingAction() OngoingAction
+	SetOngoingAction(OngoingAction)
+}
+
+type OngoingAction interface {
+	Tick()
 }

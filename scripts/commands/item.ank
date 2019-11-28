@@ -1,0 +1,6 @@
+bind.command("item", func(player, args) {
+	if len(args) == 1 {
+		printf("must specify an item")
+	}
+	printf("%+v %+v", player, args)
+})

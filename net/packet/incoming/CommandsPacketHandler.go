@@ -11,6 +11,7 @@ import (
 	"rsps/model"
 	"rsps/net/packet"
 	"rsps/net/packet/outgoing"
+	"rsps/util"
 	"strconv"
 	"strings"
 )
@@ -35,11 +36,18 @@ func (c *CommandsPacketHandler) HandlePacket(player *entity.Player, packet *pack
 		if len(parts) == 1 {
 			return
 		}
-		id, _ := strconv.Atoi(parts[1])
+		var id int
+		itemByName := util.GetItemDefinitionByName(parts[1], false)
+		if itemByName == nil {
+			id, _ = strconv.Atoi(parts[1])
+		} else {
+			id = itemByName.ID
+		}
 		amount := 1
 		if len(parts) > 2 {
 			amount, _ = strconv.Atoi(parts[2])
 		}
+
 		player.OutgoingQueue = append(player.OutgoingQueue, &outgoing.SendMessagePacket{Message: fmt.Sprintf("adding item %d amount %d", id, amount)})
 		player.Inventory.AddItem(id, amount)
 

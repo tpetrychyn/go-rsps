@@ -15,14 +15,14 @@ import (
 )
 
 func main() {
-	handler.LoadScripts()
-
 	db := initDatabase()
 	playerRepository := repository.NewPlayerRepository(db)
 
 	util.LoadItemDefinitions()
 
 	rand.Seed(time.Now().Unix())
+
+	handler.LoadScripts()
 
 	server := net.NewTcpServer(43594)
 	server.Start(playerRepository)

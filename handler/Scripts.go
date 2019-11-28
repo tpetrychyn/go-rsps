@@ -10,6 +10,7 @@ import (
 	"os"
 	"rsps/entity"
 	"rsps/model"
+	"rsps/util"
 )
 
 type ObjectObserver struct {
@@ -19,6 +20,7 @@ type ObjectObserver struct {
 
 var ObjectObservers = make(map[int]interface{})
 var CommandObservers = make(map[string]interface{})
+var ItemClickObservers = make(map[int][]interface{})
 
 var scriptsDir = "./scripts"
 
@@ -43,6 +45,11 @@ func LoadScripts() {
 		panic(err)
 	}
 
+	// clear existing handlers
+	ObjectObservers = make(map[int]interface{})
+	CommandObservers = make(map[string]interface{})
+	ItemClickObservers = make(map[int][]interface{})
+
 	parseScripts(scriptsDir, files)
 }
 
@@ -53,7 +60,7 @@ func parseScripts(directory string, files []os.FileInfo) {
 			if err != nil {
 				continue
 			}
-			parseScripts(directory + "/" + file.Name(), dir)
+			parseScripts(directory+"/"+file.Name(), dir)
 			continue
 		}
 		data, err := ioutil.ReadFile(fmt.Sprintf("%s/%s", directory, file.Name()))
@@ -63,15 +70,12 @@ func parseScripts(directory string, files []os.FileInfo) {
 
 		e := WorldModule()
 		e.Define("printf", fmt.Printf)
+		e.Define("HITPOINTS", model.Hitpoints)
 		_, err = vm.Execute(e, &vm.Options{Debug: true}, string(data))
 		if err != nil {
 			log.Println("error binding:", err)
 		}
 	}
-}
-
-func Run() {
-	//w := WorldModule()
 }
 
 func WorldModule() *env.Env {
@@ -85,9 +89,24 @@ func WorldModule() *env.Env {
 			log.Printf("bound command %s", command)
 			CommandObservers[command] = f
 		},
+		"item": func(id interface{}, f interface{}) {
+			var itemId int
+			if id, ok := id.(int64); ok {
+				itemId = int(id)
+			}
+			if name, ok := id.(string); ok {
+				item := util.GetItemDefinitionByName(name, false)
+				if item != nil {
+					itemId = item.ID
+				}
+			}
+			log.Printf("bound item click %d", itemId)
+			ItemClickObservers[itemId] = append(ItemClickObservers[itemId], f)
+		},
 	})
 
 	_ = e.Define("world", map[string]interface{}{
+		"instance":  entity.WorldProvider(),
 		"setObject": SetObject,
 		"getObject": GetObject,
 	})

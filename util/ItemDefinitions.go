@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 )
 
 type WeaponDefinition struct {
@@ -72,6 +73,19 @@ type ItemDefinition struct {
 
 func GetItemDefinition(itemId int) *ItemDefinition {
 	return ItemDefinitions[itemId]
+}
+
+func GetItemDefinitionByName(name string, noted bool) *ItemDefinition {
+	for k, v := range ItemDefinitions {
+		if k > 6500 {
+			// TODO: seems items above 6??? are "waste disposal"
+			continue
+		}
+		if strings.ToLower(v.Name) == strings.ToLower(name) && v.Noted == noted {
+			return v
+		}
+	}
+	return nil
 }
 
 var ItemDefinitions map[int]*ItemDefinition

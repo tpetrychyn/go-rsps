@@ -14,6 +14,7 @@ const (
 	WALK_ON_COMMAND_OPCODE        = 98
 	COMMANDS_OPCODE               = 103
 	BANK_FIVE_OPCODE              = 117
+	CLICK_ITEM_OPCODE             = 122
 	BANK_ALL_OPCODE               = 129
 	CLOSE_WINDOW_OPCODE           = 130
 	MAGE_NPC_OPCODE               = 131
@@ -33,6 +34,7 @@ var Packets = map[byte]packet.PacketListener{
 	SECOND_CLICK_NPC_OPCODE:       new(ClickNpcPacketHandler),
 	CONTINUE_DIAGLOG_OPCODE:       new(ContinueDialogPacketHandler),
 	COMMANDS_OPCODE:               new(CommandsPacketHandler),
+	CLICK_ITEM_OPCODE:             new(ClickItemPacketHandler),
 	BANK_FIVE_OPCODE:              new(BankFivePacketHandler),
 	BANK_TEN_OPCODE:               new(BankTenPacketHandler),
 	BANK_ALL_OPCODE:               new(BankAllPacketHandler),

@@ -110,10 +110,13 @@ func (i *Inventory) DropItem(itemId, slot int) {
 		return
 	}
 
+	i.RemoveItem(itemId, slot)
+	i.player.Region.CreateGroundItemAtPosition(i.player, invItem, i.player.Position)
+}
+
+func (i *Inventory) RemoveItem(id, slot int) {
 	i.Items[slot] = &model.Item{}
 	i.player.OutgoingQueue = append(i.player.OutgoingQueue, &outgoing.InterfaceItemPacket{InterfaceId: model.INVENTORY_INTERFACE_ID, Slot: slot, Item: &model.Item{}})
-	i.player.Region.CreateGroundItemAtPosition(i.player, invItem, i.player.Position)
-
 	go repository.InventoryRepositorySingleton.Save(i.player.Name, i.Items)
 }
 

@@ -212,11 +212,11 @@ func (p *PlayerUpdatePacket) appendUpdates(updateStream *model.Stream, target mo
 		}
 
 		if updateFlag.SingleHit {
-			p.updateSingleHit(updateStream)
+			p.updateSingleHit(updateStream, target)
 		}
 
 		if updateFlag.DoubleHit {
-			p.updateDoubleHit(updateStream)
+			p.updateDoubleHit(updateStream, target)
 		}
 	}
 }
@@ -279,14 +279,14 @@ func (p *PlayerUpdatePacket) updateAnimation(stream *model.Stream, target model.
 	stream.WriteByte(^1 + 256)
 }
 
-func (p *PlayerUpdatePacket) updateSingleHit(stream *model.Stream) {
-	stream.WriteByte(10)
+func (p *PlayerUpdatePacket) updateSingleHit(stream *model.Stream, target model.PlayerInterface) {
+	stream.WriteByte(byte(target.GetUpdateFlag().SingleHitDamage))
 	stream.WriteByte(1 + 128) // blue, red, green, yellow
 	stream.WriteByte(^90 + 256)
 	stream.WriteByte(99)
 }
 
-func (p *PlayerUpdatePacket) updateDoubleHit(stream *model.Stream) {
+func (p *PlayerUpdatePacket) updateDoubleHit(stream *model.Stream, target model.PlayerInterface) {
 	stream.WriteByte(10)
 	stream.WriteByte(128 - 1) // blue, red, green, yellow
 	stream.WriteByte(90)

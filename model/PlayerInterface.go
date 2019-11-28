@@ -10,8 +10,8 @@ type PlayerInterface interface {
 	AddLoadedPlayer(PlayerInterface)
 	RemoveLoadedPlayer(int)
 
-	GetNearbyNpcs() []NpcInterface
-	GetLoadedNpcs() []NpcInterface
+	GetNearbyNpcs() map[int]NpcInterface
+	GetLoadedNpcs() map[int]NpcInterface
 	AddLoadedNpc(NpcInterface)
 	RemoveLoadedNpc(int)
 

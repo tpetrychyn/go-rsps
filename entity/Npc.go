@@ -13,28 +13,30 @@ type Npc struct {
 	CurrentHitpoints  int
 	MaxHitpoints      int
 	UpdateFlag        *model.UpdateFlag
-	Killer            *Player
+	Killer            model.Character
 	MarkedForDeletion bool
 	IsDying           bool
+
+	GlobalTickCount int
+	AttackSpeed     int
+	OngoingAction   model.OngoingAction
 }
 
-func NewNpc(id int) *Npc {
+func NewNpc(id int, npcType int, position *model.Position) *Npc {
 	// TODO: npcs will be gone when region is deleted, need to respawn them in constructor probably
-	spawn := &model.Position{
-		X: 3201,
-		Y: 3200,
-	}
+	attackSpeed := 5
 	npc := &Npc{
 		Movement: &model.Movement{
-			Position:           spawn,
-			LastKnownRegion:    spawn,
+			Position:           position,
+			LastKnownRegion:    position,
 			PrimaryDirection:   model.None,
 			SecondaryDirection: model.None,
 		},
 		Id:               id,
-		NpcType:          2,
+		NpcType:          npcType,
 		CurrentHitpoints: 10,
 		MaxHitpoints:     10,
+		AttackSpeed:      attackSpeed,
 		UpdateFlag:       &model.UpdateFlag{},
 	}
 	mq := NewMovementQueue(npc)
@@ -44,6 +46,14 @@ func NewNpc(id int) *Npc {
 
 func (n *Npc) Tick() {
 	n.MovementQueue.Tick()
+
+	if n.GlobalTickCount > 0 {
+		n.GlobalTickCount--
+	}
+
+	if n.OngoingAction != nil {
+		n.OngoingAction.Tick()
+	}
 
 	if n.CurrentHitpoints <= 0 && !n.IsDying {
 		n.UpdateFlag.SetAnimation(836, 2)
@@ -55,10 +65,12 @@ func (n *Npc) Tick() {
 			world := WorldProvider()
 			region := world.GetRegion(GetRegionIdByPosition(n.Position))
 			if n.Killer != nil {
-				region.CreateGroundItemAtPosition(n.Killer, &model.Item{
-					ItemId: 995,
-					Amount: 10000,
-				}, n.Position)
+				if p, ok := n.Killer.(*Player); ok {
+					region.CreateGroundItemAtPosition(p, &model.Item{
+						ItemId: 995,
+						Amount: 10000,
+					}, n.Position)
+				}
 			}
 			world.RemoveNpc(n.Id)
 		}()
@@ -108,4 +120,20 @@ func (n *Npc) TakeDamage(damage int) {
 
 func (n *Npc) GetMarkedForDeletion() bool {
 	return n.MarkedForDeletion
+}
+
+func (n *Npc) GetGlobalTickCount() int {
+	return n.GlobalTickCount
+}
+
+func (n *Npc) SetGlobalTickCount(g int) {
+	n.GlobalTickCount = g
+}
+
+func (n *Npc) GetOngoingAction() model.OngoingAction {
+	return n.OngoingAction
+}
+
+func (n *Npc) SetOngoingAction(action model.OngoingAction) {
+	n.OngoingAction = action
 }

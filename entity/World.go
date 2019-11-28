@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"log"
 	"rsps/model"
 	"sync"
 )
@@ -60,10 +61,11 @@ func (w *World) GetRegion(id uint16) *Region {
 
 func (w *World) AddNpc(npcType int, position *model.Position) {
 	region := w.GetRegion(GetRegionIdByPosition(position))
-	for id := 0; id < 2000; id++ {
+	for id := 1; id < 2000; id++ {
 		_, ok := w.Npcs.Load(id)
 		if !ok {
-			npc := NewNpc(id)
+			log.Printf("adding npc %d to region %d at position %+v", id, region.Id, position)
+			npc := NewNpc(id, npcType, position)
 			w.Npcs.Store(id, npc)
 			region.Npcs.Store(id, npc)
 			return
